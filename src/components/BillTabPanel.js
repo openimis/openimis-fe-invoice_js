@@ -23,7 +23,7 @@ const styles = (theme) => ({
   },
 });
 
-const BillTabPanel = ({ intl, rights, classes, bill, setConfirmedAction }) => {
+const BillTabPanel = ({ intl, rights, classes, bill, setConfirmedAction, isWorker = false }) => {
   const [activeTab, setActiveTab] = useState(BILL_LINE_ITEMS_TAB_VALUE);
 
   const isSelected = (tab) => tab === activeTab;
@@ -43,6 +43,7 @@ const BillTabPanel = ({ intl, rights, classes, bill, setConfirmedAction }) => {
           onChange={handleChange}
           isSelected={isSelected}
           tabStyle={tabStyle}
+          isWorker={isWorker}
         />
       </Grid>
       <Contributions
@@ -51,6 +52,7 @@ const BillTabPanel = ({ intl, rights, classes, bill, setConfirmedAction }) => {
         value={activeTab}
         bill={bill}
         setConfirmedAction={setConfirmedAction}
+        isWorker={isWorker}
       />
     </Paper>
   );

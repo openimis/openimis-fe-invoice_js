@@ -5,9 +5,9 @@ import { BILL_EVENTS_TAB_VALUE, RIGHT_BILL_EVENT_SEARCH, RIGHT_BILL_EVENT_CREATE
 import BillEventsSearcher from "./BillEventsSearcher";
 import CreateBillEventMessageDialog from "../dialogs/BillEventMessageDialog";
 
-
-const BillEventsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected }) =>
-  rights?.includes(RIGHT_BILL_EVENT_SEARCH) && (
+const BillEventsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected, isWorker }) =>
+  rights?.includes(RIGHT_BILL_EVENT_SEARCH) &&
+  !isWorker && (
     <Tab
       onChange={onChange}
       className={tabStyle(BILL_EVENTS_TAB_VALUE)}
@@ -17,24 +17,23 @@ const BillEventsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected }) =>
     />
   );
 
-
-const BillEventsTabPanel = ({ rights, value, bill }) => (
-  <PublishedComponent pubRef="policyHolder.TabPanel" module="bill" index={BILL_EVENTS_TAB_VALUE} value={value}>
-    {rights?.includes(RIGHT_BILL_EVENT_CREATE_MESSAGE) && (
-      <Grid container justify="flex-end" alignItems="center" spacing={1}>
-        <Grid item>
-          <Typography>
-            <FormattedMessage module="invoice" id="billEventMessage.create.label" />
-          </Typography>
+const BillEventsTabPanel = ({ isWorker, rights, value, bill }) =>
+  !isWorker && (
+    <PublishedComponent pubRef="policyHolder.TabPanel" module="bill" index={BILL_EVENTS_TAB_VALUE} value={value}>
+      {rights?.includes(RIGHT_BILL_EVENT_CREATE_MESSAGE) && (
+        <Grid container justify="flex-end" alignItems="center" spacing={1}>
+          <Grid item>
+            <Typography>
+              <FormattedMessage module="invoice" id="billEventMessage.create.label" />
+            </Typography>
+          </Grid>
+          <Grid item>
+            <CreateBillEventMessageDialog bill={bill} />
+          </Grid>
         </Grid>
-        <Grid item>
-          <CreateBillEventMessageDialog bill={bill} />
-        </Grid>
-      </Grid>
-     )}
-  <BillEventsSearcher bill={bill} />
-  </PublishedComponent>
-);
-
+      )}
+      <BillEventsSearcher bill={bill} />
+    </PublishedComponent>
+  );
 
 export { BillEventsTabLabel, BillEventsTabPanel };

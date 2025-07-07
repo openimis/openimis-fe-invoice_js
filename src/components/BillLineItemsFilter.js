@@ -4,8 +4,8 @@ import _debounce from "lodash/debounce";
 import { Grid } from "@material-ui/core";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 
-import { TextInput, NumberInput } from "@openimis/fe-core";
-import { CONTAINS_LOOKUP, DEFUALT_DEBOUNCE_TIME } from "../constants";
+import { TextInput, NumberInput, useModulesManager } from "@openimis/fe-core";
+import { CONTAINS_LOOKUP, DEFAULT, DEFUALT_DEBOUNCE_TIME } from "../constants";
 
 const styles = (theme) => ({
   form: {
@@ -17,6 +17,10 @@ const styles = (theme) => ({
 });
 
 const BillLineItemsFilter = ({ classes, filters, onChangeFilters }) => {
+  const modulesManager = useModulesManager();
+
+  const isWorker = modulesManager.getConf("fe-core", "isWorker", DEFAULT.IS_WORKER);
+
   const debouncedOnChangeFilters = _debounce(onChangeFilters, DEFUALT_DEBOUNCE_TIME);
 
   const filterValue = (filterName) => filters?.[filterName]?.value;
@@ -72,14 +76,6 @@ const BillLineItemsFilter = ({ classes, filters, onChangeFilters }) => {
         />
       </Grid>
       <Grid item xs={2} className={classes.item}>
-        <TextInput
-          module="bill"
-          label="billItem.ledgerAccount"
-          value={filterTextFieldValue("ledgerAccount")}
-          onChange={onChangeStringFilter("ledgerAccount", CONTAINS_LOOKUP)}
-        />
-      </Grid>
-      <Grid item xs={2} className={classes.item}>
         <NumberInput
           module="bill"
           label="billItem.quantity"
@@ -91,48 +87,60 @@ const BillLineItemsFilter = ({ classes, filters, onChangeFilters }) => {
       <Grid item xs={2} className={classes.item}>
         <NumberInput
           module="bill"
-          label="billItem.unitPrice"
-          min={0}
-          value={filterValue("unitPrice")}
-          onChange={onChangeFilter("unitPrice")}
-        />
-      </Grid>
-      <Grid item xs={2} className={classes.item}>
-        <NumberInput
-          module="bill"
-          label="billItem.discount"
-          min={0}
-          value={filterValue("discount")}
-          onChange={onChangeFilter("discount")}
-        />
-      </Grid>
-      <Grid item xs={2} className={classes.item}>
-        <NumberInput
-          module="bill"
-          label="billItem.deduction"
-          min={0}
-          value={filterValue("deduction")}
-          onChange={onChangeFilter("deduction")}
-        />
-      </Grid>
-      <Grid item xs={2} className={classes.item}>
-        <NumberInput
-          module="bill"
           label="billItem.amountTotal"
           min={0}
           value={filterValue("amountTotal")}
           onChange={onChangeFilter("amountTotal")}
         />
       </Grid>
-      <Grid item xs={2} className={classes.item}>
-        <NumberInput
-          module="bill"
-          label="billItem.amountNet"
-          min={0}
-          value={filterValue("amountNet")}
-          onChange={onChangeFilter("amountNet")}
-        />
-      </Grid>
+      {!isWorker && (
+        <>
+          <Grid item xs={2} className={classes.item}>
+            <TextInput
+              module="bill"
+              label="billItem.ledgerAccount"
+              value={filterTextFieldValue("ledgerAccount")}
+              onChange={onChangeStringFilter("ledgerAccount", CONTAINS_LOOKUP)}
+            />
+          </Grid>
+          <Grid item xs={2} className={classes.item}>
+            <NumberInput
+              module="bill"
+              label="billItem.unitPrice"
+              min={0}
+              value={filterValue("unitPrice")}
+              onChange={onChangeFilter("unitPrice")}
+            />
+          </Grid>
+          <Grid item xs={2} className={classes.item}>
+            <NumberInput
+              module="bill"
+              label="billItem.discount"
+              min={0}
+              value={filterValue("discount")}
+              onChange={onChangeFilter("discount")}
+            />
+          </Grid>
+          <Grid item xs={2} className={classes.item}>
+            <NumberInput
+              module="bill"
+              label="billItem.deduction"
+              min={0}
+              value={filterValue("deduction")}
+              onChange={onChangeFilter("deduction")}
+            />
+          </Grid>
+          <Grid item xs={2} className={classes.item}>
+            <NumberInput
+              module="bill"
+              label="billItem.amountNet"
+              min={0}
+              value={filterValue("amountNet")}
+              onChange={onChangeFilter("amountNet")}
+            />
+          </Grid>
+        </>
+      )}
     </Grid>
   );
 };

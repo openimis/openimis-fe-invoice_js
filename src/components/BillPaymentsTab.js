@@ -5,7 +5,6 @@ import { BILL_PAYMENTS_TAB_VALUE, RIGHT_BILL_PAYMENT_SEARCH, RIGHT_BILL_PAYMENT_
 import BillPaymentsSearcher from "./BillPaymentsSearcher";
 import CreateBillPaymentDialog from "../dialogs/BillPaymentDialog";
 
-
 const BillPaymentsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected }) =>
   rights?.includes(RIGHT_BILL_PAYMENT_SEARCH) && (
     <Tab
@@ -17,10 +16,9 @@ const BillPaymentsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected }) 
     />
   );
 
-
-const BillPaymentsTabPanel = ({ rights, value, bill, setConfirmedAction }) => (
+const BillPaymentsTabPanel = ({ isWorker, rights, value, bill, setConfirmedAction }) => (
   <PublishedComponent pubRef="policyHolder.TabPanel" module="bill" index={BILL_PAYMENTS_TAB_VALUE} value={value}>
-    {rights?.includes(RIGHT_BILL_PAYMENT_CREATE) && (
+    {rights?.includes(RIGHT_BILL_PAYMENT_CREATE) && !isWorker && (
       <Grid container justify="flex-end" alignItems="center" spacing={1}>
         <Grid item>
           <Typography>
@@ -31,10 +29,9 @@ const BillPaymentsTabPanel = ({ rights, value, bill, setConfirmedAction }) => (
           <CreateBillPaymentDialog bill={bill} />
         </Grid>
       </Grid>
-     )}
-  <BillPaymentsSearcher bill={bill} rights={rights} setConfirmedAction={setConfirmedAction} />
+    )}
+    <BillPaymentsSearcher bill={bill} isWorker={isWorker} rights={rights} setConfirmedAction={setConfirmedAction} />
   </PublishedComponent>
 );
-
 
 export { BillPaymentsTabLabel, BillPaymentsTabPanel };

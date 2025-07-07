@@ -6,7 +6,7 @@ import { Grid } from "@material-ui/core";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 
 import { withModulesManager, formatMessage, TextInput, NumberInput, PublishedComponent } from "@openimis/fe-core";
-import { CONTAINS_LOOKUP, DEFUALT_DEBOUNCE_TIME } from "../constants";
+import { CONTAINS_LOOKUP, DEFAULT, DEFUALT_DEBOUNCE_TIME } from "../constants";
 import InvoiceStatusPicker from "../pickers/InvoiceStatusPicker";
 import ThirdPartyTypePickerBill from "../pickers/ThirdPartyTypePickerBill";
 import SubjectTypePickerBill from "../pickers/SubjectTypePickerBill";
@@ -20,7 +20,9 @@ const styles = (theme) => ({
   },
 });
 
-const BillFilter = ({ intl, classes, filters, onChangeFilters }) => {
+const BillFilter = ({ intl, classes, filters, onChangeFilters, modulesManager }) => {
+  const isWorker = modulesManager.getConf("fe-core", "isWorker", DEFAULT.IS_WORKER);
+
   const debouncedOnChangeFilters = _debounce(onChangeFilters, DEFUALT_DEBOUNCE_TIME);
 
   const filterValue = (filterName) => filters?.[filterName]?.value;
@@ -60,24 +62,28 @@ const BillFilter = ({ intl, classes, filters, onChangeFilters }) => {
 
   return (
     <Grid container className={classes.form}>
-      <Grid item xs={2} className={classes.item}>
-        <SubjectTypePickerBill
-          label="subject"
-          withNull
-          nullLabel={formatMessage(intl, "bill", "any")}
-          value={filterValue("subjectType")}
-          onChange={onChangeStringFilter("subjectType")}
-        />
-      </Grid>
-      <Grid item xs={2} className={classes.item}>
-        <ThirdPartyTypePickerBill
-          label="thirdparty"
-          withNull
-          nullLabel={formatMessage(intl, "bill", "any")}
-          value={filterValue("thirdpartyType")}
-          onChange={onChangeStringFilter("thirdpartyType")}
-        />
-      </Grid>
+      {!isWorker && (
+        <>
+          <Grid item xs={2} className={classes.item}>
+            <SubjectTypePickerBill
+              label="subject"
+              withNull
+              nullLabel={formatMessage(intl, "bill", "any")}
+              value={filterValue("subjectType")}
+              onChange={onChangeStringFilter("subjectType")}
+            />
+          </Grid>
+          <Grid item xs={2} className={classes.item}>
+            <ThirdPartyTypePickerBill
+              label="thirdparty"
+              withNull
+              nullLabel={formatMessage(intl, "bill", "any")}
+              value={filterValue("thirdpartyType")}
+              onChange={onChangeStringFilter("thirdpartyType")}
+            />
+          </Grid>
+        </>
+      )}
       <Grid item xs={2} className={classes.item}>
         <TextInput
           module="bill"
@@ -121,15 +127,17 @@ const BillFilter = ({ intl, classes, filters, onChangeFilters }) => {
           }
         />
       </Grid>
-      <Grid item xs={2} className={classes.item}>
-        <NumberInput
-          module="bill"
-          label="amountTotal"
-          min={0}
-          value={filterValue("amountTotal")}
-          onChange={onChangeDecimalFilter("amountTotal")}
-        />
-      </Grid>
+      {!isWorker && (
+        <Grid item xs={2} className={classes.item}>
+          <NumberInput
+            module="bill"
+            label="amountTotal"
+            min={0}
+            value={filterValue("amountTotal")}
+            onChange={onChangeDecimalFilter("amountTotal")}
+          />
+        </Grid>
+      )}
     </Grid>
   );
 };

@@ -32,6 +32,8 @@ export const RIGHT_BILL_EVENT_DELETE = 156304;
 export const RIGHT_BILL_EVENT_CREATE_MESSAGE = 156306;
 export const RIGHT_BILL_EVENT_DELETE_MY_MESSAGE = 156307;
 export const RIGHT_BILL_EVENT_DELETE_ALL_MESSAGE = 156308;
+export const INSPECTOR_RIGHT = 204005;
+export const ADMIN_RIGHT = 204004;
 export const DEFAULT_PAGE_SIZE = 10;
 export const ROWS_PER_PAGE_OPTIONS = [10, 20, 50, 100];
 export const EMPTY_STRING = "";
@@ -49,7 +51,7 @@ export const STATUS = {
   DELETED: "A_4",
   SUSPENDED: "A_5",
   UNPAID: "A_6",
-  RECONCILIATED: "A_7",
+  RECONCILIATED: "A_7"
 };
 export const SUBJECT_TYPE_OPTIONS = [
   {
@@ -103,6 +105,7 @@ export const THIRDPARTY_TYPE_OPTIONS_BILL = [
   }
 ];
 
+export const WORKER_VOUCHER_HEAD_PANEL_CONTRIB = "workerVoucher.VoucherHeadPanel";
 export const INVOICE_SUBJECT_AND_THIRDPARTY_PICKER_CONTRIBUTION_KEY = "invoice.SubjectAndThirdpartyPicker";
 export const INVOICE_SUBJECT_AND_THIRDPARTY_PICKER_PROPS = {
   TYPE: "type",
@@ -172,4 +175,9 @@ export const EVENT_TYPE = {
 export const EMPTY_EVENT_MESSAGE = {
   eventType: EVENT_TYPE.MESSAGE,
   message: "",
+};
+
+export const DEFAULT = {
+  IS_WORKER: false,
+  ECONOMIC_UNIT_CONFIG: false,
 };

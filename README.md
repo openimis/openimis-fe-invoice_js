@@ -67,4 +67,6 @@ None
 * `state.core.user`, to access user info (rights,...)
 
 ## Configurations Options
-None
+
+- `App.economicUnitConfig`:
+  This configuration option determines whether the Bill page should be filtered based on the selected Economic Unit. When set to **true**, the Bill page will display data only for the chosen Economic Unit, ensuring that users view information specific to their assigned unit. If set to **false** (the default setting), the Bill page will not be filtered by any Economic Unit, and users can view all available data regardless of their unit association.

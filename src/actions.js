@@ -204,7 +204,7 @@ const formatPaymentInvoiceGQL = (payment, subjectId, subjectType) =>
   `
     ${!!payment.id ? `id: "${payment.id}"` : ""}
     ${!!subjectId ? `subjectId: "${subjectId}"` : ""}
-    ${!!subjectType ? `subjectType: "${subjectType}"` : ""}
+    ${!!subjectType ? `subjectTypeName "${subjectType}"` : ""}
     ${!!payment.status ? `status: ${payment.status}` : ""}
     ${!!payment.reconciliationStatus ? `reconciliationStatus: ${payment.reconciliationStatus}` : ""}
     ${!!payment.codeExt ? `codeExt: "${payment.codeExt}"` : ""}
@@ -326,7 +326,11 @@ export function createInvoiceEventMessage(invoiceEvent, clientMutationLabel) {
 
 //bill 
 export function fetchBills(params) {
-  const payload = formatPageQueryWithCount("bill", params, BILL_FULL_PROJECTION);
+  let updatedArr = params
+    .map(str => str.includes('subjectType:') ? str.replace('subjectType', 'subjectTypeFilter') : str)
+    .map(str => str.includes('thirdpartyType:') ? str.replace('thirdpartyType', 'thirdpartyTypeFilter') : str);
+
+  const payload = formatPageQueryWithCount("bill", updatedArr, BILL_FULL_PROJECTION);
   return graphql(payload, ACTION_TYPE.SEARCH_BILLS);
 }
 

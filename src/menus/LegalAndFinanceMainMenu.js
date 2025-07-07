@@ -3,46 +3,84 @@ import { injectIntl } from "react-intl";
 import { connect } from "react-redux";
 import { DoubleArrow } from "@material-ui/icons";
 import { formatMessage, MainMenuContribution, withModulesManager } from "@openimis/fe-core";
-import { LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY } from "../constants";
+import {
+  LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY,
+  RIGHT_INVOICE_SEARCH,
+  RIGHT_BILL_SEARCH,
+  RIGHT_BILL_AMEND,
+  RIGHT_INVOICE_AMEND,
+  DEFAULT,
+} from "../constants";
 import { withStyles } from "@material-ui/core/styles";
-import { RIGHT_INVOICE_SEARCH, RIGHT_BILL_SEARCH, RIGHT_BILL_AMEND, RIGHT_INVOICE_AMEND } from "./../constants"
 
-const DoubleArrowFlipped = withStyles({
+export const DoubleArrowFlipped = withStyles({
   root: {
     transform: "scaleX(-1)",
   },
 })(DoubleArrow);
 
-
 const LegalAndFinanceMainMenu = (props) => {
-  const entries = []
+  const { modulesManager, rights, intl } = props;
+  const isWorker = modulesManager.getConf("fe-core", "isWorker", DEFAULT.IS_WORKER);
 
-  if (!!props.rights.filter((r) => r >= RIGHT_INVOICE_SEARCH && r <= RIGHT_INVOICE_AMEND).length) {
+  const entries = [];
+
+  if (isWorker) {
+    if (rights.includes(RIGHT_BILL_SEARCH || RIGHT_BILL_AMEND)) {
+      entries.push({
+        text: formatMessage(intl, "invoice", "menu.bills"),
+        icon: <DoubleArrowFlipped />,
+        route: "/bills",
+        id: "legalAndFinance.bills",
+      });
+    }
+
+    if (!entries.length) return null;
+
+    return (
+      <MainMenuContribution 
+        {...props} 
+        header={formatMessage(intl, "invoice", "mainMenu")}
+        entries={entries}
+        menuId='LegalAndFinanceMainMenu'
+      />
+    );
+  }
+
+  if (rights.filter((r) => r >= RIGHT_INVOICE_SEARCH && r <= RIGHT_INVOICE_AMEND).length) {
     // RIGHT_SEARCH is shared by HF & HQ staff)
     entries.push({
-      text: formatMessage(props.intl, "invoice", "menu.invoices"),
+      text: formatMessage(intl, "invoice", "menu.invoices"),
       icon: <DoubleArrow />,
       route: "/invoices",
+      id: "legalAndFinance.invoices",
     });
   }
-  if (!!props.rights.filter((r) => r >= RIGHT_BILL_SEARCH && r <= RIGHT_BILL_AMEND).length) {
+  if (rights.filter((r) => r >= RIGHT_BILL_SEARCH && r <= RIGHT_BILL_AMEND).length) {
     // RIGHT_SEARCH is shared by HF & HQ staff)
     entries.push({
-      text: formatMessage(props.intl, "invoice", "menu.bills"),
+      text: formatMessage(intl, "invoice", "menu.bills"),
       icon: <DoubleArrowFlipped />,
       route: "/bills",
+      id: "legalAndFinance.bills",
     });
   }
-  
+
   entries.push(
-    ...props.modulesManager
+    ...modulesManager
       .getContribs(LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY)
-      .filter((c) => !c.filter || c.filter(props.rights)),
+      .filter((c) => !c.filter || c.filter(rights)),
   );
+
   if (!entries.length) return null;
 
   return (
-    <MainMenuContribution {...props} header={formatMessage(props.intl, "invoice", "mainMenu")} entries={entries} />
+    <MainMenuContribution 
+      {...props} 
+      header={formatMessage(intl, "invoice", "mainMenu")}
+      entries={entries}
+      menuId="LegalAndFinanceMainMenu"
+    />
   );
 };
 

@@ -18,53 +18,82 @@ const BillLineItemsSearcher = ({
   billLineItems,
   billLineItemsPageInfo,
   billLineItemsTotalCount,
+  isWorker,
 }) => {
   const fetch = (params) => fetchBillLineItems(params);
 
-  const headers = () => [
-    "billItem.code",
-    "billItem.description",
-    "billItem.ledgerAccount",
-    "billItem.quantity",
-    "billItem.unitPrice",
-    "billItem.discount",
-    "billItem.deduction",
-    "billItem.amountTotal",
-    "billItem.amountNet",
-  ];
+  const headersSetter = () => {
+    const headers = ["billItem.code", "billItem.description", "billItem.quantity", "billItem.amountTotal"];
 
-  const itemFormatters = () => [
-    (billItem) => billItem.code,
-    (billItem) => billItem.description,
-    (billItem) => billItem.ledgerAccount,
-    (billItem) => billItem.quantity,
-    (billItem) => billItem.unitPrice,
-    (billItem) => billItem.discount,
-    (billItem) => billItem.deduction,
-    (billItem) => billItem.amountTotal,
-    (billItem) => (
-      <Tooltip
-        title={formatMessageWithValues(intl, "invoice", "billItem.amountNetTooltip", {
-          value: !!billItem?.taxAnalysis ? JSON.parse(billItem.taxAnalysis)?.["total"] : null,
-        })}
-        placement="right"
-      >
-        <div>{billItem.amountNet}</div>
-      </Tooltip>
-    ),
-  ];
+    if (!isWorker) {
+      const additionalHeaders = [
+        "billItem.ledgerAccount",
+        "billItem.unitPrice",
+        "billItem.discount",
+        "billItem.deduction",
+        "billItem.amountNet",
+      ];
 
-  const sorts = () => [
-    ["code", true],
-    ["description", true],
-    ["ledgerAccount", true],
-    ["quantity", true],
-    ["unitPrice", true],
-    ["discount", true],
-    ["deduction", true],
-    ["amountTotal", true],
-    ["amountNet", true],
-  ];
+      headers.push(...additionalHeaders);
+    }
+
+    return headers;
+  };
+
+  const itemFormatters = () => {
+    const formatters = [
+      (billItem) => billItem.code,
+      (billItem) => billItem.description,
+      (billItem) => billItem.quantity,
+      (billItem) => billItem.amountTotal,
+    ];
+
+    if (!isWorker) {
+      const additionalFormatters = [
+        (billItem) => billItem.ledgerAccount,
+        (billItem) => billItem.unitPrice,
+        (billItem) => billItem.discount,
+        (billItem) => billItem.deduction,
+        (billItem) => (
+          <Tooltip
+            title={formatMessageWithValues(intl, "invoice", "billItem.amountNetTooltip", {
+              value: !!billItem?.taxAnalysis ? JSON.parse(billItem.taxAnalysis)?.["total"] : null,
+            })}
+            placement="right"
+          >
+            <div>{billItem.amountNet}</div>
+          </Tooltip>
+        ),
+      ];
+
+      formatters.push(...additionalFormatters);
+    }
+
+    return formatters;
+  };
+
+  const sortsSetter = () => {
+    const sorts = [
+      ["code", true],
+      ["description", true],
+      ["quantity", true],
+      ["amountTotal", true],
+    ];
+
+    if (!isWorker) {
+      const additionalSorts = [
+        ["ledgerAccount", true],
+        ["unitPrice", true],
+        ["discount", true],
+        ["deduction", true],
+        ["amountNet", true],
+      ];
+
+      sorts.push(...additionalSorts);
+    }
+
+    return sorts;
+  };
 
   const defaultFilters = () => ({
     bill_Id: {
@@ -90,9 +119,9 @@ const BillLineItemsSearcher = ({
         tableTitle={formatMessageWithValues(intl, "invoice", "billItems.searcher.resultsTitle", {
           billLineItemsTotalCount,
         })}
-        headers={headers}
+        headers={headersSetter}
         itemFormatters={itemFormatters}
-        sorts={sorts}
+        sorts={sortsSetter}
         rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
         defaultPageSize={DEFAULT_PAGE_SIZE}
         defaultOrderBy="code"
