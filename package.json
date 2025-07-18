@@ -26,6 +26,8 @@
     "dist"
   ],
   "dependencies": {
-    "flat": "^5.0.2"
+    "flat": "^5.0.2",
+    "@mui/material": "^5.15.14",
+    "@mui/icons-material": "^5.14.17"
   }
 }

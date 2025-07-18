@@ -1,7 +1,7 @@
 import React from "react";
 import { injectIntl } from "react-intl";
 import { connect } from "react-redux";
-import { DoubleArrow } from "@material-ui/icons";
+import DoubleArrow from "@mui/icons-material/DoubleArrow";
 import { formatMessage, MainMenuContribution, withModulesManager } from "@openimis/fe-core";
 import {
   LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY,
@@ -11,7 +11,7 @@ import {
   RIGHT_INVOICE_AMEND,
   DEFAULT,
 } from "../constants";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@mui/material/styles";
 
 export const DoubleArrowFlipped = withStyles({
   root: {

@@ -1,8 +1,8 @@
 import React from "react";
-import { Tab } from "@material-ui/core";
+import { Tab } from "@mui/material";
 import { formatMessage, PublishedComponent, FormattedMessage } from "@openimis/fe-core";
 import { INVOICE_EVENTS_TAB_VALUE, RIGHT_INVOICE_EVENT_SEARCH, RIGHT_INVOICE_EVENT_CREATE_MESSAGE } from "../constants";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@mui/material";
 import CreateInvoiceEventMessageDialog from "../dialogs/InvoiceEventMessageDialog";
 import InvoiceEventsSearcher from "./InvoiceEventsSearcher";
 

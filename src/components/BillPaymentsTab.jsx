@@ -1,5 +1,5 @@
 import React from "react";
-import { Tab, Grid, Typography } from "@material-ui/core";
+import { Tab, Grid, Typography } from "@mui/material";
 import { formatMessage, PublishedComponent, FormattedMessage } from "@openimis/fe-core";
 import { BILL_PAYMENTS_TAB_VALUE, RIGHT_BILL_PAYMENT_SEARCH, RIGHT_BILL_PAYMENT_CREATE } from "../constants";
 import BillPaymentsSearcher from "./BillPaymentsSearcher";

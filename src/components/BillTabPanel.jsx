@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Paper, Grid } from "@material-ui/core";
+import { Paper, Grid } from "@mui/material";
 import { Contributions } from "@openimis/fe-core";
 import { injectIntl } from "react-intl";
-import { withTheme, withStyles } from "@material-ui/core/styles";
+import { withTheme, withStyles } from "@mui/material/styles";
 import {
   BILL_LINE_ITEMS_TAB_VALUE,
   BILL_TABS_LABEL_CONTRIBUTION_KEY,

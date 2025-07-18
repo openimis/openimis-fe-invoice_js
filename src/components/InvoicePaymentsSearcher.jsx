@@ -19,8 +19,8 @@ import {
 } from "../constants";
 import InvoicePaymentsFilter from "./InvoicePaymentsFilter";
 import PaymentInvoiceStatusPicker from "../pickers/PaymentInvoiceStatusPicker"
-import { IconButton, Tooltip } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { IconButton, Tooltip } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { ACTION_TYPE } from "../reducer";
 
 const InvoicePaymentsSearcher = ({

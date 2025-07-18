@@ -1,5 +1,5 @@
 import React from "react";
-import { DoubleArrow } from "@material-ui/icons";
+import DoubleArrow from "@mui/icons-material/DoubleArrow";
 import { FormattedMessage } from "@openimis/fe-core";
 import messages_en from "./translations/en.json";
 import reducer from "./reducer";

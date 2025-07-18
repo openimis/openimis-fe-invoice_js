@@ -25,9 +25,9 @@ import {
 import InvoiceFilter from "./InvoiceFilter";
 import InvoiceStatusPicker from "../pickers/InvoiceStatusPicker";
 import { getSubjectAndThirdpartyTypePicker } from "../util/subject-and-thirdparty-picker";
-import { IconButton, Tooltip } from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { IconButton, Tooltip } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const InvoiceSearcher = ({
   intl,

@@ -11,11 +11,11 @@ import {
 import { injectIntl } from "react-intl";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { withTheme, withStyles } from "@material-ui/core/styles";
+import { withTheme, withStyles } from "@mui/material/styles";
 import { RIGHT_INVOICE_UPDATE, STATUS } from "../constants";
 import { fetchInvoice, deleteInvoice } from "../actions";
 import InvoiceHeadPanel from "../components/InvoiceHeadPanel";
-import DeleteIcon from "@material-ui/icons/Delete";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { getEnumValue } from "../util/enum";
 import InvoiceTabPanel from "../components/InvoiceTabPanel";
 import { ACTION_TYPE } from "../reducer";

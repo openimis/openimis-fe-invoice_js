@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { fetchBillLineItems } from "../actions";
 import { DEFAULT_PAGE_SIZE, ROWS_PER_PAGE_OPTIONS } from "../constants";
-import { Tooltip } from "@material-ui/core";
+import { Tooltip } from "@mui/material";
 import BillLineItemsFilter from "./BillLineItemsFilter";
 
 const BillLineItemsSearcher = ({

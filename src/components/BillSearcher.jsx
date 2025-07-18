@@ -3,10 +3,10 @@ import { bindActionCreators } from "redux";
 import { connect, useSelector } from "react-redux";
 import { injectIntl } from "react-intl";
 
-import { IconButton, Tooltip, Button, Dialog, DialogActions, DialogTitle, DialogContent } from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import DeleteIcon from "@material-ui/icons/Delete";
+import { IconButton, Tooltip, Button, Dialog, DialogActions, DialogTitle, DialogContent } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import {
   withModulesManager,
