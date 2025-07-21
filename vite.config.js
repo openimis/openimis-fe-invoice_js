@@ -1,10 +1,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import pkg from './package.json';
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@emotion/react': path.resolve(__dirname, 'node_modules/@emotion/react'),
+    },
+  },
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.jsx'),
