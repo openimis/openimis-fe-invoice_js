@@ -4,42 +4,56 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+
   resolve: {
-    alias: {
-      '@emotion/react': path.resolve(__dirname, 'node_modules/@emotion/react'),
-    },
+    // so that vite nto inject the vite-optinla-deep
+    dedupe: [
+      'react',
+      'react-dom',
+      '@emotion/react',
+      '@emotion/styled'
+    ],
+
+    
+    alias: [
+      {
+        find: '@mui/styled-engine',
+        replacement: '@emotion/styled'
+      }
+    ]
   },
+
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.jsx'),
       name: 'Invoice',
       fileName: (format) => `index.${format}.js`,
-      formats: ['es', 'cjs'],
+      formats: ['es', 'cjs']
     },
     rollupOptions: {
       external: [
-        /^@babel.*/,
+        /^@babel\..*/,
         /^@date-io\/.*/,
-        /^@material-ui\/.*/,
-        /^@openimis.*/,
+        /^@openimis\./,
         'classnames',
         'clsx',
         'history',
-        /^lodash.*/,
+        /^lodash\..*/,
         'moment',
         'prop-types',
-        /^react.*/,
-        /^redux.*/,
-        'flat',
+        /^react($|\/)/,
+        /^redux($|\/)/,
+        'flat'
+      
       ],
       output: {
         globals: {
-          react: 'React',
-        },
-      },
+          react: 'React'
+        }
+      }
     },
     sourcemap: true,
     outDir: 'dist',
-    emptyOutDir: true,
-  },
+    emptyOutDir: true
+  }
 });
