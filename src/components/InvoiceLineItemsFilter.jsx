@@ -2,7 +2,7 @@ import React from "react";
 import _debounce from "lodash/debounce";
 
 import { Grid } from "@mui/material";
-import { withTheme, withStyles } from "@mui/material/styles";
+import { withTheme, withStyles } from "@mui/styles";
 
 import { TextInput, NumberInput } from "@openimis/fe-core";
 import { CONTAINS_LOOKUP, DEFUALT_DEBOUNCE_TIME } from "../constants";

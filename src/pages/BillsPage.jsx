@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { injectIntl } from "react-intl";
 
-import { withTheme, withStyles } from "@mui/material/styles";
+import { withTheme, withStyles } from "@mui/styles";
 
 import { Helmet, withModulesManager, formatMessage, clearCurrentPaginationPage } from "@openimis/fe-core";
 import { RIGHT_BILL_SEARCH } from "../constants";

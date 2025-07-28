@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
 import { FormattedMessage, TextInput, formatMessageWithValues } from "@openimis/fe-core";
 import { Fab, Grid } from "@mui/material";
-import { withTheme, withStyles } from "@mui/material/styles";
+import { withTheme, withStyles } from "@mui/styles";
 import { createInvoiceEventMessage } from "../actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

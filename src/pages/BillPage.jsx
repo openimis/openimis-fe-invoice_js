@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { injectIntl } from "react-intl";
 
-import { withTheme, withStyles } from "@mui/material/styles";
+import { withTheme, withStyles } from "@mui/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import {

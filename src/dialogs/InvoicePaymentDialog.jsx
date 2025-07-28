@@ -16,7 +16,7 @@ import {
   formatMessage,
 } from "@openimis/fe-core";
 import { Fab, Grid, IconButton, Tooltip } from "@mui/material";
-import { withTheme, withStyles } from "@mui/material/styles";
+import { withTheme, withStyles } from "@mui/styles";
 import { createPaymentInvoiceWithDetail, updateInvoicePayment } from "../actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

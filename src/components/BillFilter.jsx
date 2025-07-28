@@ -2,8 +2,8 @@ import React from "react";
 import { injectIntl } from "react-intl";
 import _debounce from "lodash/debounce";
 
-import { Grid } from "@material-ui/core";
-import { withTheme, withStyles } from "@material-ui/core/styles";
+import { Grid } from "@mui/material";
+import { withTheme, withStyles } from "@mui/styles";
 
 import { withModulesManager, formatMessage, TextInput, NumberInput, PublishedComponent } from "@openimis/fe-core";
 import { CONTAINS_LOOKUP, DEFAULT, DEFUALT_DEBOUNCE_TIME } from "../constants";

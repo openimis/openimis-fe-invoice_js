@@ -11,7 +11,7 @@ import {
 import { injectIntl } from "react-intl";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { withTheme, withStyles } from "@mui/material/styles";
+import { withTheme, withStyles } from "@mui/styles";
 import { RIGHT_INVOICE_UPDATE, STATUS } from "../constants";
 import { fetchInvoice, deleteInvoice } from "../actions";
 import InvoiceHeadPanel from "../components/InvoiceHeadPanel";

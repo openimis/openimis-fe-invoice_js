@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Paper, Grid } from "@mui/material";
 import { Contributions } from "@openimis/fe-core";
 import { injectIntl } from "react-intl";
-import { withTheme, withStyles } from "@mui/material/styles";
+import { withTheme, withStyles } from "@mui/styles";
 import {
   INVOICE_LINE_ITEMS_TAB_VALUE,
   INVOICE_TABS_LABEL_CONTRIBUTION_KEY,

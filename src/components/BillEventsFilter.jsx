@@ -3,7 +3,7 @@ import { injectIntl } from "react-intl";
 import _debounce from "lodash/debounce";
 
 import { Grid } from "@mui/material";
-import { withTheme, withStyles } from "@mui/material/styles";
+import { withTheme, withStyles } from "@mui/styles";
 
 import { formatMessage, TextInput } from "@openimis/fe-core";
 import { CONTAINS_LOOKUP, DEFUALT_DEBOUNCE_TIME } from "../constants";
