@@ -27,12 +27,12 @@
   ],
   "dependencies": {
     "flat": "^5.0.2",
-    "@mui/material": "^5.15.14",
-    "@mui/icons-material": "^5.14.17",
+    "@mui/material": "^7.2.0",
+    "@mui/icons-material": "^7.2.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@emotion/cache": "^11.11.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   }
 }

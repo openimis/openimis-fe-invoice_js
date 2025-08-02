@@ -3,7 +3,7 @@ import { injectIntl } from "react-intl";
 import _debounce from "lodash/debounce";
 
 import { Grid } from "@mui/material";
-import { withTheme, withStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
 
 import { withModulesManager, formatMessage, TextInput, NumberInput, PublishedComponent } from "@openimis/fe-core";
 import { CONTAINS_LOOKUP, DEFAULT, DEFUALT_DEBOUNCE_TIME } from "../constants";
@@ -11,16 +11,16 @@ import InvoiceStatusPicker from "../pickers/InvoiceStatusPicker";
 import ThirdPartyTypePickerBill from "../pickers/ThirdPartyTypePickerBill";
 import SubjectTypePickerBill from "../pickers/SubjectTypePickerBill";
 
-const styles = (theme) => ({
-  form: {
+const StyledBillFilter = styled('div')(({ theme }) => ({
+  '& .form': {
     padding: 0,
   },
-  item: {
+  '& .item': {
     padding: theme.spacing(1),
   },
-});
+}));
 
-const BillFilter = ({ intl, classes, filters, onChangeFilters, modulesManager }) => {
+const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
   const isWorker = modulesManager.getConf("fe-core", "isWorker", DEFAULT.IS_WORKER);
 
   const debouncedOnChangeFilters = _debounce(onChangeFilters, DEFUALT_DEBOUNCE_TIME);
@@ -61,85 +61,87 @@ const BillFilter = ({ intl, classes, filters, onChangeFilters, modulesManager })
     };
 
   return (
-    <Grid container className={classes.form}>
-      {!isWorker && (
-        <>
-          <Grid item xs={2} className={classes.item}>
-            <SubjectTypePickerBill
-              label="subject"
-              withNull
-              nullLabel={formatMessage(intl, "bill", "any")}
-              value={filterValue("subjectType")}
-              onChange={onChangeStringFilter("subjectType")}
-            />
-          </Grid>
-          <Grid item xs={2} className={classes.item}>
-            <ThirdPartyTypePickerBill
-              label="thirdparty"
-              withNull
-              nullLabel={formatMessage(intl, "bill", "any")}
-              value={filterValue("thirdpartyType")}
-              onChange={onChangeStringFilter("thirdpartyType")}
-            />
-          </Grid>
-        </>
-      )}
-      <Grid item xs={2} className={classes.item}>
-        <TextInput
-          module="bill"
-          label="code"
-          value={filterTextFieldValue("code")}
-          onChange={onChangeStringFilter("code", CONTAINS_LOOKUP)}
-        />
-      </Grid>
-      <Grid item xs={2} className={classes.item}>
-        <PublishedComponent
-          pubRef="core.DatePicker"
-          module="bill"
-          label="dateBill"
-          value={filterValue("dateBill")}
-          onChange={(v) =>
-            onChangeFilters([
-              {
-                id: "dateBill",
-                value: v,
-                filter: `dateBill: "${v}"`,
-              },
-            ])
-          }
-        />
-      </Grid>
-      <Grid item xs={2} className={classes.item}>
-        <InvoiceStatusPicker
-          label="status.label"
-          withNull
-          nullLabel={formatMessage(intl, "bill", "any")}
-          value={filterValue("status")}
-          onChange={(value) =>
-            onChangeFilters([
-              {
-                id: "status",
-                value: value,
-                // probably won't work on mssql https://openimis.atlassian.net/browse/OP-1546
-                filter: `status: A_${value}`,
-              },
-            ])
-          }
-        />
-      </Grid>
-      {!isWorker && (
-        <Grid item xs={2} className={classes.item}>
-          <NumberInput
+    <StyledBillFilter>
+      <Grid container className="form">
+        {!isWorker && (
+          <>
+            <Grid item xs={2} className="item">
+              <SubjectTypePickerBill
+                label="subject"
+                withNull
+                nullLabel={formatMessage(intl, "bill", "any")}
+                value={filterValue("subjectType")}
+                onChange={onChangeStringFilter("subjectType")}
+              />
+            </Grid>
+            <Grid item xs={2} className="item">
+              <ThirdPartyTypePickerBill
+                label="thirdparty"
+                withNull
+                nullLabel={formatMessage(intl, "bill", "any")}
+                value={filterValue("thirdpartyType")}
+                onChange={onChangeStringFilter("thirdpartyType")}
+              />
+            </Grid>
+          </>
+        )}
+        <Grid item xs={2} className="item">
+          <TextInput
             module="bill"
-            label="amountTotal"
-            min={0}
-            value={filterValue("amountTotal")}
-            onChange={onChangeDecimalFilter("amountTotal")}
+            label="code"
+            value={filterTextFieldValue("code")}
+            onChange={onChangeStringFilter("code", CONTAINS_LOOKUP)}
           />
         </Grid>
-      )}
-    </Grid>
+        <Grid item xs={2} className="item">
+          <PublishedComponent
+            pubRef="core.DatePicker"
+            module="bill"
+            label="dateBill"
+            value={filterValue("dateBill")}
+            onChange={(v) =>
+              onChangeFilters([
+                {
+                  id: "dateBill",
+                  value: v,
+                  filter: `dateBill: "${v}"`,
+                },
+              ])
+            }
+          />
+        </Grid>
+        <Grid item xs={2} className="item">
+          <InvoiceStatusPicker
+            label="status.label"
+            withNull
+            nullLabel={formatMessage(intl, "bill", "any")}
+            value={filterValue("status")}
+            onChange={(value) =>
+              onChangeFilters([
+                {
+                  id: "status",
+                  value: value,
+                  // probably won't work on mssql https://openimis.atlassian.net/browse/OP-1546
+                  filter: `status: A_${value}`,
+                },
+              ])
+            }
+          />
+        </Grid>
+        {!isWorker && (
+          <Grid item xs={2} className="item">
+            <NumberInput
+              module="bill"
+              label="amountTotal"
+              min={0}
+              value={filterValue("amountTotal")}
+              onChange={onChangeDecimalFilter("amountTotal")}
+            />
+          </Grid>
+        )}
+      </Grid>
+    </StyledBillFilter>
   );
 };
 
-export default withModulesManager(injectIntl(withTheme(withStyles(styles)(BillFilter))));
+export default withModulesManager(injectIntl(BillFilter));

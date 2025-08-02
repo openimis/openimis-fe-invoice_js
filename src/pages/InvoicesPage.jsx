@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
 import { Helmet, withModulesManager, formatMessage, clearCurrentPaginationPage } from "@openimis/fe-core";
 import { injectIntl } from "react-intl";
-import { withTheme, withStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
 import { connect, useDispatch } from "react-redux";
 import { RIGHT_INVOICE_SEARCH } from "../constants";
 import InvoiceSearcher from "../components/InvoiceSearcher";
 import { defaultPageStyles } from "../util/styles";
 
-const InvoicesPage = ({ intl, classes, rights }) => {
+const StyledInvoicesPage = styled('div')(({ theme }) => ({
+  ...defaultPageStyles(theme),
+}));
+
+const InvoicesPage = ({ intl, rights }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,12 +19,14 @@ const InvoicesPage = ({ intl, classes, rights }) => {
   }, []);
 
   return (
-    rights.includes(RIGHT_INVOICE_SEARCH) && (
-      <div className={classes.page}>
-        <Helmet title={formatMessage(intl, "invoice", "invoices.pageTitle")} />
-        <InvoiceSearcher rights={rights} />
-      </div>
-    )
+    <StyledInvoicesPage>
+      {rights.includes(RIGHT_INVOICE_SEARCH) && (
+        <div className="page">
+          <Helmet title={formatMessage(intl, "invoice", "invoices.pageTitle")} />
+          <InvoiceSearcher rights={rights} />
+        </div>
+      )}
+    </StyledInvoicesPage>
   );
 };
 
@@ -29,5 +35,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default withModulesManager(
-  injectIntl(withTheme(withStyles(defaultPageStyles)(connect(mapStateToProps)(InvoicesPage)))),
+  injectIntl(connect(mapStateToProps)(InvoicesPage)),
 );

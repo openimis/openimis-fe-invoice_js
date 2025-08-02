@@ -16,7 +16,7 @@ import {
   formatMessage,
 } from "@openimis/fe-core";
 import { Fab, Grid, IconButton, Tooltip } from "@mui/material";
-import { withTheme, withStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
 import { createPaymentInvoiceWithDetail, updateInvoicePayment } from "../actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -25,9 +25,12 @@ import InvoicePaymentStatusPicker from "../pickers/InvoicePaymentStatusPicker";
 import PaymentInvoiceStatusPicker from "../pickers/PaymentInvoiceStatusPicker";
 import { defaultDialogStyles } from "../util/styles";
 
+const StyledInvoicePaymentDialog = styled('div')(({ theme }) => ({
+  ...defaultDialogStyles(theme),
+}));
+
 const InvoicePaymentDialog = ({
   intl,
-  classes,
   invoice,
   invoicePayment = null,
   disabled,
@@ -75,152 +78,154 @@ const InvoicePaymentDialog = ({
   const canSave = Object.keys(payment)?.every((key) => !!payment[key]);
 
   return (
-    <>
-      {isNew ? (
-        <Fab size="small" color="primary" onClick={handleOpen}>
-          <AddIcon />
-        </Fab>
-      ) : (
-        <Tooltip title={formatMessage(intl, "invoice", "editButtonTooltip")}>
-          <IconButton onClick={handleOpen} disabled={disabled}>
-            <EditIcon />
-          </IconButton>
-        </Tooltip>
-      )}
-      <Dialog open={isOpen} onClose={handleClose}>
-        <DialogTitle>
-          <FormattedMessage module="invoice" id={`invoicePayment.${isNew ? "create" : "update"}.label`} />
-        </DialogTitle>
-        <DialogContent>
-          <Grid container direction="column" className={classes.item}>
-            <Grid item className={classes.item}>
-              <PaymentInvoiceStatusPicker
-                label="paymentInvoice.reconciliationStatus.label"
-                withNull
-                value={payment?.reconciliationStatus}
-                onChange={onAttributeChange("reconciliationStatus")}
-                required
-              />
+    <StyledInvoicePaymentDialog>
+      <>
+        {isNew ? (
+          <Fab size="small" color="primary" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
+        ) : (
+          <Tooltip title={formatMessage(intl, "invoice", "editButtonTooltip")}>
+            <IconButton onClick={handleOpen} disabled={disabled}>
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+        )}
+        <Dialog open={isOpen} onClose={handleClose}>
+          <DialogTitle>
+            <FormattedMessage module="invoice" id={`invoicePayment.${isNew ? "create" : "update"}.label`} />
+          </DialogTitle>
+          <DialogContent>
+            <Grid container direction="column" className="item">
+              <Grid item className="item">
+                <PaymentInvoiceStatusPicker
+                  label="paymentInvoice.reconciliationStatus.label"
+                  withNull
+                  value={payment?.reconciliationStatus}
+                  onChange={onAttributeChange("reconciliationStatus")}
+                  required
+                />
+              </Grid>
+              <Grid item className="item">
+                <InvoicePaymentStatusPicker
+                  label="paymentInvoice.status.label"
+                  withNull
+                  value={payment?.status}
+                  onChange={onAttributeChange("status")}
+                  required
+                />
+              </Grid>
+              <Grid item className="item">
+                <TextInput
+                  module="invoice"
+                  label="paymentInvoice.payerRef"
+                  value={payment?.payerRef}
+                  onChange={onAttributeChange("payerRef")}
+                  required
+                />
+              </Grid>
+              <Grid item className="item">
+                <TextInput
+                  module="invoice"
+                  label="paymentInvoice.payerName"
+                  value={payment?.payerName}
+                  onChange={onAttributeChange("payerName")}
+                  required
+                />
+              </Grid>
+              <Grid item className="item">
+                <TextInput
+                  module="invoice"
+                  label="paymentInvoice.codeExt"
+                  value={payment?.codeExt}
+                  onChange={onAttributeChange("codeExt")}
+                  required
+                />
+              </Grid>
+              <Grid item className="item">
+                <TextInput
+                  module="invoice"
+                  label="paymentInvoice.label"
+                  value={payment?.label}
+                  onChange={onAttributeChange("label")}
+                  required
+                />
+              </Grid>
+              <Grid item className="item">
+                <TextInput
+                  module="invoice"
+                  label="paymentInvoice.codeTp"
+                  value={payment?.codeTp}
+                  onChange={onAttributeChange("codeTp")}
+                  required
+                />
+              </Grid>
+              <Grid item className="item">
+                <TextInput
+                  module="invoice"
+                  label="paymentInvoice.codeReceipt"
+                  value={payment?.codeReceipt}
+                  onChange={onAttributeChange("codeReceipt")}
+                  required
+                />
+              </Grid>
+              <Grid item className="item">
+                <NumberInput
+                  module="invoice"
+                  label="paymentInvoice.fees"
+                  min={0}
+                  value={payment?.fees}
+                  onChange={onAttributeChange("fees")}
+                  required
+                />
+              </Grid>
+              <Grid item className="item">
+                <NumberInput
+                  module="invoice"
+                  label="paymentInvoice.amountReceived"
+                  min={0}
+                  value={payment?.amountReceived}
+                  onChange={onAttributeChange("amountReceived")}
+                  required
+                />
+              </Grid>
+              <Grid item className="item">
+                <PublishedComponent
+                  pubRef="core.DatePicker"
+                  module="invoice"
+                  label="paymentInvoice.datePayment"
+                  value={payment?.datePayment}
+                  onChange={onAttributeChange("datePayment")}
+                  required
+                />
+              </Grid>
+              <Grid item className="item">
+                <TextInput
+                  module="invoice"
+                  label="paymentInvoice.paymentOrigin"
+                  value={payment?.paymentOrigin}
+                  onChange={onAttributeChange("paymentOrigin")}
+                  required
+                />
+              </Grid>
             </Grid>
-            <Grid item className={classes.item}>
-              <InvoicePaymentStatusPicker
-                label="paymentInvoice.status.label"
-                withNull
-                value={payment?.status}
-                onChange={onAttributeChange("status")}
-                required
-              />
-            </Grid>
-            <Grid item className={classes.item}>
-              <TextInput
-                module="invoice"
-                label="paymentInvoice.payerRef"
-                value={payment?.payerRef}
-                onChange={onAttributeChange("payerRef")}
-                required
-              />
-            </Grid>
-            <Grid item className={classes.item}>
-              <TextInput
-                module="invoice"
-                label="paymentInvoice.payerName"
-                value={payment?.payerName}
-                onChange={onAttributeChange("payerName")}
-                required
-              />
-            </Grid>
-            <Grid item className={classes.item}>
-              <TextInput
-                module="invoice"
-                label="paymentInvoice.codeExt"
-                value={payment?.codeExt}
-                onChange={onAttributeChange("codeExt")}
-                required
-              />
-            </Grid>
-            <Grid item className={classes.item}>
-              <TextInput
-                module="invoice"
-                label="paymentInvoice.label"
-                value={payment?.label}
-                onChange={onAttributeChange("label")}
-                required
-              />
-            </Grid>
-            <Grid item className={classes.item}>
-              <TextInput
-                module="invoice"
-                label="paymentInvoice.codeTp"
-                value={payment?.codeTp}
-                onChange={onAttributeChange("codeTp")}
-                required
-              />
-            </Grid>
-            <Grid item className={classes.item}>
-              <TextInput
-                module="invoice"
-                label="paymentInvoice.codeReceipt"
-                value={payment?.codeReceipt}
-                onChange={onAttributeChange("codeReceipt")}
-                required
-              />
-            </Grid>
-            <Grid item className={classes.item}>
-              <NumberInput
-                module="invoice"
-                label="paymentInvoice.fees"
-                min={0}
-                value={payment?.fees}
-                onChange={onAttributeChange("fees")}
-                required
-              />
-            </Grid>
-            <Grid item className={classes.item}>
-              <NumberInput
-                module="invoice"
-                label="paymentInvoice.amountReceived"
-                min={0}
-                value={payment?.amountReceived}
-                onChange={onAttributeChange("amountReceived")}
-                required
-              />
-            </Grid>
-            <Grid item className={classes.item}>
-              <PublishedComponent
-                pubRef="core.DatePicker"
-                module="invoice"
-                label="paymentInvoice.datePayment"
-                value={payment?.datePayment}
-                onChange={onAttributeChange("datePayment")}
-                required
-              />
-            </Grid>
-            <Grid item className={classes.item}>
-              <TextInput
-                module="invoice"
-                label="paymentInvoice.paymentOrigin"
-                value={payment?.paymentOrigin}
-                onChange={onAttributeChange("paymentOrigin")}
-                required
-              />
-            </Grid>
-          </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} variant="outlined">
-            <FormattedMessage module="invoice" id="dialog.cancel" />
-          </Button>
-          <Button onClick={handleSave} disabled={!canSave} variant="contained" color="primary" autoFocus>
-            <FormattedMessage module="invoice" id={`dialog.${isNew ? "create" : "update"}`} />
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} variant="outlined">
+              <FormattedMessage module="invoice" id="dialog.cancel" />
+            </Button>
+            <Button onClick={handleSave} disabled={!canSave} variant="contained" color="primary" autoFocus>
+              <FormattedMessage module="invoice" id={`dialog.${isNew ? "create" : "update"}`} />
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </>
+    </StyledInvoicePaymentDialog>
   );
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({ createPaymentInvoiceWithDetail, updateInvoicePayment }, dispatch);
 
 export default injectIntl(
-  withTheme(withStyles(defaultDialogStyles)(connect(null, mapDispatchToProps)(InvoicePaymentDialog))),
+  connect(null, mapDispatchToProps)(InvoicePaymentDialog),
 );

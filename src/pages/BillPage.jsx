@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { injectIntl } from "react-intl";
 
-import { withTheme, withStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import {
@@ -23,13 +23,12 @@ import BillTabPanel from "../components/BillTabPanel";
 import { ACTION_TYPE } from "../reducer";
 import { getEnumValue } from "../util/enum";
 
-const styles = (theme) => ({
-  page: theme.page,
-});
+const StyledBillPage = styled('div')(({ theme }) => ({
+  '& .page': theme.page,
+}));
 
 const BillPage = ({
   intl,
-  classes,
   rights,
   history,
   billUuid,
@@ -104,25 +103,27 @@ const BillPage = ({
   const VoucherHeadPanel = modulesManager.getContribs(WORKER_VOUCHER_HEAD_PANEL_CONTRIB)?.[0];
 
   return (
-    rights.includes(RIGHT_BILL_SEARCH) && (
-      <div className={classes.page}>
-        <Helmet title={formatMessageWithValues(intl, "bill", "pageTitle", titleParams(bill))} />
-        <Form
-          module="bill"
-          title="pageTitle"
-          titleParams={titleParams(bill)}
-          bill={editedBill}
-          back={back}
-          onChange={onChange}
-          HeadPanel={isWorker && VoucherHeadPanel ? VoucherHeadPanel : BillHeadPanel}
-          Panels={[BillTabPanel]}
-          isWorker={isWorker}
-          rights={rights}
-          actions={actions}
-          setConfirmedAction={setConfirmedAction}
-        />
-      </div>
-    )
+    <StyledBillPage>
+      {rights.includes(RIGHT_BILL_SEARCH) && (
+        <div className="page">
+          <Helmet title={formatMessageWithValues(intl, "bill", "pageTitle", titleParams(bill))} />
+          <Form
+            module="bill"
+            title="pageTitle"
+            titleParams={titleParams(bill)}
+            bill={editedBill}
+            back={back}
+            onChange={onChange}
+            HeadPanel={isWorker && VoucherHeadPanel ? VoucherHeadPanel : BillHeadPanel}
+            Panels={[BillTabPanel]}
+            isWorker={isWorker}
+            rights={rights}
+            actions={actions}
+            setConfirmedAction={setConfirmedAction}
+          />
+        </div>
+      )}
+    </StyledBillPage>
   );
 };
 
@@ -144,5 +145,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default withHistory(
-  injectIntl(withTheme(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(BillPage)))),
+  injectIntl(connect(mapStateToProps, mapDispatchToProps)(BillPage)),
 );

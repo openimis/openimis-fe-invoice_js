@@ -3,14 +3,18 @@ import { injectIntl } from "react-intl";
 import _debounce from "lodash/debounce";
 
 import { Grid } from "@mui/material";
-import { withTheme, withStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
 
 import { formatMessage, TextInput } from "@openimis/fe-core";
 import { CONTAINS_LOOKUP, DEFUALT_DEBOUNCE_TIME } from "../constants";
 import { defaultFilterStyles } from "../util/styles";
 import InvoiceEventTypePicker from "../pickers/InvoiceEventTypePicker";
 
-const BillEventsFilter = ({ intl, classes, filters, onChangeFilters }) => {
+const StyledBillEventsFilter = styled('div')(({ theme }) => ({
+  ...defaultFilterStyles(theme),
+}));
+
+const BillEventsFilter = ({ intl, filters, onChangeFilters }) => {
   const debouncedOnChangeFilters = _debounce(onChangeFilters, DEFUALT_DEBOUNCE_TIME);
 
   const filterValue = (filterName) => filters?.[filterName]?.value;
@@ -38,26 +42,28 @@ const BillEventsFilter = ({ intl, classes, filters, onChangeFilters }) => {
     };
 
   return (
-    <Grid container className={classes.form}>
-      <Grid item xs={2} className={classes.item}>
-        <InvoiceEventTypePicker
-          label="billEvent.eventType.label"
-          withNull
-          nullLabel={formatMessage(intl, "invoice", "any")}
-          value={filterValue("eventType")}
-          onChange={onChangeStringFilter("eventType")}
-        />
+    <StyledBillEventsFilter>
+      <Grid container className="form">
+        <Grid item xs={2} className="item">
+          <InvoiceEventTypePicker
+            label="billEvent.eventType.label"
+            withNull
+            nullLabel={formatMessage(intl, "invoice", "any")}
+            value={filterValue("eventType")}
+            onChange={onChangeStringFilter("eventType")}
+          />
+        </Grid>
+        <Grid item xs={2} className="item">
+          <TextInput
+            module="invoice"
+            label="billEvent.message"
+            value={filterTextFieldValue("message")}
+            onChange={onChangeStringFilter("message", CONTAINS_LOOKUP)}
+          />
+        </Grid>
       </Grid>
-      <Grid item xs={2} className={classes.item}>
-        <TextInput
-          module="invoice"
-          label="billEvent.message"
-          value={filterTextFieldValue("message")}
-          onChange={onChangeStringFilter("message", CONTAINS_LOOKUP)}
-        />
-      </Grid>
-    </Grid>
+    </StyledBillEventsFilter>
   );
 };
 
-export default injectIntl(withTheme(withStyles(defaultFilterStyles)(BillEventsFilter)));
+export default injectIntl(BillEventsFilter);

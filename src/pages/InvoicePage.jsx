@@ -11,7 +11,7 @@ import {
 import { injectIntl } from "react-intl";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { withTheme, withStyles } from "@mui/styles";
+import { styled } from "@mui/material/styles";
 import { RIGHT_INVOICE_UPDATE, STATUS } from "../constants";
 import { fetchInvoice, deleteInvoice } from "../actions";
 import InvoiceHeadPanel from "../components/InvoiceHeadPanel";
@@ -21,9 +21,12 @@ import InvoiceTabPanel from "../components/InvoiceTabPanel";
 import { ACTION_TYPE } from "../reducer";
 import { defaultPageStyles } from "../util/styles";
 
+const StyledInvoicePage = styled('div')(({ theme }) => ({
+  ...defaultPageStyles(theme),
+}));
+
 const InvoicePage = ({
   intl,
-  classes,
   rights,
   history,
   invoiceUuid,
@@ -95,24 +98,26 @@ const InvoicePage = ({
   ];
 
   return (
-    rights.includes(RIGHT_INVOICE_UPDATE) && (
-      <div className={classes.page}>
-        <Helmet title={formatMessageWithValues(intl, "invoice", "pageTitle", titleParams(invoice))} />
-        <Form
-          module="invoice"
-          title="pageTitle"
-          titleParams={titleParams(invoice)}
-          invoice={editedInvoice}
-          back={back}
-          onChange={onChange}
-          HeadPanel={InvoiceHeadPanel}
-          Panels={[InvoiceTabPanel]}
-          rights={rights}
-          actions={actions}
-          setConfirmedAction={setConfirmedAction}
-        />
-      </div>
-    )
+    <StyledInvoicePage>
+      {rights.includes(RIGHT_INVOICE_UPDATE) && (
+        <div className="page">
+          <Helmet title={formatMessageWithValues(intl, "invoice", "pageTitle", titleParams(invoice))} />
+          <Form
+            module="invoice"
+            title="pageTitle"
+            titleParams={titleParams(invoice)}
+            invoice={editedInvoice}
+            back={back}
+            onChange={onChange}
+            HeadPanel={InvoiceHeadPanel}
+            Panels={[InvoiceTabPanel]}
+            rights={rights}
+            actions={actions}
+            setConfirmedAction={setConfirmedAction}
+          />
+        </div>
+      )}
+    </StyledInvoicePage>
   );
 };
 
@@ -133,5 +138,5 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ fetchInvoice, deleteInvoice, coreConfirm, journalize }, dispatch);
 
 export default withHistory(
-  injectIntl(withTheme(withStyles(defaultPageStyles)(connect(mapStateToProps, mapDispatchToProps)(InvoicePage)))),
+  injectIntl(connect(mapStateToProps, mapDispatchToProps)(InvoicePage)),
 );
