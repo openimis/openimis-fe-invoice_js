@@ -11,13 +11,11 @@ import {
   RIGHT_INVOICE_AMEND,
   DEFAULT,
 } from "../constants";
-import { withStyles } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
-export const DoubleArrowFlipped = withStyles({
-  root: {
-    transform: "scaleX(-1)",
-  },
-})(DoubleArrow);
+export const DoubleArrowFlipped = styled(DoubleArrow)({
+  transform: "scaleX(-1)",
+});
 
 const LegalAndFinanceMainMenu = (props) => {
   const { modulesManager, rights, intl } = props;

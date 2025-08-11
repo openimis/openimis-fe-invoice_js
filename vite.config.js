@@ -65,15 +65,12 @@ export default defineConfig({
         '@mui/icons-material',
         '@mui/system',
         '@mui/styles',
-        '@material-ui/lab',
-        '@material-ui/pickers',
+      
         '@date-io/core',
         '@date-io/moment',
         'zxcvbn',
         'flat',
-        /^@material-ui\/icons\/.*/,
-        /^@material-ui\/core\/.*/,
-        /^@material-ui\/lab\/.*/,
+
         /^@babel-.*/,
         /^@date-io\/.*/,
         /^@openimis.*/

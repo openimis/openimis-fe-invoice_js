@@ -16,7 +16,7 @@ import {
   formatMessage,
 } from "@openimis/fe-core";
 import { Fab, Grid, IconButton, Tooltip } from "@mui/material";
-import { withTheme, withStyles } from "@mui/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import { createPaymentInvoiceWithDetail, updateBillPayment } from "../actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -24,13 +24,12 @@ import { EMPTY_PAYMENT_INVOICE } from "../constants";
 import InvoicePaymentStatusPicker from "../pickers/InvoicePaymentStatusPicker";
 import PaymentInvoiceStatusPicker from "../pickers/PaymentInvoiceStatusPicker";
 
-const styles = (theme) => ({
-  item: theme.paper.item,
-});
+const StyledGrid = styled(Grid)(({ theme }) => ({
+  ...theme.paper.item,
+}));
 
 const BillPaymentDialog = ({
   intl,
-  classes,
   bill,
   billPayment = null,
   disabled,
@@ -95,8 +94,8 @@ const BillPaymentDialog = ({
           <FormattedMessage module="invoice" id={`billPayment.${isNew ? "create" : "update"}.label`} />
         </DialogTitle>
         <DialogContent>
-          <Grid container direction="column" className={classes.item}>
-            <Grid item className={classes.item}>
+          <StyledGrid container direction="column">
+                <StyledGrid item>
               <PaymentInvoiceStatusPicker
                 label="paymentInvoice.reconciliationStatus.label"
                 withNull
@@ -104,8 +103,8 @@ const BillPaymentDialog = ({
                 onChange={onAttributeChange("reconciliationStatus")}
                 required
               />
-            </Grid>
-            <Grid item className={classes.item}>
+            </StyledGrid>
+            <StyledGrid item>
               <InvoicePaymentStatusPicker
                 label="paymentInvoice.status.label"
                 withNull
@@ -113,8 +112,8 @@ const BillPaymentDialog = ({
                 onChange={onAttributeChange("status")}
                 required
               />
-            </Grid>
-            <Grid item className={classes.item}>
+            </StyledGrid>
+            <StyledGrid item>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.payerRef"
@@ -122,8 +121,8 @@ const BillPaymentDialog = ({
                 onChange={onAttributeChange("payerRef")}
                 required
               />
-            </Grid>
-            <Grid item className={classes.item}>
+            </StyledGrid>
+            <StyledGrid item>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.payerName"
@@ -131,8 +130,8 @@ const BillPaymentDialog = ({
                 onChange={onAttributeChange("payerName")}
                 required
               />
-            </Grid>
-            <Grid item className={classes.item}>
+            </StyledGrid>
+            <StyledGrid item>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.codeExt"
@@ -140,8 +139,8 @@ const BillPaymentDialog = ({
                 onChange={onAttributeChange("codeExt")}
                 required
               />
-            </Grid>
-            <Grid item className={classes.item}>
+            </StyledGrid>
+            <StyledGrid item>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.label"
@@ -149,8 +148,8 @@ const BillPaymentDialog = ({
                 onChange={onAttributeChange("label")}
                 required
               />
-            </Grid>
-            <Grid item className={classes.item}>
+            </StyledGrid>
+            <StyledGrid item>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.codeTp"
@@ -158,8 +157,8 @@ const BillPaymentDialog = ({
                 onChange={onAttributeChange("codeTp")}
                 required
               />
-            </Grid>
-            <Grid item className={classes.item}>
+            </StyledGrid>
+            <StyledGrid item>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.codeReceipt"
@@ -167,8 +166,8 @@ const BillPaymentDialog = ({
                 onChange={onAttributeChange("codeReceipt")}
                 required
               />
-            </Grid>
-            <Grid item className={classes.item}>
+            </StyledGrid>
+            <StyledGrid item>
               <NumberInput
                 module="invoice"
                 label="paymentInvoice.fees"
@@ -177,8 +176,8 @@ const BillPaymentDialog = ({
                 onChange={onAttributeChange("fees")}
                 required
               />
-            </Grid>
-            <Grid item className={classes.item}>
+            </StyledGrid>
+            <StyledGrid item>
               <NumberInput
                 module="invoice"
                 label="paymentInvoice.amountReceived"
@@ -187,8 +186,8 @@ const BillPaymentDialog = ({
                 onChange={onAttributeChange("amountReceived")}
                 required
               />
-            </Grid>
-            <Grid item className={classes.item}>
+            </StyledGrid>
+            <StyledGrid item>
               <PublishedComponent
                 pubRef="core.DatePicker"
                 module="invoice"
@@ -197,8 +196,8 @@ const BillPaymentDialog = ({
                 onChange={onAttributeChange("datePayment")}
                 required
               />
-            </Grid>
-            <Grid item className={classes.item}>
+            </StyledGrid>
+            <StyledGrid item>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.paymentOrigin"
@@ -206,8 +205,8 @@ const BillPaymentDialog = ({
                 onChange={onAttributeChange("paymentOrigin")}
                 required
               />
-            </Grid>
-          </Grid>
+            </StyledGrid>
+          </StyledGrid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} variant="outlined">
@@ -226,4 +225,4 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ createPaymentInvoiceWithDetail, updateBillPayment }, dispatch);
 };
 
-export default injectIntl(withTheme(withStyles(styles)(connect(null, mapDispatchToProps)(BillPaymentDialog))));
+export default injectIntl(connect(null, mapDispatchToProps)(BillPaymentDialog));
