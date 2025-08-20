@@ -3,7 +3,7 @@ import DoubleArrow from "@mui/icons-material/DoubleArrow";
 import { FormattedMessage } from "@openimis/fe-core";
 import messages_en from "./translations/en.json";
 import reducer from "./reducer";
-import flatten from "flat";
+import { flatten } from "flat";
 import LegalAndFinanceMainMenu from "./menus/LegalAndFinanceMainMenu";
 import { DoubleArrowFlipped } from "./menus/LegalAndFinanceMainMenu";
 import InvoicesPage from "./pages/InvoicesPage";

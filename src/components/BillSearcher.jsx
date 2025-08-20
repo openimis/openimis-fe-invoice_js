@@ -94,8 +94,6 @@ const BillSearcher = ({
     if (billsExport) {
       downloadExport(billsExport, "bill_export.csv")();
     }
-
-    return setFailedExport(false);
   }, [billsExport]);
 
   useEffect(() => {
