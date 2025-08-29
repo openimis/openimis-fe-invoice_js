@@ -4,7 +4,9 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react({
+    jsxRuntime: 'automatic',
+  })],
 
   resolve: {
     // so that vite nto inject the vite-optinla-deep
