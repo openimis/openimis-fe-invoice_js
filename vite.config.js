@@ -3,13 +3,27 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
+const noExternal = [
+  '@mui/material',
+  '@mui/system',
+  '@mui/icons-material',
+  '@mui/styled-engine',
+  '@emotion/react',
+  '@emotion/styled',
+  '@emotion/cache'
+];
+
 export default defineConfig({
   plugins: [react({
     jsxRuntime: 'automatic',
+    jsxImportSource: '@emotion/react',
+    babel: {
+      plugins: ['@emotion/babel-plugin'],
+    },
   })],
 
   resolve: {
-    // so that vite nto inject the vite-optinla-deep
+    // so that vite not inject the vite-optional-deep
     dedupe: [
       'react',
       'react-dom',
@@ -17,13 +31,36 @@ export default defineConfig({
       '@emotion/styled'
     ],
 
-    
-    alias: [
-      {
-        find: '@mui/styled-engine',
-        replacement: '@emotion/styled'
-      }
-    ]
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@emotion/react': path.resolve(
+        __dirname,
+        'node_modules/@emotion/react'
+      ),
+      '@emotion/styled': path.resolve(
+        __dirname,
+        'node_modules/@emotion/styled'
+      ),
+      '@emotion/cache': path.resolve(
+        __dirname,
+        'node_modules/@emotion/cache'
+      ),
+      '@mui/styled-engine': path.resolve(
+        __dirname,
+        'node_modules/@emotion/styled'
+      )
+    }
+  },
+  optimizeDeps: {
+    include: [
+      '@emotion/react',
+      '@emotion/styled',
+      '@emotion/cache',
+      '@mui/material',
+      '@mui/icons-material',
+      '@mui/system',
+    ],
+    force: true,
   },
 
   build: {
@@ -67,6 +104,7 @@ export default defineConfig({
         '@mui/icons-material',
         '@mui/system',
         '@mui/styles',
+        '@mui/styled-engine',
       
         '@date-io/core',
         '@date-io/moment',
@@ -92,5 +130,8 @@ export default defineConfig({
     sourcemap: true,
     outDir: 'dist',
     emptyOutDir: true
+  },
+  ssr: {
+    noExternal,
   }
 });
