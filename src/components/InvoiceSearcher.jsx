@@ -52,7 +52,11 @@ const InvoiceSearcher = ({
   const [deletedInvoiceUuids, setDeletedInvoiceUuids] = useState([]);
   const prevSubmittingMutationRef = useRef();
 
-  useEffect(() => invoiceToDelete && openDeleteInvoiceConfirmDialog(), [invoiceToDelete]);
+  useEffect(() => {
+    if (invoiceToDelete) {
+      openDeleteInvoiceConfirmDialog();
+    }
+  }, [invoiceToDelete]);
 
   useEffect(() => {
     if (invoiceToDelete && confirmed) {
@@ -218,6 +222,7 @@ const mapDispatchToProps = (dispatch) =>
     dispatch,
   );
 
+export { InvoiceSearcher };
 export default withHistory(
   withModulesManager(injectIntl(connect(mapStateToProps, mapDispatchToProps)(InvoiceSearcher))),
 );

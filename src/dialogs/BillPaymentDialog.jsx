@@ -95,7 +95,7 @@ const BillPaymentDialog = ({
         </DialogTitle>
         <DialogContent>
           <StyledGrid container direction="column">
-                <StyledGrid item>
+                <StyledGrid>
               <PaymentInvoiceStatusPicker
                 label="paymentInvoice.reconciliationStatus.label"
                 withNull
@@ -104,7 +104,7 @@ const BillPaymentDialog = ({
                 required
               />
             </StyledGrid>
-            <StyledGrid item>
+            <StyledGrid>
               <InvoicePaymentStatusPicker
                 label="paymentInvoice.status.label"
                 withNull
@@ -113,7 +113,7 @@ const BillPaymentDialog = ({
                 required
               />
             </StyledGrid>
-            <StyledGrid item>
+            <StyledGrid>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.payerRef"
@@ -122,7 +122,7 @@ const BillPaymentDialog = ({
                 required
               />
             </StyledGrid>
-            <StyledGrid item>
+            <StyledGrid>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.payerName"
@@ -131,7 +131,7 @@ const BillPaymentDialog = ({
                 required
               />
             </StyledGrid>
-            <StyledGrid item>
+            <StyledGrid>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.codeExt"
@@ -140,7 +140,7 @@ const BillPaymentDialog = ({
                 required
               />
             </StyledGrid>
-            <StyledGrid item>
+            <StyledGrid>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.label"
@@ -149,7 +149,7 @@ const BillPaymentDialog = ({
                 required
               />
             </StyledGrid>
-            <StyledGrid item>
+            <StyledGrid>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.codeTp"
@@ -158,7 +158,7 @@ const BillPaymentDialog = ({
                 required
               />
             </StyledGrid>
-            <StyledGrid item>
+            <StyledGrid>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.codeReceipt"
@@ -167,7 +167,7 @@ const BillPaymentDialog = ({
                 required
               />
             </StyledGrid>
-            <StyledGrid item>
+            <StyledGrid>
               <NumberInput
                 module="invoice"
                 label="paymentInvoice.fees"
@@ -177,7 +177,7 @@ const BillPaymentDialog = ({
                 required
               />
             </StyledGrid>
-            <StyledGrid item>
+            <StyledGrid>
               <NumberInput
                 module="invoice"
                 label="paymentInvoice.amountReceived"
@@ -187,7 +187,7 @@ const BillPaymentDialog = ({
                 required
               />
             </StyledGrid>
-            <StyledGrid item>
+            <StyledGrid>
               <PublishedComponent
                 pubRef="core.DatePicker"
                 module="invoice"
@@ -197,7 +197,7 @@ const BillPaymentDialog = ({
                 required
               />
             </StyledGrid>
-            <StyledGrid item>
+            <StyledGrid>
               <TextInput
                 module="invoice"
                 label="paymentInvoice.paymentOrigin"
@@ -225,4 +225,5 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ createPaymentInvoiceWithDetail, updateBillPayment }, dispatch);
 };
 
+export { StyledGrid };
 export default injectIntl(connect(null, mapDispatchToProps)(BillPaymentDialog));

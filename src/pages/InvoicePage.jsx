@@ -49,7 +49,11 @@ const InvoicePage = ({
     }
   }, [invoiceUuid]);
 
-  useEffect(() => confirmed && confirmedAction(), [confirmed]);
+  useEffect(() => {
+    if (confirmed) {
+      confirmedAction();
+    }
+  }, [confirmed]);
 
   useEffect(() => {
     if (prevSubmittingMutationRef.current && !submittingMutation) {
@@ -137,6 +141,7 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ fetchInvoice, deleteInvoice, coreConfirm, journalize }, dispatch);
 
+export { StyledInvoicePage };
 export default withHistory(
   injectIntl(connect(mapStateToProps, mapDispatchToProps)(InvoicePage)),
 );

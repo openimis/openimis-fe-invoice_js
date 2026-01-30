@@ -114,4 +114,5 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchInvoiceLineItems }, dispatch);
 
+export { InvoiceLineItemsSearcher };
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(InvoiceLineItemsSearcher));

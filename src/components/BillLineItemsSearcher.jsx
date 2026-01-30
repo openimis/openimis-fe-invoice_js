@@ -149,4 +149,5 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
+export { BillLineItemsSearcher };
 export default withHistory(injectIntl(connect(mapStateToProps, mapDispatchToProps)(BillLineItemsSearcher)));

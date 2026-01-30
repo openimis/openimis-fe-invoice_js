@@ -68,7 +68,7 @@ const BillEventMessageDialog = ({
           </DialogTitle>
           <DialogContent>
             <Grid container direction="column" className="item">
-              <Grid item className="item">
+              <Grid className="item">
                 <TextInput
                   module="invoice"
                   label="billEvent.message"
@@ -95,6 +95,7 @@ const BillEventMessageDialog = ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({ createBillEventType }, dispatch);
 
+export { StyledBillEventMessageDialog };
 export default injectIntl(
     connect(null, mapDispatchToProps)(BillEventMessageDialog),
   );

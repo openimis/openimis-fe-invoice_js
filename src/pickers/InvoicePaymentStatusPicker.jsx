@@ -40,4 +40,5 @@ const InvoicePaymentStatusPicker = ({
   );
 };
 
+export { InvoicePaymentStatusPicker };
 export default injectIntl(InvoicePaymentStatusPicker);

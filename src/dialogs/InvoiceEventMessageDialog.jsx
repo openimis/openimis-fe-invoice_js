@@ -60,7 +60,7 @@ const InvoiceEventMessageDialog = ({ intl, invoice, createInvoiceEventMessage })
           </DialogTitle>
           <DialogContent>
             <Grid container direction="column" className="item">
-              <Grid item className="item">
+              <Grid className="item">
                 <TextInput
                   module="invoice"
                   label="invoiceEvent.message"
@@ -87,6 +87,7 @@ const InvoiceEventMessageDialog = ({ intl, invoice, createInvoiceEventMessage })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({ createInvoiceEventMessage }, dispatch);
 
+export { StyledInvoiceEventMessageDialog };
 export default injectIntl(
   connect(null, mapDispatchToProps)(InvoiceEventMessageDialog),
 );

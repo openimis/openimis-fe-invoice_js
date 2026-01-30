@@ -74,7 +74,11 @@ const BillSearcher = ({
   const additionalExportFields =
     economicUnitConfig && economicUnit?.id && !isAdminOrInspector ? { subjectId: decodeId(economicUnit?.id) } : {};
 
-  useEffect(() => billToDelete && openConfirmDialog(), [billToDelete]);
+  useEffect(() => {
+    if (billToDelete) {
+      openConfirmDialog();
+    }
+  }, [billToDelete]);
 
   useEffect(() => {
     if (billToDelete && confirmed) {
@@ -382,4 +386,5 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
+export { BillSearcher };
 export default withHistory(withModulesManager(injectIntl(connect(mapStateToProps, mapDispatchToProps)(BillSearcher))));

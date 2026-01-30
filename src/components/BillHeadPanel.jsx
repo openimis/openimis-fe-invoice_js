@@ -22,9 +22,9 @@ const BillHeadPanel = ({ modulesManager, bill, mandatoryFieldsEmpty }) => {
     <StyledBillHeadPanel>
       <>
         <Grid container className="tableTitle">
-          <Grid item>
+          <Grid>
             <Grid container align="center" justify="center" direction="column" className="fullHeight">
-              <Grid item>
+              <Grid>
                 <Typography>
                   <FormattedMessage module="invoice" id="bill.headPanelTitle" />
                 </Typography>
@@ -42,28 +42,28 @@ const BillHeadPanel = ({ modulesManager, bill, mandatoryFieldsEmpty }) => {
           </>
         )}
         <Grid container className="item">
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <SubjectTypePickerBill label="bill.subject" withNull value={bill?.subjectTypeNameLabel} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             {getSubjectAndThirdpartyTypePicker(modulesManager, bill?.subjectTypeName, bill?.subject)}
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <ThirdPartyTypePickerBill label="bill.thirdparty" withNull value={bill?.thirdpartyTypeNameLabel} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             {getSubjectAndThirdpartyTypePicker(modulesManager, bill?.thirdpartyTypeName, bill?.thirdparty)}
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <TextInput module="invoice" label="bill.code" value={bill?.code} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <TextInput module="invoice" label="bill.codeTp" value={bill?.codeTp} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <TextInput module="invoice" label="bill.codeExt" value={bill?.codeExt} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               module="invoice"
@@ -72,7 +72,7 @@ const BillHeadPanel = ({ modulesManager, bill, mandatoryFieldsEmpty }) => {
               readOnly
             />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               module="invoice"
@@ -81,7 +81,7 @@ const BillHeadPanel = ({ modulesManager, bill, mandatoryFieldsEmpty }) => {
               readOnly
             />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               module="invoice"
@@ -90,7 +90,7 @@ const BillHeadPanel = ({ modulesManager, bill, mandatoryFieldsEmpty }) => {
               readOnly
             />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               module="invoice"
@@ -99,7 +99,7 @@ const BillHeadPanel = ({ modulesManager, bill, mandatoryFieldsEmpty }) => {
               readOnly
             />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               module="invoice"
@@ -108,7 +108,7 @@ const BillHeadPanel = ({ modulesManager, bill, mandatoryFieldsEmpty }) => {
               readOnly
             />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <NumberInput
               module="invoice"
               label="bill.amountDiscount"
@@ -117,31 +117,31 @@ const BillHeadPanel = ({ modulesManager, bill, mandatoryFieldsEmpty }) => {
               readOnly
             />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <NumberInput module="invoice" label="bill.amountNet" displayZero value={bill?.amountNet} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <TextInput module="invoice" label="bill.taxAnalysis" value={taxAnalysisTotal} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <NumberInput module="invoice" label="bill.amountTotal" displayZero value={bill?.amountTotal} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <InvoiceStatusPicker label="invoice.status.label" withNull value={bill?.status} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <TextInput module="invoice" label="bill.currencyTpCode" value={bill?.currencyTpCode} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <TextInput module="invoice" label="bill.currencyCode" value={bill?.currencyCode} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <TextInput module="invoice" label="bill.note" value={bill?.note} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <TextInput module="invoice" label="bill.terms" value={bill?.terms} readOnly />
           </Grid>
-          <Grid item xs={3} className="item">
+          <Grid size={3} className="item">
             <TextInput module="invoice" label="bill.paymentReference" value={bill?.paymentReference} readOnly />
           </Grid>
         </Grid>
@@ -150,4 +150,5 @@ const BillHeadPanel = ({ modulesManager, bill, mandatoryFieldsEmpty }) => {
   );
 };
 
+export { StyledBillHeadPanel };
 export default withModulesManager(injectIntl(BillHeadPanel));

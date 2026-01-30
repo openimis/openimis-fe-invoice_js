@@ -37,4 +37,5 @@ const ThirdpartyTypePickerBill = ({
   );
 };
 
+export { ThirdpartyTypePickerBill };
 export default injectIntl(ThirdpartyTypePickerBill);

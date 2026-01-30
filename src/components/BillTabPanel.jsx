@@ -60,4 +60,5 @@ const BillTabPanel = ({ intl, rights, bill, setConfirmedAction, isWorker = false
   );
 };
 
+export { StyledBillTabPanel };
 export default injectIntl(BillTabPanel);

@@ -22,12 +22,12 @@ const BillEventsTabPanel = ({ isWorker, rights, value, bill }) =>
     <PublishedComponent pubRef="policyHolder.TabPanel" module="bill" index={BILL_EVENTS_TAB_VALUE} value={value}>
       {rights?.includes(RIGHT_BILL_EVENT_CREATE_MESSAGE) && (
         <Grid container justify="flex-end" alignItems="center" spacing={1}>
-          <Grid item>
+          <Grid>
             <Typography>
               <FormattedMessage module="invoice" id="billEventMessage.create.label" />
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <CreateBillEventMessageDialog bill={bill} />
           </Grid>
         </Grid>

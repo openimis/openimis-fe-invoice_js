@@ -21,12 +21,12 @@ const InvoicePaymentsTabPanel = ({ rights, value, invoice, setConfirmedAction })
   <PublishedComponent pubRef="policyHolder.TabPanel" module="invoice" index={INVOICE_PAYMENTS_TAB_VALUE} value={value}>
     {rights?.includes(RIGHT_INVOICE_PAYMENT_CREATE) && (
       <Grid container justify="flex-end" alignItems="center" spacing={1}>
-        <Grid item>
+        <Grid>
           <Typography>
             <FormattedMessage module="invoice" id="invoicePayment.create.label" />
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid>
           <CreateInvoicePaymentDialog invoice={invoice} />
         </Grid>
       </Grid>

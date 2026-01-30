@@ -44,7 +44,7 @@ const BillEventsFilter = ({ intl, filters, onChangeFilters }) => {
   return (
     <StyledBillEventsFilter>
       <Grid container className="form">
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <InvoiceEventTypePicker
             label="billEvent.eventType.label"
             withNull
@@ -53,7 +53,7 @@ const BillEventsFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("eventType")}
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <TextInput
             module="invoice"
             label="billEvent.message"
@@ -66,4 +66,5 @@ const BillEventsFilter = ({ intl, filters, onChangeFilters }) => {
   );
 };
 
+export { StyledBillEventsFilter };
 export default injectIntl(BillEventsFilter);

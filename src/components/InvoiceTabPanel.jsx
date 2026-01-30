@@ -58,4 +58,5 @@ const InvoiceTabPanel = ({ intl, rights, invoice, setConfirmedAction }) => {
   );
 };
 
+export { StyledInvoiceTabPanel };
 export default injectIntl(InvoiceTabPanel);

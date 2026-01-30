@@ -37,4 +37,5 @@ const SubjectTypePickerBill = ({
   );
 };
 
+export { SubjectTypePickerBill };
 export default injectIntl(SubjectTypePickerBill);

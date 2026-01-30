@@ -47,7 +47,11 @@ const InvoicePaymentsSearcher = ({
   const [deletedPaymentInvoiceUuids, setDeletedPaymentInvoiceUuids] = useState([]);
   const prevSubmittingMutationRef = useRef();
 
-  useEffect(() => paymentInvoiceToDelete && openDeletePaymentInvoiceConfirmDialog(), [paymentInvoiceToDelete]);
+  useEffect(() => {
+    if (paymentInvoiceToDelete) {
+      openDeletePaymentInvoiceConfirmDialog();
+    }
+  }, [paymentInvoiceToDelete]);
 
   useEffect(() => {
     if (paymentInvoiceToDelete && confirmed) {
@@ -235,4 +239,5 @@ const mapDispatchToProps = (dispatch) =>
     dispatch,
   );
 
+export { InvoicePaymentsSearcher };
 export default withModulesManager(injectIntl(connect(mapStateToProps, mapDispatchToProps)(InvoicePaymentsSearcher)));

@@ -56,7 +56,7 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
   return (
     <StyledInvoiceFilter>
       <Grid container className="form">
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <SubjectTypePicker
             label="invoice.subject"
             withNull
@@ -65,7 +65,7 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("subjectType")}
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <ThirdpartyTypePicker
             label="invoice.thirdparty"
             withNull
@@ -74,7 +74,7 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("thirdpartyType")}
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <TextInput
             module="invoice"
             label="invoice.code"
@@ -82,7 +82,7 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("code", CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <PublishedComponent
             pubRef="core.DatePicker"
             module="invoice"
@@ -99,7 +99,7 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             }
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <InvoiceStatusPicker
             label="invoice.status.label"
             withNull
@@ -108,7 +108,7 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("status")}
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <NumberInput
             module="invoice"
             label="invoice.amountTotal"
@@ -122,4 +122,5 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
   );
 };
 
+export { StyledInvoiceFilter };
 export default injectIntl(InvoiceFilter);

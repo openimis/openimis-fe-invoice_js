@@ -40,4 +40,5 @@ const InvoiceEventTypePicker = ({
   );
 };
 
+export { InvoiceEventTypePicker };
 export default injectIntl(InvoiceEventTypePicker);

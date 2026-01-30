@@ -97,7 +97,7 @@ const InvoicePaymentDialog = ({
           </DialogTitle>
           <DialogContent>
             <Grid container direction="column" className="item">
-              <Grid item className="item">
+              <Grid className="item">
                 <PaymentInvoiceStatusPicker
                   label="paymentInvoice.reconciliationStatus.label"
                   withNull
@@ -106,7 +106,7 @@ const InvoicePaymentDialog = ({
                   required
                 />
               </Grid>
-              <Grid item className="item">
+              <Grid className="item">
                 <InvoicePaymentStatusPicker
                   label="paymentInvoice.status.label"
                   withNull
@@ -115,7 +115,7 @@ const InvoicePaymentDialog = ({
                   required
                 />
               </Grid>
-              <Grid item className="item">
+              <Grid className="item">
                 <TextInput
                   module="invoice"
                   label="paymentInvoice.payerRef"
@@ -124,7 +124,7 @@ const InvoicePaymentDialog = ({
                   required
                 />
               </Grid>
-              <Grid item className="item">
+              <Grid className="item">
                 <TextInput
                   module="invoice"
                   label="paymentInvoice.payerName"
@@ -133,7 +133,7 @@ const InvoicePaymentDialog = ({
                   required
                 />
               </Grid>
-              <Grid item className="item">
+              <Grid className="item">
                 <TextInput
                   module="invoice"
                   label="paymentInvoice.codeExt"
@@ -142,7 +142,7 @@ const InvoicePaymentDialog = ({
                   required
                 />
               </Grid>
-              <Grid item className="item">
+              <Grid className="item">
                 <TextInput
                   module="invoice"
                   label="paymentInvoice.label"
@@ -151,7 +151,7 @@ const InvoicePaymentDialog = ({
                   required
                 />
               </Grid>
-              <Grid item className="item">
+              <Grid className="item">
                 <TextInput
                   module="invoice"
                   label="paymentInvoice.codeTp"
@@ -160,7 +160,7 @@ const InvoicePaymentDialog = ({
                   required
                 />
               </Grid>
-              <Grid item className="item">
+              <Grid className="item">
                 <TextInput
                   module="invoice"
                   label="paymentInvoice.codeReceipt"
@@ -169,7 +169,7 @@ const InvoicePaymentDialog = ({
                   required
                 />
               </Grid>
-              <Grid item className="item">
+              <Grid className="item">
                 <NumberInput
                   module="invoice"
                   label="paymentInvoice.fees"
@@ -179,7 +179,7 @@ const InvoicePaymentDialog = ({
                   required
                 />
               </Grid>
-              <Grid item className="item">
+              <Grid className="item">
                 <NumberInput
                   module="invoice"
                   label="paymentInvoice.amountReceived"
@@ -189,7 +189,7 @@ const InvoicePaymentDialog = ({
                   required
                 />
               </Grid>
-              <Grid item className="item">
+              <Grid className="item">
                 <PublishedComponent
                   pubRef="core.DatePicker"
                   module="invoice"
@@ -199,7 +199,7 @@ const InvoicePaymentDialog = ({
                   required
                 />
               </Grid>
-              <Grid item className="item">
+              <Grid className="item">
                 <TextInput
                   module="invoice"
                   label="paymentInvoice.paymentOrigin"
@@ -226,6 +226,7 @@ const InvoicePaymentDialog = ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({ createPaymentInvoiceWithDetail, updateInvoicePayment }, dispatch);
 
+export { StyledInvoicePaymentDialog };
 export default injectIntl(
   connect(null, mapDispatchToProps)(InvoicePaymentDialog),
 );

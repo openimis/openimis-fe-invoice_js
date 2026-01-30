@@ -65,7 +65,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
       <Grid container className="form">
         {!isWorker && (
           <>
-            <Grid item xs={2} className="item">
+            <Grid size={2} className="item">
               <SubjectTypePickerBill
                 label="subject"
                 withNull
@@ -74,7 +74,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
                 onChange={onChangeStringFilter("subjectType")}
               />
             </Grid>
-            <Grid item xs={2} className="item">
+            <Grid size={2} className="item">
               <ThirdPartyTypePickerBill
                 label="thirdparty"
                 withNull
@@ -85,7 +85,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
             </Grid>
           </>
         )}
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <TextInput
             module="bill"
             label="code"
@@ -93,7 +93,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
             onChange={onChangeStringFilter("code", CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <PublishedComponent
             pubRef="core.DatePicker"
             module="bill"
@@ -110,7 +110,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
             }
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <InvoiceStatusPicker
             label="status.label"
             withNull
@@ -129,7 +129,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
           />
         </Grid>
         {!isWorker && (
-          <Grid item xs={2} className="item">
+          <Grid size={2} className="item">
             <NumberInput
               module="bill"
               label="amountTotal"
@@ -144,4 +144,5 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
   );
 };
 
+export { StyledBillFilter };
 export default withModulesManager(injectIntl(BillFilter));

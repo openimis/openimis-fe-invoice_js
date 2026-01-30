@@ -60,7 +60,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
   return (
     <StyledBillLineItemsFilter>
       <Grid container className="form">
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <TextInput
             module="bill"
             label="billItem.code"
@@ -68,7 +68,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("code", CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <TextInput
             module="bill"
             label="billItem.description"
@@ -76,7 +76,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("description", CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <NumberInput
             module="bill"
             label="billItem.quantity"
@@ -85,7 +85,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
             onChange={onChangeFilter("quantity")}
           />
         </Grid>
-        <Grid item xs={2} className="item">
+        <Grid size={2} className="item">
           <NumberInput
             module="bill"
             label="billItem.amountTotal"
@@ -96,7 +96,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
         </Grid>
         {!isWorker && (
           <>
-            <Grid item xs={2} className="item">
+            <Grid size={2} className="item">
               <TextInput
                 module="bill"
                 label="billItem.ledgerAccount"
@@ -104,7 +104,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
                 onChange={onChangeStringFilter("ledgerAccount", CONTAINS_LOOKUP)}
               />
             </Grid>
-            <Grid item xs={2} className="item">
+            <Grid size={2} className="item">
               <NumberInput
                 module="bill"
                 label="billItem.unitPrice"
@@ -113,7 +113,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
                 onChange={onChangeFilter("unitPrice")}
               />
             </Grid>
-            <Grid item xs={2} className="item">
+            <Grid size={2} className="item">
               <NumberInput
                 module="bill"
                 label="billItem.discount"
@@ -122,7 +122,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
                 onChange={onChangeFilter("discount")}
               />
             </Grid>
-            <Grid item xs={2} className="item">
+            <Grid size={2} className="item">
               <NumberInput
                 module="bill"
                 label="billItem.deduction"
@@ -131,7 +131,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
                 onChange={onChangeFilter("deduction")}
               />
             </Grid>
-            <Grid item xs={2} className="item">
+            <Grid size={2} className="item">
               <NumberInput
                 module="bill"
                 label="billItem.amountNet"

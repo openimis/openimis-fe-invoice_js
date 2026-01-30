@@ -37,4 +37,5 @@ const SubjectTypePicker = ({
   );
 };
 
+export { SubjectTypePicker };
 export default injectIntl(SubjectTypePicker);

@@ -43,7 +43,11 @@ const BillPaymentsSearcher = ({
   const [deletedBillPaymentUuids, setDeletedBillPaymentUuids] = useState([]);
   const prevSubmittingMutationRef = useRef();
 
-  useEffect(() => billPaymentToDelete && openDeleteBillPaymentConfirmDialog(), [billPaymentToDelete]);
+  useEffect(() => {
+    if (billPaymentToDelete) {
+      openDeleteBillPaymentConfirmDialog();
+    }
+  }, [billPaymentToDelete]);
 
   useEffect(() => {
     if (billPaymentToDelete && confirmed) {
@@ -251,4 +255,5 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
+export { BillPaymentsSearcher };
 export default withModulesManager(injectIntl(connect(mapStateToProps, mapDispatchToProps)(BillPaymentsSearcher)));

@@ -53,7 +53,11 @@ const BillPage = ({
     }
   }, [billUuid]);
 
-  useEffect(() => confirmed && confirmedAction(), [confirmed]);
+  useEffect(() => {
+    if (confirmed) {
+      confirmedAction();
+    }
+  }, [confirmed]);
 
   useEffect(() => {
     if (prevSubmittingMutationRef.current && !submittingMutation) {
@@ -135,7 +139,6 @@ const mapStateToProps = (state, props) => ({
   fetchedBill: state.invoice.fetchedBill,
   bill: state.invoice.bill,
   errorBill: state.invoice.errorBill,
-  confirmed: state.core.confirmed,
   submittingMutation: state.invoice.submittingMutation,
   mutation: state.invoice.mutation,
 });
@@ -144,6 +147,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ fetchBill, deleteBill, coreConfirm, journalize }, dispatch);
 };
 
+export { StyledBillPage };
 export default withHistory(
   injectIntl(connect(mapStateToProps, mapDispatchToProps)(BillPage)),
 );

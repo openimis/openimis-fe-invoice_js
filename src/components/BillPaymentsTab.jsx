@@ -20,12 +20,12 @@ const BillPaymentsTabPanel = ({ isWorker, rights, value, bill, setConfirmedActio
   <PublishedComponent pubRef="policyHolder.TabPanel" module="bill" index={BILL_PAYMENTS_TAB_VALUE} value={value}>
     {rights?.includes(RIGHT_BILL_PAYMENT_CREATE) && !isWorker && (
       <Grid container justify="flex-end" alignItems="center" spacing={1}>
-        <Grid item>
+        <Grid>
           <Typography>
             <FormattedMessage module="invoice" id="billPayment.create.label" />
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid>
           <CreateBillPaymentDialog bill={bill} />
         </Grid>
       </Grid>
