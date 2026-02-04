@@ -9,8 +9,8 @@ import { getSubjectAndThirdpartyTypePicker } from "../util/subject-and-thirdpart
 import InvoiceStatusPicker from "../pickers/InvoiceStatusPicker";
 
 const StyledBillHeadPanel = styled('div')(({ theme }) => ({
-  '& .tableTitle': theme.table.title,
-  '& .item': theme.paper.item,
+  '& .tableTitle': theme.table?.title ?? {},
+  '& .item': theme.paper?.item ?? {},
   '& .fullHeight': {
     height: "100%",
   },

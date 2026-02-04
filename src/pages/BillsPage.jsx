@@ -9,8 +9,8 @@ import { RIGHT_BILL_SEARCH } from "../constants";
 import BillSearcher from "../components/BillSearcher";
 
 const StyledBillsPage = styled('div')(({ theme }) => ({
-  '& .page': theme.page,
-  '& .fab': theme.fab,
+  '& .page': theme.page ?? {},
+  '& .fab': theme.fab ?? {},
 }));
 
 const BILL_SEARCHER_ACTION_CONTRIBUTION_KEY = "invoice.bill.SelectionAction";

@@ -10,8 +10,8 @@ import {
 } from "../constants";
 
 const StyledBillTabPanel = styled('div')(({ theme }) => ({
-  '& .paper': theme.paper.paper,
-  '& .tableTitle': theme.table.title,
+  '& .paper': theme.paper?.paper ?? {},
+  '& .tableTitle': theme.table?.title ?? {},
   '& .tabs': {
     padding: 0,
   },

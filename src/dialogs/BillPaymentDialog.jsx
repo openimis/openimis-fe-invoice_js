@@ -25,7 +25,7 @@ import InvoicePaymentStatusPicker from "../pickers/InvoicePaymentStatusPicker";
 import PaymentInvoiceStatusPicker from "../pickers/PaymentInvoiceStatusPicker";
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
-  ...theme.paper.item,
+  ...theme.paper?.item ?? {},
 }));
 
 const BillPaymentDialog = ({

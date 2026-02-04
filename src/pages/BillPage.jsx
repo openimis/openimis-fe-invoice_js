@@ -24,7 +24,7 @@ import { ACTION_TYPE } from "../reducer";
 import { getEnumValue } from "../util/enum";
 
 const StyledBillPage = styled('div')(({ theme }) => ({
-  '& .page': theme.page,
+  '& .page': theme.page ?? {},
 }));
 
 const BillPage = ({
