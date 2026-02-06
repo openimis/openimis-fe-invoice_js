@@ -23,7 +23,8 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^7.2.0",
-    "@mui/icons-material": "^7.2.0"
+    "@mui/icons-material": "^7.2.0",
+    "flat": "^5.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.0",
@@ -34,7 +35,6 @@
     "dist"
   ],
   "dependencies": {
-    "flat": "^5.0.2",
     "@emotion/cache": "^11.11.0"
   }
 }
