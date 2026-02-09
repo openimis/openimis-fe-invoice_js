@@ -5,7 +5,7 @@ import _debounce from "lodash/debounce";
 import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { formatMessage, TextInput, NumberInput, PublishedComponent } from "@openimis/fe-core";
+import { formatMessage, TextInput, NumberInput, PublishedComponent, GRID_RESPONSIVE_STANDARD } from "@openimis/fe-core";
 import { CONTAINS_LOOKUP, DEFUALT_DEBOUNCE_TIME } from "../constants";
 import { defaultFilterStyles } from "../util/styles";
 import InvoiceStatusPicker from "../pickers/InvoiceStatusPicker";
@@ -56,7 +56,7 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
   return (
     <StyledInvoiceFilter>
       <Grid container className="form">
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <SubjectTypePicker
             label="invoice.subject"
             withNull
@@ -65,7 +65,7 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("subjectType")}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <ThirdpartyTypePicker
             label="invoice.thirdparty"
             withNull
@@ -74,7 +74,7 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("thirdpartyType")}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="invoice"
             label="invoice.code"
@@ -82,7 +82,7 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("code", CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <PublishedComponent
             pubRef="core.DatePicker"
             module="invoice"
@@ -99,7 +99,7 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             }
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <InvoiceStatusPicker
             label="invoice.status.label"
             withNull
@@ -108,7 +108,7 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("status")}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <NumberInput
             module="invoice"
             label="invoice.amountTotal"

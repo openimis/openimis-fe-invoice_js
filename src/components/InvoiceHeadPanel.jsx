@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Divider, Typography } from "@mui/material";
-import { withModulesManager, TextInput, FormattedMessage, PublishedComponent, NumberInput } from "@openimis/fe-core";
+import { withModulesManager, TextInput, FormattedMessage, PublishedComponent, NumberInput, GRID_RESPONSIVE_STANDARD } from "@openimis/fe-core";
 import { injectIntl } from "react-intl";
 import { styled } from "@mui/material/styles";
 import SubjectTypePicker from "../pickers/SubjectTypePicker";
@@ -38,29 +38,29 @@ const InvoiceHeadPanel = ({ modulesManager, invoice, mandatoryFieldsEmpty }) => 
             <Divider />
           </>
         )}
-        <Grid container className="item">
-          <Grid size={3} className="item">
+        <Grid container className="form">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <SubjectTypePicker label="invoice.subject" withNull value={invoice?.subjectTypeName} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             {getSubjectAndThirdpartyTypePicker(modulesManager, invoice?.subjectTypeName, invoice?.subject)}
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <ThirdpartyTypePicker label="invoice.thirdparty" withNull value={invoice?.thirdpartyTypeName} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             {getSubjectAndThirdpartyTypePicker(modulesManager, invoice?.thirdpartyTypeName, invoice?.thirdparty)}
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <TextInput module="invoice" label="invoice.code" value={invoice?.code} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <TextInput module="invoice" label="invoice.codeTp" value={invoice?.codeTp} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <TextInput module="invoice" label="invoice.codeExt" value={invoice?.codeExt} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               module="invoice"
@@ -69,7 +69,7 @@ const InvoiceHeadPanel = ({ modulesManager, invoice, mandatoryFieldsEmpty }) => 
               readOnly
             />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               module="invoice"
@@ -78,7 +78,7 @@ const InvoiceHeadPanel = ({ modulesManager, invoice, mandatoryFieldsEmpty }) => 
               readOnly
             />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               module="invoice"
@@ -87,7 +87,7 @@ const InvoiceHeadPanel = ({ modulesManager, invoice, mandatoryFieldsEmpty }) => 
               readOnly
             />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               module="invoice"
@@ -96,7 +96,7 @@ const InvoiceHeadPanel = ({ modulesManager, invoice, mandatoryFieldsEmpty }) => 
               readOnly
             />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <PublishedComponent
               pubRef="core.DatePicker"
               module="invoice"
@@ -105,7 +105,7 @@ const InvoiceHeadPanel = ({ modulesManager, invoice, mandatoryFieldsEmpty }) => 
               readOnly
             />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <NumberInput
               module="invoice"
               label="invoice.amountDiscount"
@@ -114,31 +114,31 @@ const InvoiceHeadPanel = ({ modulesManager, invoice, mandatoryFieldsEmpty }) => 
               readOnly
             />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <NumberInput module="invoice" label="invoice.amountNet" displayZero value={invoice?.amountNet} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <TextInput module="invoice" label="invoice.taxAnalysis" value={taxAnalysisTotal} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <NumberInput module="invoice" label="invoice.amountTotal" displayZero value={invoice?.amountTotal} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <InvoiceStatusPicker label="invoice.status.label" withNull value={invoice?.status} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <TextInput module="invoice" label="invoice.currencyTpCode" value={invoice?.currencyTpCode} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <TextInput module="invoice" label="invoice.currencyCode" value={invoice?.currencyCode} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <TextInput module="invoice" label="invoice.note" value={invoice?.note} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <TextInput module="invoice" label="invoice.terms" value={invoice?.terms} readOnly />
           </Grid>
-          <Grid size={3} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <TextInput module="invoice" label="invoice.paymentReference" value={invoice?.paymentReference} readOnly />
           </Grid>
         </Grid>

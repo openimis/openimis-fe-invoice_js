@@ -4,16 +4,12 @@ import _debounce from "lodash/debounce";
 import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { TextInput, NumberInput, useModulesManager } from "@openimis/fe-core";
+import { TextInput, NumberInput, useModulesManager, GRID_RESPONSIVE_STANDARD } from "@openimis/fe-core";
 import { CONTAINS_LOOKUP, DEFAULT, DEFUALT_DEBOUNCE_TIME } from "../constants";
+import { defaultFilterStyles } from "../util/styles";
 
 const StyledBillLineItemsFilter = styled('div')(({ theme }) => ({
-  '& .form': {
-    padding: 0,
-  },
-  '& .item': {
-    padding: theme.spacing(1),
-  },
+  ...defaultFilterStyles(theme),
 }));
 
 const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
@@ -60,7 +56,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
   return (
     <StyledBillLineItemsFilter>
       <Grid container className="form">
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="bill"
             label="billItem.code"
@@ -68,7 +64,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("code", CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="bill"
             label="billItem.description"
@@ -76,7 +72,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("description", CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <NumberInput
             module="bill"
             label="billItem.quantity"
@@ -85,7 +81,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
             onChange={onChangeFilter("quantity")}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <NumberInput
             module="bill"
             label="billItem.amountTotal"
@@ -96,7 +92,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
         </Grid>
         {!isWorker && (
           <>
-            <Grid size={2} className="item">
+            <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
               <TextInput
                 module="bill"
                 label="billItem.ledgerAccount"
@@ -104,7 +100,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
                 onChange={onChangeStringFilter("ledgerAccount", CONTAINS_LOOKUP)}
               />
             </Grid>
-            <Grid size={2} className="item">
+            <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
               <NumberInput
                 module="bill"
                 label="billItem.unitPrice"
@@ -113,7 +109,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
                 onChange={onChangeFilter("unitPrice")}
               />
             </Grid>
-            <Grid size={2} className="item">
+            <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
               <NumberInput
                 module="bill"
                 label="billItem.discount"
@@ -122,7 +118,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
                 onChange={onChangeFilter("discount")}
               />
             </Grid>
-            <Grid size={2} className="item">
+            <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
               <NumberInput
                 module="bill"
                 label="billItem.deduction"
@@ -131,7 +127,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
                 onChange={onChangeFilter("deduction")}
               />
             </Grid>
-            <Grid size={2} className="item">
+            <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
               <NumberInput
                 module="bill"
                 label="billItem.amountNet"

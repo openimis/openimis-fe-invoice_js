@@ -5,7 +5,7 @@ import _debounce from "lodash/debounce";
 import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { TextInput, NumberInput, PublishedComponent, formatMessage } from "@openimis/fe-core";
+import { TextInput, NumberInput, PublishedComponent, formatMessage, GRID_RESPONSIVE_STANDARD } from "@openimis/fe-core";
 import { CONTAINS_LOOKUP, DEFUALT_DEBOUNCE_TIME, STARTS_WITH_LOOKUP } from "../constants";
 import { defaultFilterStyles } from "../util/styles";
 import PaymentInvoiceStatusPicker from "../pickers/PaymentInvoiceStatusPicker";
@@ -54,7 +54,7 @@ const InvoicePaymentsFilter = ({ intl, filters, onChangeFilters }) => {
   return (
     <StyledInvoicePaymentsFilter>
       <Grid container className="form">
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <PaymentInvoiceStatusPicker
             label="paymentInvoice.reconciliationStatus.label"
             withNull
@@ -71,7 +71,7 @@ const InvoicePaymentsFilter = ({ intl, filters, onChangeFilters }) => {
             }
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="invoice"
             label="paymentInvoice.codeExt"
@@ -79,7 +79,7 @@ const InvoicePaymentsFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("codeExt", CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="invoice"
             label="paymentInvoice.label"
@@ -87,7 +87,7 @@ const InvoicePaymentsFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("label", STARTS_WITH_LOOKUP)}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="invoice"
             label="paymentInvoice.codeTp"
@@ -95,7 +95,7 @@ const InvoicePaymentsFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("codeTp", CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="invoice"
             label="paymentInvoice.codeReceipt"
@@ -103,7 +103,7 @@ const InvoicePaymentsFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("codeReceipt", CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <NumberInput
             module="invoice"
             label="paymentInvoice.fees"
@@ -112,7 +112,7 @@ const InvoicePaymentsFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeFilter("fees")}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <NumberInput
             module="invoice"
             label="paymentInvoice.amountReceived"
@@ -121,7 +121,7 @@ const InvoicePaymentsFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeFilter("amountReceived")}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <PublishedComponent
             pubRef="core.DatePicker"
             module="invoice"
@@ -130,7 +130,7 @@ const InvoicePaymentsFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("datePayment")}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="invoice"
             label="paymentInvoice.paymentOrigin"
@@ -138,7 +138,7 @@ const InvoicePaymentsFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("paymentOrigin", CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="invoice"
             label="paymentInvoice.payerRef"

@@ -5,7 +5,7 @@ import _debounce from "lodash/debounce";
 import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { TextInput, formatMessage } from "@openimis/fe-core";
+import { TextInput, formatMessage, GRID_RESPONSIVE_STANDARD } from "@openimis/fe-core";
 import { CONTAINS_LOOKUP, DEFUALT_DEBOUNCE_TIME } from "../constants";
 import { defaultFilterStyles } from "../util/styles";
 import InvoiceEventTypePicker from "../pickers/InvoiceEventTypePicker";
@@ -44,7 +44,7 @@ const InvoiceEventsFilter = ({ intl, filters, onChangeFilters }) => {
   return (
     <StyledInvoiceEventsFilter>
       <Grid container className="form">
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <InvoiceEventTypePicker
             label="invoiceEvent.eventType.label"
             withNull
@@ -53,7 +53,7 @@ const InvoiceEventsFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("eventType")}
           />
         </Grid>
-        <Grid size={10} className="item">
+        <Grid size={{ xs: 12, lg: 9 }} className="item">
           <TextInput
             module="invoice"
             label="invoiceEvent.message"

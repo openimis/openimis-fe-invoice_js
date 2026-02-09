@@ -5,19 +5,22 @@ import _debounce from "lodash/debounce";
 import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { withModulesManager, formatMessage, TextInput, NumberInput, PublishedComponent } from "@openimis/fe-core";
+import {
+  withModulesManager,
+  formatMessage,
+  TextInput,
+  NumberInput,
+  PublishedComponent,
+  GRID_RESPONSIVE_STANDARD,
+} from "@openimis/fe-core";
 import { CONTAINS_LOOKUP, DEFAULT, DEFUALT_DEBOUNCE_TIME } from "../constants";
+import { defaultFilterStyles } from "../util/styles";
 import InvoiceStatusPicker from "../pickers/InvoiceStatusPicker";
 import ThirdPartyTypePickerBill from "../pickers/ThirdPartyTypePickerBill";
 import SubjectTypePickerBill from "../pickers/SubjectTypePickerBill";
 
 const StyledBillFilter = styled('div')(({ theme }) => ({
-  '& .form': {
-    padding: 0,
-  },
-  '& .item': {
-    padding: theme.spacing(1),
-  },
+  ...defaultFilterStyles(theme),
 }));
 
 const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
@@ -65,7 +68,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
       <Grid container className="form">
         {!isWorker && (
           <>
-            <Grid size={2} className="item">
+            <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
               <SubjectTypePickerBill
                 label="subject"
                 withNull
@@ -74,7 +77,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
                 onChange={onChangeStringFilter("subjectType")}
               />
             </Grid>
-            <Grid size={2} className="item">
+            <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
               <ThirdPartyTypePickerBill
                 label="thirdparty"
                 withNull
@@ -85,7 +88,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
             </Grid>
           </>
         )}
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="bill"
             label="code"
@@ -93,7 +96,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
             onChange={onChangeStringFilter("code", CONTAINS_LOOKUP)}
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <PublishedComponent
             pubRef="core.DatePicker"
             module="bill"
@@ -110,7 +113,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
             }
           />
         </Grid>
-        <Grid size={2} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <InvoiceStatusPicker
             label="status.label"
             withNull
@@ -129,7 +132,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
           />
         </Grid>
         {!isWorker && (
-          <Grid size={2} className="item">
+          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <NumberInput
               module="bill"
               label="amountTotal"
