@@ -13,7 +13,12 @@ import ThirdpartyTypePicker from "../pickers/ThirdpartyTypePicker";
 import SubjectTypePicker from "../pickers/SubjectTypePicker";
 
 const StyledInvoiceFilter = styled('div')(({ theme }) => ({
-  ...defaultFilterStyles(theme),
+  '& .form': {
+    padding: 0,
+  },
+  '& .item': {
+    padding: theme.spacing(1),
+  },
 }));
 
 const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
@@ -105,7 +110,15 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             withNull
             nullLabel={formatMessage(intl, "invoice", "any")}
             value={filterValue("status")}
-            onChange={onChangeStringFilter("status")}
+            onChange={(value) =>
+              onChangeFilters([
+                {
+                  id: "status",
+                  value: value,
+                  filter: `status: A_${value}`,
+                },
+              ])
+            }
           />
         </Grid>
         <Grid size={2} className="item">
