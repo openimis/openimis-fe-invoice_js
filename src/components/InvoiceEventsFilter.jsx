@@ -53,7 +53,7 @@ const InvoiceEventsFilter = ({ intl, filters, onChangeFilters }) => {
             onChange={onChangeStringFilter("eventType")}
           />
         </Grid>
-        <Grid size={{ xs: 12, lg: 9 }} className="item">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="invoice"
             label="invoiceEvent.message"
