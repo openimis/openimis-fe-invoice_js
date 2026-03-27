@@ -3,7 +3,7 @@ import { injectIntl } from "react-intl";
 import { connect } from "react-redux";
 import { formatMessage, MainMenuContribution, withModulesManager } from "@openimis/fe-core";
 import { LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY } from "../constants";
-
+import BalanceIcon from '@mui/icons-material/Balance';
 const LegalAndFinanceMainMenu = (props) => {
   return (
     <MainMenuContribution
@@ -11,6 +11,7 @@ const LegalAndFinanceMainMenu = (props) => {
       header={formatMessage(props.intl, "invoice", "mainMenu")}
       contributionKey={LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY}
       menuId="LegalAndFinanceMainMenu"
+      icon={< BalanceIcon />}
     />
   );
 };
