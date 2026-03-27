@@ -69,7 +69,6 @@ const BillSearcher = ({
   const { economicUnit } = useSelector((state) => state.policyHolder);
   const economicUnitConfig = modulesManager.getConf("fe-core", "App.economicUnitConfig", DEFAULT.ECONOMIC_UNIT_CONFIG);
   const isAdminOrInspector = rights.includes(INSPECTOR_RIGHT) || rights.includes(ADMIN_RIGHT);
-  const isWorker = modulesManager.getConf("fe-core", "isWorker", DEFAULT.IS_WORKER);
 
   const additionalExportFields =
     economicUnitConfig && economicUnit?.id && !isAdminOrInspector ? { subjectId: decodeId(economicUnit?.id) } : {};
@@ -153,11 +152,9 @@ const BillSearcher = ({
   const headers = () => {
     const headers = ["bill.code", "bill.dateBill", "bill.amountTotal", "bill.status.label"];
 
-    if (!isWorker) {
-      const additionalHeaders = ["bill.subject", "bill.thirdparty"];
+    const additionalHeaders = ["bill.subject", "bill.thirdparty"];
 
-      headers.unshift(...additionalHeaders);
-    }
+    headers.unshift(...additionalHeaders);
 
     if (rights.includes(RIGHT_BILL_SEARCH)) {
       headers.push("emptyLabel");
@@ -174,13 +171,13 @@ const BillSearcher = ({
       (bill) => (
         <div style={{ textAlign: "right" }}>
           {rights.includes(RIGHT_BILL_SEARCH) && (
-            <Tooltip title={formatMessage(intl, "invoice", isWorker ? "viewDetailsButtonTooltip" : "editButtonTooltip")}>
+            <Tooltip title={formatMessage(intl, "invoice", "editButtonTooltip")}>
               <IconButton
                 href={billUpdatePageUrl(bill)}
                 onClick={(e) => e.stopPropagation() && onDoubleClick(bill)}
                 disabled={deletedBillUuids.includes(bill.id)}
               >
-                {isWorker ? <VisibilityIcon /> : <EditIcon />}
+                <EditIcon />
               </IconButton>
             </Tooltip>
           )}
@@ -198,14 +195,13 @@ const BillSearcher = ({
       ),
     ];
 
-    if (!isWorker) {
-      const additionalFormatters = [
+    const additionalFormatters = [
         (bill) => getSubjectAndThirdpartyTypePicker(modulesManager, bill.subjectTypeName, bill.subject),
         (bill) => getSubjectAndThirdpartyTypePicker(modulesManager, bill.thirdpartyTypeName, bill.thirdparty),
       ];
 
-      formatters.unshift(...additionalFormatters);
-    }
+    formatters.unshift(...additionalFormatters);
+    
 
     return formatters;
   };
@@ -220,14 +216,13 @@ const BillSearcher = ({
       ["status", true],
     ];
 
-    if (!isWorker) {
-      sortsArray.unshift(
+    sortsArray.unshift(
         ...[
           ["subjectType", true],
           ["thirdpartyType", true],
         ],
       );
-    }
+    
 
     return sortsArray;
   };
@@ -335,7 +330,7 @@ const BillSearcher = ({
           "status": "Status",
         }}
         additionalExportFields={additionalExportFields}
-        downloadWithIconButton={isWorker}
+        downloadWithIconButton={true}
       />
       {failedExport && (
         <Dialog open={failedExport} fullWidth maxWidth="sm">

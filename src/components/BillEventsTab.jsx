@@ -5,20 +5,18 @@ import { BILL_EVENTS_TAB_VALUE, RIGHT_BILL_EVENT_SEARCH, RIGHT_BILL_EVENT_CREATE
 import BillEventsSearcher from "./BillEventsSearcher";
 import CreateBillEventMessageDialog from "../dialogs/BillEventMessageDialog";
 
-const BillEventsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected, isWorker }) =>
+const BillEventsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected }) =>
   rights?.includes(RIGHT_BILL_EVENT_SEARCH) &&
-  !isWorker && (
     <Tab
       onChange={onChange}
       className={tabStyle(BILL_EVENTS_TAB_VALUE)}
       selected={isSelected(BILL_EVENTS_TAB_VALUE)}
       value={BILL_EVENTS_TAB_VALUE}
       label={formatMessage(intl, "invoice", "billEvents.label")}
-    />
-  );
+    />;
 
-const BillEventsTabPanel = ({ isWorker, rights, value, bill }) =>
-  !isWorker && (
+const BillEventsTabPanel = ({ rights, value, bill }) =>
+
     <PublishedComponent pubRef="policyHolder.TabPanel" module="bill" index={BILL_EVENTS_TAB_VALUE} value={value}>
       {rights?.includes(RIGHT_BILL_EVENT_CREATE_MESSAGE) && (
         <Grid container justify="flex-end" alignItems="center" spacing={1}>
@@ -33,7 +31,6 @@ const BillEventsTabPanel = ({ isWorker, rights, value, bill }) =>
         </Grid>
       )}
       <BillEventsSearcher bill={bill} />
-    </PublishedComponent>
-  );
+    </PublishedComponent>;
 
 export { BillEventsTabLabel, BillEventsTabPanel };

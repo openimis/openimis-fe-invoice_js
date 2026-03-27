@@ -24,8 +24,6 @@ const StyledBillFilter = styled('div')(({ theme }) => ({
 }));
 
 const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
-  const isWorker = modulesManager.getConf("fe-core", "isWorker", DEFAULT.IS_WORKER);
-
   const debouncedOnChangeFilters = _debounce(onChangeFilters, DEFUALT_DEBOUNCE_TIME);
 
   const filterValue = (filterName) => filters?.[filterName]?.value;
@@ -66,8 +64,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
   return (
     <StyledBillFilter>
       <Grid container className="form">
-        {!isWorker && (
-          <>
+        {<>
             <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
               <SubjectTypePickerBill
                 label="subject"
@@ -86,8 +83,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
                 onChange={onChangeStringFilter("thirdpartyType")}
               />
             </Grid>
-          </>
-        )}
+          </>}
         <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
           <TextInput
             module="bill"
@@ -131,8 +127,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
             }
           />
         </Grid>
-        {!isWorker && (
-          <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
+        {<Grid size={GRID_RESPONSIVE_STANDARD} className="item">
             <NumberInput
               module="bill"
               label="amountTotal"
@@ -140,8 +135,7 @@ const BillFilter = ({ intl, filters, onChangeFilters, modulesManager }) => {
               value={filterValue("amountTotal")}
               onChange={onChangeDecimalFilter("amountTotal")}
             />
-          </Grid>
-        )}
+          </Grid>}
       </Grid>
     </StyledBillFilter>
   );

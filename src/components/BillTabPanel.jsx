@@ -23,7 +23,7 @@ const StyledBillTabPanel = styled('div')(({ theme }) => ({
   },
 }));
 
-const BillTabPanel = ({ intl, rights, bill, setConfirmedAction, isWorker = false }) => {
+const BillTabPanel = ({ intl, rights, bill, setConfirmedAction }) => {
   const [activeTab, setActiveTab] = useState(BILL_LINE_ITEMS_TAB_VALUE);
 
   const isSelected = (tab) => tab === activeTab;
@@ -44,7 +44,6 @@ const BillTabPanel = ({ intl, rights, bill, setConfirmedAction, isWorker = false
             onChange={handleChange}
             isSelected={isSelected}
             tabStyle={tabStyle}
-            isWorker={isWorker}
           />
         </Grid>
         <Contributions
@@ -53,7 +52,6 @@ const BillTabPanel = ({ intl, rights, bill, setConfirmedAction, isWorker = false
           value={activeTab}
           bill={bill}
           setConfirmedAction={setConfirmedAction}
-          isWorker={isWorker}
         />
       </Paper>
     </StyledBillTabPanel>

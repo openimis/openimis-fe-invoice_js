@@ -15,8 +15,6 @@ const StyledBillLineItemsFilter = styled('div')(({ theme }) => ({
 const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
   const modulesManager = useModulesManager();
 
-  const isWorker = modulesManager.getConf("fe-core", "isWorker", DEFAULT.IS_WORKER);
-
   const debouncedOnChangeFilters = _debounce(onChangeFilters, DEFUALT_DEBOUNCE_TIME);
 
   const filterValue = (filterName) => filters?.[filterName]?.value;
@@ -90,8 +88,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
             onChange={onChangeFilter("amountTotal")}
           />
         </Grid>
-        {!isWorker && (
-          <>
+        {<>
             <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
               <TextInput
                 module="bill"
@@ -136,8 +133,7 @@ const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
                 onChange={onChangeFilter("amountNet")}
               />
             </Grid>
-          </>
-        )}
+          </>}
       </Grid>
     </StyledBillLineItemsFilter>
   );

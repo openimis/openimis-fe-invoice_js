@@ -45,7 +45,6 @@ const BillPage = ({
   const [editedBill, setEditedBill] = useState({});
   const [confirmedAction, setConfirmedAction] = useState(() => null);
   const prevSubmittingMutationRef = useRef();
-  const isWorker = modulesManager.getConf("fe-core", "isWorker", DEFAULT.IS_WORKER);
 
   useEffect(() => {
     if (!!billUuid) {
@@ -96,7 +95,7 @@ const BillPage = ({
   };
 
   const actions = [
-    !!bill && !isWorker && 
+    !!bill &&
       getEnumValue(bill?.status) !== STATUS.PAID && {
         doIt: openDeleteBillConfirmDialog,
         icon: <DeleteIcon />,
@@ -118,9 +117,8 @@ const BillPage = ({
             bill={editedBill}
             back={back}
             onChange={onChange}
-            HeadPanel={isWorker && VoucherHeadPanel ? VoucherHeadPanel : BillHeadPanel}
+            HeadPanel={BillHeadPanel}
             Panels={[BillTabPanel]}
-            isWorker={isWorker}
             rights={rights}
             actions={actions}
             setConfirmedAction={setConfirmedAction}

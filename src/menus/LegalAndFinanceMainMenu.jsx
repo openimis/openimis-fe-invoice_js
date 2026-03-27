@@ -1,82 +1,15 @@
 import React from "react";
 import { injectIntl } from "react-intl";
 import { connect } from "react-redux";
-import DoubleArrow from "@mui/icons-material/DoubleArrow";
 import { formatMessage, MainMenuContribution, withModulesManager } from "@openimis/fe-core";
-import {
-  LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY,
-  RIGHT_INVOICE_SEARCH,
-  RIGHT_BILL_SEARCH,
-  RIGHT_BILL_AMEND,
-  RIGHT_INVOICE_AMEND,
-  DEFAULT,
-} from "../constants";
-import { styled } from "@mui/material/styles";
-
-export const DoubleArrowFlipped = styled(DoubleArrow)({
-  transform: "scaleX(-1)",
-});
+import { LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY } from "../constants";
 
 const LegalAndFinanceMainMenu = (props) => {
-  const { modulesManager, rights, intl } = props;
-  const isWorker = modulesManager.getConf("fe-core", "isWorker", DEFAULT.IS_WORKER);
-
-  const entries = [];
-
-  if (isWorker) {
-    if (rights.includes(RIGHT_BILL_SEARCH || RIGHT_BILL_AMEND)) {
-      entries.push({
-        text: formatMessage(intl, "invoice", "menu.bills"),
-        icon: <DoubleArrowFlipped />,
-        route: "/bills",
-        id: "legalAndFinance.bills",
-      });
-    }
-
-    if (!entries.length) return null;
-
-    return (
-      <MainMenuContribution 
-        {...props} 
-        header={formatMessage(intl, "invoice", "mainMenu")}
-        entries={entries}
-        menuId='LegalAndFinanceMainMenu'
-      />
-    );
-  }
-
-  if (rights.filter((r) => r >= RIGHT_INVOICE_SEARCH && r <= RIGHT_INVOICE_AMEND).length) {
-    // RIGHT_SEARCH is shared by HF & HQ staff)
-    entries.push({
-      text: formatMessage(intl, "invoice", "menu.invoices"),
-      icon: <DoubleArrow />,
-      route: "/invoices",
-      id: "legalAndFinance.invoices",
-    });
-  }
-  if (rights.filter((r) => r >= RIGHT_BILL_SEARCH && r <= RIGHT_BILL_AMEND).length) {
-    // RIGHT_SEARCH is shared by HF & HQ staff)
-    entries.push({
-      text: formatMessage(intl, "invoice", "menu.bills"),
-      icon: <DoubleArrowFlipped />,
-      route: "/bills",
-      id: "legalAndFinance.bills",
-    });
-  }
-
-  entries.push(
-    ...modulesManager
-      .getContribs(LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY)
-      .filter((c) => !c.filter || c.filter(rights)),
-  );
-
-  if (!entries.length) return null;
-
   return (
-    <MainMenuContribution 
-      {...props} 
-      header={formatMessage(intl, "invoice", "mainMenu")}
-      entries={entries}
+    <MainMenuContribution
+      {...props}
+      header={formatMessage(props.intl, "invoice", "mainMenu")}
+      contributionKey={LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY}
       menuId="LegalAndFinanceMainMenu"
     />
   );

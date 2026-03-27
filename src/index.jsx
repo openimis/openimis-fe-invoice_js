@@ -5,7 +5,6 @@ import messages_en from "./translations/en.json";
 import reducer from "./reducer";
 import { flatten } from "flat";
 import LegalAndFinanceMainMenu from "./menus/LegalAndFinanceMainMenu";
-import { DoubleArrowFlipped } from "./menus/LegalAndFinanceMainMenu";
 import InvoicesPage from "./pages/InvoicesPage";
 import InvoiceStatusPicker from "./pickers/InvoiceStatusPicker";
 import SubjectTypePickerBill from "./pickers/SubjectTypePickerBill";
@@ -69,7 +68,7 @@ const DEFAULT_CONFIG = {
     },
     {
       text: <FormattedMessage module="invoice" id="menu.bills" />,
-      icon: <DoubleArrowFlipped />,
+      icon: <DoubleArrow sx={{ transform: 'scaleX(-1)' }} />,
       route: "/bills",
       id: "legalAndFinance.bills",
       filter: (rights) => rights.filter((r) => r >= RIGHT_BILL_SEARCH && r <= RIGHT_BILL_AMEND).length > 0,

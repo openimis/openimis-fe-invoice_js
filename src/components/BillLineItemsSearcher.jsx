@@ -18,15 +18,13 @@ const BillLineItemsSearcher = ({
   billLineItems,
   billLineItemsPageInfo,
   billLineItemsTotalCount,
-  isWorker,
 }) => {
   const fetch = (params) => fetchBillLineItems(params);
 
   const headersSetter = () => {
     const headers = ["billItem.code", "billItem.description", "billItem.quantity", "billItem.amountTotal"];
 
-    if (!isWorker) {
-      const additionalHeaders = [
+    const additionalHeaders = [
         "billItem.ledgerAccount",
         "billItem.unitPrice",
         "billItem.discount",
@@ -34,8 +32,7 @@ const BillLineItemsSearcher = ({
         "billItem.amountNet",
       ];
 
-      headers.push(...additionalHeaders);
-    }
+    headers.push(...additionalHeaders);
 
     return headers;
   };
@@ -48,8 +45,7 @@ const BillLineItemsSearcher = ({
       (billItem) => billItem.amountTotal,
     ];
 
-    if (!isWorker) {
-      const additionalFormatters = [
+    const additionalFormatters = [
         (billItem) => billItem.ledgerAccount,
         (billItem) => billItem.unitPrice,
         (billItem) => billItem.discount,
@@ -66,8 +62,8 @@ const BillLineItemsSearcher = ({
         ),
       ];
 
-      formatters.push(...additionalFormatters);
-    }
+    formatters.push(...additionalFormatters);
+
 
     return formatters;
   };
@@ -80,8 +76,7 @@ const BillLineItemsSearcher = ({
       ["amountTotal", true],
     ];
 
-    if (!isWorker) {
-      const additionalSorts = [
+    const additionalSorts = [
         ["ledgerAccount", true],
         ["unitPrice", true],
         ["discount", true],
@@ -89,8 +84,7 @@ const BillLineItemsSearcher = ({
         ["amountNet", true],
       ];
 
-      sorts.push(...additionalSorts);
-    }
+    sorts.push(...additionalSorts);
 
     return sorts;
   };

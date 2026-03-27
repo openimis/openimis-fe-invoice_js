@@ -14,9 +14,9 @@ const BillLineItemsTabLabel = ({ intl, onChange, tabStyle, isSelected }) => (
   />
 );
 
-const BillLineItemsTabPanel = ({ isWorker, value, bill }) => (
+const BillLineItemsTabPanel = ({ value, bill }) => (
   <PublishedComponent pubRef="policyHolder.TabPanel" module="bill" index={BILL_LINE_ITEMS_TAB_VALUE} value={value}>
-    <BillLineItemsSearcher bill={bill} isWorker={isWorker} />
+    <BillLineItemsSearcher bill={bill}/>
   </PublishedComponent>
 );
 

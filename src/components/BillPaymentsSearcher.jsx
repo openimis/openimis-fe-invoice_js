@@ -20,7 +20,6 @@ import { ACTION_TYPE } from "../reducer";
 import BillPaymentsFilter from "./BillPaymentsFilter";
 
 const BillPaymentsSearcher = ({
-  isWorker,
   intl,
   modulesManager,
   rights,
@@ -121,16 +120,15 @@ const BillPaymentsSearcher = ({
       "billPayment.datePayment",
     ];
 
-    if (!isWorker) {
-      const additionalHeaders = [
+    const additionalHeaders = [
         "billPayment.codeTp",
         "billPayment.codeReceipt",
         "billPayment.fees",
         "billPayment.paymentOrigin",
       ];
 
-      headers.push(...additionalHeaders);
-    }
+    headers.push(...additionalHeaders);
+    
 
     return headers;
   };
@@ -144,18 +142,16 @@ const BillPaymentsSearcher = ({
         billPayment.datePayment ? formatDateFromISO(modulesManager, intl, billPayment.datePayment) : EMPTY_STRING,
     ];
 
-    if (!isWorker) {
-      const additionalFormatters = [
+    const additionalFormatters = [
         (billPayment) => billPayment.codeTp,
         (billPayment) => billPayment.codeReceipt,
         (billPayment) => billPayment.fees,
         (billPayment) => billPayment.paymentOrigin,
       ];
 
-      formatters.push(...additionalFormatters);
-    }
+    formatters.push(...additionalFormatters);
 
-    if (!isWorker && rights.includes(RIGHT_BILL_PAYMENT_DELETE)) {
+    if (rights.includes(RIGHT_BILL_PAYMENT_DELETE)) {
       formatters.push((billPayment) => (
         <Tooltip title={formatMessage(intl, "invoice", "deleteButtonTooltip")}>
           <IconButton onClick={() => onDelete(billPayment)} disabled={deletedBillPaymentUuids.includes(billPayment.id)}>
@@ -176,16 +172,14 @@ const BillPaymentsSearcher = ({
       ["datePayment", true],
     ];
 
-    if (!isWorker) {
-      const additionalSorts = [
+    const additionalSorts = [
         ["codeTp", true],
         ["codeReceipt", true],
         ["fees", true],
         ["paymentOrigin", true],
       ];
 
-      sortsArray.push(...additionalSorts);
-    }
+    sortsArray.push(...additionalSorts);
 
     return sortsArray;
   };
