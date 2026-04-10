@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { injectIntl } from "react-intl";
 
 import { styled } from "@mui/material/styles";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 import {
   Form,
@@ -15,6 +14,7 @@ import {
   coreConfirm,
   journalize,
   useModulesManager,
+  GetIconComponent,
 } from "@openimis/fe-core";
 import { fetchBill, deleteBill } from "../actions";
 import { STATUS, RIGHT_BILL_SEARCH, DEFAULT, WORKER_VOUCHER_HEAD_PANEL_CONTRIB } from "../constants";
@@ -22,6 +22,7 @@ import BillHeadPanel from "../components/BillHeadPanel";
 import BillTabPanel from "../components/BillTabPanel";
 import { ACTION_TYPE } from "../reducer";
 import { getEnumValue } from "../util/enum";
+const DeleteIcon = GetIconComponent("Delete")
 
 const StyledBillPage = styled('div')(({ theme }) => ({
   '& .page': theme.page ?? {},

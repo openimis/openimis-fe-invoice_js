@@ -4,9 +4,6 @@ import { connect, useSelector } from "react-redux";
 import { injectIntl } from "react-intl";
 
 import { IconButton, Tooltip, Button, Dialog, DialogActions, DialogTitle, DialogContent } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import DeleteIcon from "@mui/icons-material/Delete";
 
 import {
   withModulesManager,
@@ -20,6 +17,7 @@ import {
   historyPush,
   downloadExport,
   decodeId,
+  GetIconComponent,
 } from "@openimis/fe-core";
 import { fetchBills, deleteBill, fetchBillsExport } from "../actions";
 import {
@@ -36,7 +34,8 @@ import {
 import BillFilter from "./BillFilter";
 import InvoiceStatusPicker from "../pickers/InvoiceStatusPicker";
 import { getSubjectAndThirdpartyTypePicker } from "../util/subject-and-thirdparty-picker";
-
+const EditIcon = GetIconComponent("Edit")
+const DeleteIcon = GetIconComponent("Delete")
 const BillSearcher = ({
   intl,
   modulesManager,
@@ -69,6 +68,7 @@ const BillSearcher = ({
   const { economicUnit } = useSelector((state) => state.policyHolder);
   const economicUnitConfig = modulesManager.getConf("fe-core", "App.economicUnitConfig", DEFAULT.ECONOMIC_UNIT_CONFIG);
   const isAdminOrInspector = rights.includes(INSPECTOR_RIGHT) || rights.includes(ADMIN_RIGHT);
+
 
   const additionalExportFields =
     economicUnitConfig && economicUnit?.id && !isAdminOrInspector ? { subjectId: decodeId(economicUnit?.id) } : {};

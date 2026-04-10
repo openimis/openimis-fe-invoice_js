@@ -10,6 +10,7 @@ import {
   journalize,
   withHistory,
   historyPush,
+  GetIconComponent,
 } from "@openimis/fe-core";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -26,8 +27,8 @@ import InvoiceFilter from "./InvoiceFilter";
 import InvoiceStatusPicker from "../pickers/InvoiceStatusPicker";
 import { getSubjectAndThirdpartyTypePicker } from "../util/subject-and-thirdparty-picker";
 import { IconButton, Tooltip } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+const EditIcon = GetIconComponent("Edit")
+const DeleteIcon = GetIconComponent("Delete")
 
 const InvoiceSearcher = ({
   intl,

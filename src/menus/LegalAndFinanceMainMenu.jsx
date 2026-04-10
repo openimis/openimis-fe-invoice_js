@@ -1,9 +1,9 @@
 import React from "react";
 import { injectIntl } from "react-intl";
 import { connect } from "react-redux";
-import { formatMessage, MainMenuContribution, withModulesManager } from "@openimis/fe-core";
+import { GetIconComponent, formatMessage, MainMenuContribution, withModulesManager } from "@openimis/fe-core";
 import { LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY } from "../constants";
-import BalanceIcon from '@mui/icons-material/Balance';
+const BalanceIcon = GetIconComponent("Balance");
 const LegalAndFinanceMainMenu = (props) => {
   return (
     <MainMenuContribution

@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { injectIntl } from "react-intl";
 
 import { IconButton, Tooltip } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { GetIconComponent } from "@openimis/fe-core";
+const DeleteIcon = GetIconComponent("Delete")
 
 import {
   formatMessage,

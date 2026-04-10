@@ -5,11 +5,11 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import AddIcon from "@mui/icons-material/Add";
 import {
   FormattedMessage,
   TextInput,
   formatMessageWithValues,
+  GetIconComponent,
 } from "@openimis/fe-core";
 import { Fab, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -18,6 +18,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { EMPTY_EVENT_MESSAGE } from "../constants";
 import { defaultDialogStyles } from "../util/styles";
+const AddIcon = GetIconComponent("Add")
 
 const StyledBillEventMessageDialog = styled('div')(({ theme }) => ({
   ...defaultDialogStyles(theme),

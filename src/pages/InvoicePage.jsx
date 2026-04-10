@@ -7,6 +7,7 @@ import {
   formatMessageWithValues,
   coreConfirm,
   journalize,
+  GetIconComponent,
 } from "@openimis/fe-core";
 import { injectIntl } from "react-intl";
 import { bindActionCreators } from "redux";
@@ -15,7 +16,7 @@ import { styled } from "@mui/material/styles";
 import { RIGHT_INVOICE_UPDATE, STATUS } from "../constants";
 import { fetchInvoice, deleteInvoice } from "../actions";
 import InvoiceHeadPanel from "../components/InvoiceHeadPanel";
-import DeleteIcon from "@mui/icons-material/Delete";
+const DeleteIcon = GetIconComponent("Delete")
 import { getEnumValue } from "../util/enum";
 import InvoiceTabPanel from "../components/InvoiceTabPanel";
 import { ACTION_TYPE } from "../reducer";

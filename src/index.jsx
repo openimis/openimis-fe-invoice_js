@@ -1,5 +1,6 @@
 import React from "react";
-import DoubleArrow from "@mui/icons-material/DoubleArrow";
+import { GetIconComponent } from "@openimis/fe-core";
+const DoubleArrow = GetIconComponent("DoubleArrow")
 import { FormattedMessage } from "@openimis/fe-core";
 import messages_en from "./translations/en.json";
 import reducer from "./reducer";

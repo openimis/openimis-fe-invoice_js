@@ -20,7 +20,8 @@ import {
 import InvoicePaymentsFilter from "./InvoicePaymentsFilter";
 import PaymentInvoiceStatusPicker from "../pickers/PaymentInvoiceStatusPicker"
 import { IconButton, Tooltip } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { GetIconComponent } from "@openimis/fe-core";
+const DeleteIcon = GetIconComponent("Delete")
 import { ACTION_TYPE } from "../reducer";
 
 const InvoicePaymentsSearcher = ({

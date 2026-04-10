@@ -5,8 +5,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
 import {
   FormattedMessage,
   PublishedComponent,
@@ -14,6 +12,7 @@ import {
   NumberInput,
   formatMessageWithValues,
   formatMessage,
+  GetIconComponent,
 } from "@openimis/fe-core";
 import { Fab, Grid, IconButton, Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -24,6 +23,8 @@ import { EMPTY_PAYMENT_INVOICE } from "../constants";
 import InvoicePaymentStatusPicker from "../pickers/InvoicePaymentStatusPicker";
 import PaymentInvoiceStatusPicker from "../pickers/PaymentInvoiceStatusPicker";
 import { defaultDialogStyles } from "../util/styles";
+const AddIcon = GetIconComponent("Add")
+const EditIcon = GetIconComponent("Edit")
 
 const StyledInvoicePaymentDialog = styled('div')(({ theme }) => ({
   ...defaultDialogStyles(theme),

@@ -5,8 +5,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
+
 import {
   FormattedMessage,
   PublishedComponent,
@@ -14,6 +13,7 @@ import {
   NumberInput,
   formatMessageWithValues,
   formatMessage,
+  GetIconComponent,
 } from "@openimis/fe-core";
 import { Fab, Grid, IconButton, Tooltip } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
@@ -23,7 +23,8 @@ import { bindActionCreators } from "redux";
 import { EMPTY_PAYMENT_INVOICE } from "../constants";
 import InvoicePaymentStatusPicker from "../pickers/InvoicePaymentStatusPicker";
 import PaymentInvoiceStatusPicker from "../pickers/PaymentInvoiceStatusPicker";
-
+const AddIcon = GetIconComponent("Add")
+const EditIcon = GetIconComponent("Edit")
 const StyledGrid = styled(Grid)(({ theme }) => ({
   ...theme.paper?.item ?? {},
 }));
