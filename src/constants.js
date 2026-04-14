@@ -46,7 +46,7 @@ export const ENUM_PREFIX_LENGTH = 2;
 export const STATUS = {
   DRAFT: "A_0",
   VALIDATED: "A_1",
-  PAYED: "A_2",
+  PAID: "A_2",
   CANCELLED: "A_3",
   DELETED: "A_4",
   SUSPENDED: "A_5",
