@@ -1,11 +1,9 @@
 import React from "react";
 import { GetIconComponent } from "@openimis/fe-core";
-const DoubleArrow = GetIconComponent("DoubleArrow")
 import { FormattedMessage } from "@openimis/fe-core";
 import messages_en from "./translations/en.json";
 import reducer from "./reducer";
 import { flatten } from "flat";
-import LegalAndFinanceMainMenu from "./menus/LegalAndFinanceMainMenu";
 import InvoicesPage from "./pages/InvoicesPage";
 import InvoiceStatusPicker from "./pickers/InvoiceStatusPicker";
 import SubjectTypePickerBill from "./pickers/SubjectTypePickerBill";
@@ -38,13 +36,15 @@ const DEFAULT_CONFIG = {
   "reducers": [{ key: "invoice", reducer }],
   "core.MainMenu": [{
     name: 'LegalAndFinanceMainMenu',
-    component: LegalAndFinanceMainMenu,
+    id: "invoice.MainMenu" ,
+    icon: "BalanceIcon",
+    text: "invoice.mainMenu"
   }],
   "core.Router": [
-    { path: ROUTE_INVOICES, component: InvoicesPage },
-    { path: ROUTE_INVOICE + "/:invoice_uuid?", component: InvoicePage },
-    { path: ROUTE_BILLS, component: BillsPage },
-    { path: ROUTE_BILL + "/:bill_uuid?", component: BillPage },
+    { path: ROUTE_INVOICES, id: "legalAndFinance.invoices", component: InvoicesPage, rights: [RIGHT_INVOICE_SEARCH, RIGHT_INVOICE_AMEND], icon: "Person" },
+    { path: ROUTE_INVOICE + "/:invoice_uuid?", id: "legalAndFinance.invoice", component: InvoicePage },
+    { path: ROUTE_BILLS, id: "legalAndFinance.bills", component: BillsPage, rights: [RIGHT_BILL_SEARCH, RIGHT_BILL_AMEND], icon: "Business" },
+    { path: ROUTE_BILL + "/:bill_uuid?", id: "legalAndFinance.bill", component: BillPage },
   ],
   "refs": [
     { key: "invoice.route.invoice", ref: ROUTE_INVOICE },
@@ -61,18 +61,13 @@ const DEFAULT_CONFIG = {
   "bill.TabPanel.panel": [BillLineItemsTabPanel, BillPaymentsTabPanel, BillEventsTabPanel],
   "invoice.MainMenu": [
     {
-      text: <FormattedMessage module="invoice" id="menu.invoices" />,
-      icon: <DoubleArrow />,
-      route: "/invoices",
-      id: "legalAndFinance.invoices",
-      filter: (rights) => rights.filter((r) => r >= RIGHT_INVOICE_SEARCH && r <= RIGHT_INVOICE_AMEND).length > 0,
+      text: "invoice.menu.invoices",
+      route: ROUTE_INVOICES,
+     
     },
     {
-      text: <FormattedMessage module="invoice" id="menu.bills" />,
-      icon: <DoubleArrow sx={{ transform: 'scaleX(-1)' }} />,
-      route: "/bills",
-      id: "legalAndFinance.bills",
-      filter: (rights) => rights.filter((r) => r >= RIGHT_BILL_SEARCH && r <= RIGHT_BILL_AMEND).length > 0,
+      text: "invoice.menu.bills",
+      route: ROUTE_BILLS,
     }
   ],
 };
