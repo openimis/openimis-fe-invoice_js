@@ -41,9 +41,21 @@ const DEFAULT_CONFIG = {
     text: "invoice.mainMenu"
   }],
   "core.Router": [
-    { path: ROUTE_INVOICES, id: "legalAndFinance.invoices", component: InvoicesPage, rights: [RIGHT_INVOICE_SEARCH, RIGHT_INVOICE_AMEND], icon: "Person" },
+    { 
+      path: ROUTE_INVOICES,
+      id: "legalAndFinance.invoices",
+      component: InvoicesPage,
+      rights: [RIGHT_INVOICE_SEARCH, RIGHT_INVOICE_AMEND],
+      icon: "Person"
+    },
     { path: ROUTE_INVOICE + "/:invoice_uuid?", id: "legalAndFinance.invoice", component: InvoicePage },
-    { path: ROUTE_BILLS, id: "legalAndFinance.bills", component: BillsPage, rights: [RIGHT_BILL_SEARCH, RIGHT_BILL_AMEND], icon: "Business" },
+    { 
+      path: ROUTE_BILLS, 
+      id: "legalAndFinance.bills",
+      component: BillsPage,
+      rights: [RIGHT_BILL_SEARCH, RIGHT_BILL_AMEND],
+      icon: "Business" 
+    },
     { path: ROUTE_BILL + "/:bill_uuid?", id: "legalAndFinance.bill", component: BillPage },
   ],
   "refs": [
