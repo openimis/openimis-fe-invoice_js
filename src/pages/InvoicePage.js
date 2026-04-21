@@ -46,7 +46,7 @@ const InvoicePage = ({
     }
   }, [invoiceUuid]);
 
-  useEffect(() => confirmed && confirmedAction(), [confirmed]);
+  useEffect(() => confirmed && !!confirmedAction && confirmedAction(), [confirmed]);
 
   useEffect(() => {
     if (prevSubmittingMutationRef.current && !submittingMutation) {
@@ -77,12 +77,13 @@ const InvoicePage = ({
 
   const openDeleteInvoiceConfirmDialog = () => {
     setConfirmedAction(() => deleteInvoiceCallback);
-    coreConfirm(
+    confirm = (e) => coreConfirm(
       formatMessageWithValues(intl, "invoice", "invoice.delete.confirm.title", {
         code: invoice?.code,
       }),
       formatMessage(intl, "invoice", "invoice.delete.confirm.message"),
     );
+    
   };
 
   const actions = [
