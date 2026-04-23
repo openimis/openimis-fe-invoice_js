@@ -1,8 +1,8 @@
 {
   "mainMenu": "Legal and Finance",
   "menu": {
-    "invoices": "Invoices",
-    "bills": "Bills"
+    "invoices": "Invoices Customer",
+    "bills": "Invocie Supplier"
   },
   "emptyLabel": " ",
   "any": "Any",
@@ -171,13 +171,13 @@
         "title": "Delete {code}?",
         "message": "Deleting data does not mean erasing it from openIMIS database. The data will only be deactivated from the viewed list."
       },
-      "mutationLabel": "Delete Bill {code}"
+      "mutationLabel": "Delete invoice {code}"
     },
-    "selection.count": "Selected {count} bill(s)"
+    "selection.count": "Selected {count} invoice(s)"
   },
   "bills": {
-    "pageTitle": "Bills",
-    "searcherResultsTitle": "{billsTotalCount} Bills Found"
+    "pageTitle": "Invoice Supplier",
+    "searcherResultsTitle": "{billsTotalCount} invoice Found"
   },
   "billItems": {
     "label": "Line Items",

@@ -46,7 +46,8 @@ const DEFAULT_CONFIG = {
       id: "legalAndFinance.invoices",
       component: InvoicesPage,
       rights: [RIGHT_INVOICE_SEARCH, RIGHT_INVOICE_AMEND],
-      icon: "Person"
+      icon: "Person",
+      text: "menu.invoice"
     },
     { path: ROUTE_INVOICE + "/:invoice_uuid?", id: "legalAndFinance.invoice", component: InvoicePage },
     { 
@@ -54,7 +55,8 @@ const DEFAULT_CONFIG = {
       id: "legalAndFinance.bills",
       component: BillsPage,
       rights: [RIGHT_BILL_SEARCH, RIGHT_BILL_AMEND],
-      icon: "Business" 
+      icon: "Business",
+      text: "menu.bills"
     },
     { path: ROUTE_BILL + "/:bill_uuid?", id: "legalAndFinance.bill", component: BillPage },
   ],
