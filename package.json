@@ -11,32 +11,30 @@
     "npm": ">=5"
   },
   "scripts": {
-    "build": "rollup -c",
-    "start": "rollup -c -w",
-    "prepare":"npm run build"
+    "build": "vite build",
+    "start": "vite",
+    "format": "prettier src -w",
+    "prepare": "npm run build"
   },
   "peerDependencies": {
-    "react-intl": "^5.8.1"
+    "react-intl": "^7.1.11",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^7.2.0",
+    "@mui/icons-material": "^7.2.0",
+    "flat": "^6.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.9.6",
-    "@babel/preset-env": "^7.9.6",
-    "@babel/preset-react": "^7.9.4",
-    "@babel/runtime": "^7.9.6",
-    "@rollup/plugin-babel": "^5.0.0",
-    "@rollup/plugin-commonjs": "^11.1.0",
-    "@rollup/plugin-json": "^4.0.3",
-    "@rollup/plugin-node-resolve": "^7.1.3",
-    "@rollup/plugin-url": "^5.0.0",
-    "rollup": "^2.10.0"
+    "@vitejs/plugin-react": "^5.0.0",
+    "vite": "^7.1.2",
+    "@emotion/babel-plugin": "^11.11.0"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "flat": "^5.0.2"
+    "@emotion/cache": "^11.11.0"
   }
 }

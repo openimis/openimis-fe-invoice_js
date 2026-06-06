@@ -1,0 +1,36 @@
+import React from "react";
+import { Tab, Grid, Typography } from "@mui/material";
+import { formatMessage, PublishedComponent, FormattedMessage } from "@openimis/fe-core";
+import { BILL_EVENTS_TAB_VALUE, RIGHT_BILL_EVENT_SEARCH, RIGHT_BILL_EVENT_CREATE_MESSAGE } from "../constants";
+import BillEventsSearcher from "./BillEventsSearcher";
+import CreateBillEventMessageDialog from "../dialogs/BillEventMessageDialog";
+
+const BillEventsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected }) =>
+  rights?.includes(RIGHT_BILL_EVENT_SEARCH) &&
+    <Tab
+      onChange={onChange}
+      className={tabStyle(BILL_EVENTS_TAB_VALUE)}
+      selected={isSelected(BILL_EVENTS_TAB_VALUE)}
+      value={BILL_EVENTS_TAB_VALUE}
+      label={formatMessage(intl, "invoice", "billEvents.label")}
+    />;
+
+const BillEventsTabPanel = ({ rights, value, bill }) =>
+
+    <PublishedComponent pubRef="policyHolder.TabPanel" module="bill" index={BILL_EVENTS_TAB_VALUE} value={value}>
+      {rights?.includes(RIGHT_BILL_EVENT_CREATE_MESSAGE) && (
+        <Grid container justify="flex-end" alignItems="center" spacing={1}>
+          <Grid>
+            <Typography>
+              <FormattedMessage module="invoice" id="billEventMessage.create.label" />
+            </Typography>
+          </Grid>
+          <Grid>
+            <CreateBillEventMessageDialog bill={bill} />
+          </Grid>
+        </Grid>
+      )}
+      <BillEventsSearcher bill={bill} />
+    </PublishedComponent>;
+
+export { BillEventsTabLabel, BillEventsTabPanel };

@@ -1,0 +1,142 @@
+import React from "react";
+import _debounce from "lodash/debounce";
+
+import { Grid } from "@mui/material";
+import { styled } from "@mui/material/styles";
+
+import { TextInput, NumberInput, useModulesManager, GRID_RESPONSIVE_STANDARD } from "@openimis/fe-core";
+import { CONTAINS_LOOKUP, DEFAULT, DEFUALT_DEBOUNCE_TIME } from "../constants";
+import { defaultFilterStyles } from "../util/styles";
+
+const StyledBillLineItemsFilter = styled('div')(({ theme }) => ({
+  ...defaultFilterStyles(theme),
+}));
+
+const BillLineItemsFilter = ({ filters, onChangeFilters }) => {
+  const modulesManager = useModulesManager();
+
+  const debouncedOnChangeFilters = _debounce(onChangeFilters, DEFUALT_DEBOUNCE_TIME);
+
+  const filterValue = (filterName) => filters?.[filterName]?.value;
+
+  const filterTextFieldValue = (filterName) => (filters[filterName] ? filters[filterName].value : "");
+
+  const onChangeFilter = (filterName) => (value) => {
+    debouncedOnChangeFilters([
+      {
+        id: filterName,
+        value: !!value ? value : null,
+        filter: `${filterName}: ${value}`,
+      },
+    ]);
+  };
+
+  const onChangeStringFilter =
+    (filterName, lookup = null) =>
+    (value) => {
+      lookup
+        ? debouncedOnChangeFilters([
+            {
+              id: filterName,
+              value,
+              filter: `${filterName}_${lookup}: "${value}"`,
+            },
+          ])
+        : onChangeFilters([
+            {
+              id: filterName,
+              value,
+              filter: `${filterName}: "${value}"`,
+            },
+          ]);
+    };
+
+  return (
+    <StyledBillLineItemsFilter>
+      <Grid container className="form">
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
+          <TextInput
+            module="bill"
+            label="billItem.code"
+            value={filterTextFieldValue("code")}
+            onChange={onChangeStringFilter("code", CONTAINS_LOOKUP)}
+          />
+        </Grid>
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
+          <TextInput
+            module="bill"
+            label="billItem.description"
+            value={filterTextFieldValue("description")}
+            onChange={onChangeStringFilter("description", CONTAINS_LOOKUP)}
+          />
+        </Grid>
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
+          <NumberInput
+            module="bill"
+            label="billItem.quantity"
+            min={0}
+            value={filterValue("quantity")}
+            onChange={onChangeFilter("quantity")}
+          />
+        </Grid>
+        <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
+          <NumberInput
+            module="bill"
+            label="billItem.amountTotal"
+            min={0}
+            value={filterValue("amountTotal")}
+            onChange={onChangeFilter("amountTotal")}
+          />
+        </Grid>
+        {<>
+            <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
+              <TextInput
+                module="bill"
+                label="billItem.ledgerAccount"
+                value={filterTextFieldValue("ledgerAccount")}
+                onChange={onChangeStringFilter("ledgerAccount", CONTAINS_LOOKUP)}
+              />
+            </Grid>
+            <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
+              <NumberInput
+                module="bill"
+                label="billItem.unitPrice"
+                min={0}
+                value={filterValue("unitPrice")}
+                onChange={onChangeFilter("unitPrice")}
+              />
+            </Grid>
+            <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
+              <NumberInput
+                module="bill"
+                label="billItem.discount"
+                min={0}
+                value={filterValue("discount")}
+                onChange={onChangeFilter("discount")}
+              />
+            </Grid>
+            <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
+              <NumberInput
+                module="bill"
+                label="billItem.deduction"
+                min={0}
+                value={filterValue("deduction")}
+                onChange={onChangeFilter("deduction")}
+              />
+            </Grid>
+            <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
+              <NumberInput
+                module="bill"
+                label="billItem.amountNet"
+                min={0}
+                value={filterValue("amountNet")}
+                onChange={onChangeFilter("amountNet")}
+              />
+            </Grid>
+          </>}
+      </Grid>
+    </StyledBillLineItemsFilter>
+  );
+};
+
+export default BillLineItemsFilter;
