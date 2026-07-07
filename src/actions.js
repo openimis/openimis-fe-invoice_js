@@ -152,7 +152,7 @@ const DETAIL_PAYMENT_INVOICE_FULL_PROJECTION = [
   "reconciliationDate",
 ];
 
-const INVOICE_EVENT_FULL_PROJECTION = ["eventType", "message"];
+const INVOICE_EVENT_FULL_PROJECTION = ["eventType", "dateCreated", "message"];
 
 const formatInvoicePaymentGQL = (payment) =>
   `
