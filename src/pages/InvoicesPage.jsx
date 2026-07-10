@@ -23,7 +23,7 @@ const InvoicesPage = ({ intl, rights }) => {
       {rights.includes(RIGHT_INVOICE_SEARCH) && (
         <div className="page">
           <Helmet title={formatMessage(intl, "invoice", "invoices.pageTitle")} />
-          <InvoiceSearcher rights={rights} />
+          <InvoiceSearcher cacheFiltersKey="invoiceInvoicesPageFiltersCache" rights={rights} />
         </div>
       )}
     </StyledInvoicesPage>

@@ -204,7 +204,7 @@ const formatPaymentInvoiceGQL = (payment, subjectId, subjectType) =>
   `
     ${!!payment.id ? `id: "${payment.id}"` : ""}
     ${!!subjectId ? `subjectId: "${subjectId}"` : ""}
-    ${!!subjectType ? `subjectTypeName "${subjectType}"` : ""}
+    ${!!subjectType ? `subjectType: "${subjectType}"` : ""}
     ${!!payment.status ? `status: ${payment.status}` : ""}
     ${!!payment.reconciliationStatus ? `reconciliationStatus: ${payment.reconciliationStatus}` : ""}
     ${!!payment.codeExt ? `codeExt: "${payment.codeExt}"` : ""}
