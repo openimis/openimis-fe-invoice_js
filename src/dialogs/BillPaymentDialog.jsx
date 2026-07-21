@@ -5,7 +5,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-
 import {
   FormattedMessage,
   PublishedComponent,
@@ -16,13 +15,14 @@ import {
   GetIconComponent,
 } from "@openimis/fe-core";
 import { Fab, Grid, IconButton, Tooltip } from "@mui/material";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { createPaymentInvoiceWithDetail, updateBillPayment } from "../actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { EMPTY_PAYMENT_INVOICE } from "../constants";
 import InvoicePaymentStatusPicker from "../pickers/InvoicePaymentStatusPicker";
 import PaymentInvoiceStatusPicker from "../pickers/PaymentInvoiceStatusPicker";
+
 const AddIcon = GetIconComponent("Add")
 const EditIcon = GetIconComponent("Edit")
 const StyledGrid = styled(Grid)(({ theme }) => ({
@@ -51,21 +51,21 @@ const BillPaymentDialog = ({
   const handleSave = () => {
     isNew
       ? createPaymentInvoiceWithDetail(
-          payment,
-          payment.billId, 
-          "bill",
-          formatMessageWithValues(intl, "invoice", "paymentInvoice.create.mutationLabel", {
-            paymentInvoiceLabel: payment.label,
-            code: bill?.code,
-          }),
-        )
+        payment,
+        payment.billId,
+        "bill",
+        formatMessageWithValues(intl, "invoice", "paymentInvoice.create.mutationLabel", {
+          paymentInvoiceLabel: payment.label,
+          code: bill?.code,
+        }),
+      )
       : updateBillPayment(
-          payment,
-          formatMessageWithValues(intl, "invoice", "paymentInvoice.update.mutationLabel", {
-            paymentInvoiceLabel: payment.label,
-            code: bill?.codeExt,
-          }),
-        );
+        payment,
+        formatMessageWithValues(intl, "invoice", "paymentInvoice.update.mutationLabel", {
+          paymentInvoiceLabel: payment.label,
+          code: bill?.codeExt,
+        }),
+      );
     handleClose();
   };
 
@@ -96,7 +96,7 @@ const BillPaymentDialog = ({
         </DialogTitle>
         <DialogContent>
           <StyledGrid container direction="column">
-                <StyledGrid>
+            <StyledGrid>
               <PaymentInvoiceStatusPicker
                 label="paymentInvoice.reconciliationStatus.label"
                 withNull

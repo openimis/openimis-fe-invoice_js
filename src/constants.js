@@ -51,7 +51,7 @@ export const STATUS = {
   DELETED: "A_4",
   SUSPENDED: "A_5",
   UNPAID: "A_6",
-  RECONCILIATED: "A_7",
+  RECONCILIATED: "A_7"
 };
 export const SUBJECT_TYPE_OPTIONS = [
   {

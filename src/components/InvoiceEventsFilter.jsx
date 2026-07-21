@@ -50,7 +50,15 @@ const InvoiceEventsFilter = ({ intl, filters, onChangeFilters }) => {
             withNull
             nullLabel={formatMessage(intl, "invoice", "any")}
             value={filterValue("eventType")}
-            onChange={onChangeStringFilter("eventType")}
+            onChange={(value) =>
+              onChangeFilters([
+                {
+                  id: "eventType",
+                  value: value,
+                  filter: `eventType: A_${value}`,
+                },
+              ])
+            }
           />
         </Grid>
         <Grid size={GRID_RESPONSIVE_STANDARD} className="item">

@@ -105,7 +105,13 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             withNull
             nullLabel={formatMessage(intl, "invoice", "any")}
             value={filterValue("status")}
-            onChange={onChangeFilter("status")}
+            onChange={(value) => onChangeFilters([
+              {
+                id: "status",
+                value: value,
+                filter: value ? `status: A_${value}` : null,
+              },
+            ])}
           />
         </Grid>
         <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
