@@ -65,7 +65,7 @@ const InvoicePaymentsFilter = ({ intl, filters, onChangeFilters }) => {
                 {
                   id: "reconciliationStatus",
                   value: value,
-                  filter: `reconciliationStatus: "${value}"`,
+                  filter: `reconciliationStatus: A_${value}`,
                 },
               ])
             }

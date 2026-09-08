@@ -61,8 +61,8 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             label="invoice.subject"
             withNull
             nullLabel={formatMessage(intl, "invoice", "any")}
-            value={filterValue("subjectType")}
-            onChange={onChangeStringFilter("subjectType")}
+            value={filterValue("subjectTypeFilter")}
+            onChange={onChangeStringFilter("subjectTypeFilter")}
           />
         </Grid>
         <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
@@ -70,8 +70,8 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             label="invoice.thirdparty"
             withNull
             nullLabel={formatMessage(intl, "invoice", "any")}
-            value={filterValue("thirdpartyType")}
-            onChange={onChangeStringFilter("thirdpartyType")}
+            value={filterValue("thirdpartyTypeFilter")}
+            onChange={onChangeStringFilter("thirdpartyTypeFilter")}
           />
         </Grid>
         <Grid size={GRID_RESPONSIVE_STANDARD} className="item">
@@ -105,7 +105,13 @@ const InvoiceFilter = ({ intl, filters, onChangeFilters }) => {
             withNull
             nullLabel={formatMessage(intl, "invoice", "any")}
             value={filterValue("status")}
-            onChange={onChangeStringFilter("status")}
+            onChange={(value) => onChangeFilters([
+              {
+                id: "status",
+                value: value,
+                filter: value ? `status: A_${value}` : null,
+              },
+            ])}
           />
         </Grid>
         <Grid size={GRID_RESPONSIVE_STANDARD} className="item">

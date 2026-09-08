@@ -152,7 +152,7 @@ const DETAIL_PAYMENT_INVOICE_FULL_PROJECTION = [
   "reconciliationDate",
 ];
 
-const INVOICE_EVENT_FULL_PROJECTION = ["eventType", "message"];
+const INVOICE_EVENT_FULL_PROJECTION = ["eventType", "dateCreated", "message"];
 
 const formatInvoicePaymentGQL = (payment) =>
   `
@@ -204,7 +204,7 @@ const formatPaymentInvoiceGQL = (payment, subjectId, subjectType) =>
   `
     ${!!payment.id ? `id: "${payment.id}"` : ""}
     ${!!subjectId ? `subjectId: "${subjectId}"` : ""}
-    ${!!subjectType ? `subjectTypeName "${subjectType}"` : ""}
+    ${!!subjectType ? `subjectType: "${subjectType}"` : ""}
     ${!!payment.status ? `status: ${payment.status}` : ""}
     ${!!payment.reconciliationStatus ? `reconciliationStatus: ${payment.reconciliationStatus}` : ""}
     ${!!payment.codeExt ? `codeExt: "${payment.codeExt}"` : ""}
