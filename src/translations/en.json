@@ -56,7 +56,7 @@
     }
   },
   "invoices": {
-    "pageTitle": "Invoices",
+    "pageTitle": "Invoices customer",
     "searcherResultsTitle": "{invoicesTotalCount} Invoices Found"
   },
   "invoiceLineItems": {
