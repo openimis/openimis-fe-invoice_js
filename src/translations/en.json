@@ -15,6 +15,7 @@
     "cancel": "Cancel"
   },
   "invoice": {
+    "policyInvoices.title": "Invoices",
     "pageTitle": "Invoice {label}",
     "headPanelTitle": "General Information",
     "subject": "Subject",

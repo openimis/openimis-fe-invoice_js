@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { injectIntl } from "react-intl";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -39,7 +39,16 @@ const InvoicePaymentDialog = ({
   updatePaymentInvoice,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [payment, setPayment] = useState({ invoiceId: invoice.id, ...(invoicePayment ?? EMPTY_PAYMENT_INVOICE) });
+  const [payment, setPayment] = useState({ invoiceId: invoice?.id, ...(invoicePayment ?? EMPTY_PAYMENT_INVOICE) });
+
+  useEffect(
+    () =>
+      setPayment((payment) =>
+        payment.invoiceId === invoice?.id ? payment : { ...payment, invoiceId: invoice?.id },
+      ),
+    [invoice?.id],
+  );
+
   const isNew = !invoicePayment;
 
   const handleOpen = () => setIsOpen(true);
