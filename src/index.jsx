@@ -11,6 +11,7 @@ import ThirdPartyTypePickerBill from "./pickers/ThirdPartyTypePickerBill";
 import InvoicePage from "./pages/InvoicePage";
 import BillsPage from "./pages/BillsPage";
 import BillPage from "./pages/BillPage";
+import PolicyInvoicesPanel from "./components/PolicyInvoicesPanel";
 import { InvoiceLineItemsTabLabel, InvoiceLineItemsTabPanel } from "./components/InvoiceLineItemsTab";
 import { InvoicePaymentsTabLabel, InvoicePaymentsTabPanel } from "./components/InvoicePaymentsTab";
 import { InvoiceEventsTabLabel, InvoiceEventsTabPanel } from "./components/InvoiceEventsTab";
@@ -73,6 +74,9 @@ const DEFAULT_CONFIG = {
   "invoice.TabPanel.panel": [InvoiceLineItemsTabPanel, InvoicePaymentsTabPanel, InvoiceEventsTabPanel],
   "bill.TabPanel.label": [BillLineItemsTabLabel, BillPaymentsTabLabel, BillEventsTabLabel],
   "bill.TabPanel.panel": [BillLineItemsTabPanel, BillPaymentsTabPanel, BillEventsTabPanel],
+  // read-only list of the invoices raised for a policy, shown on the policy page
+  // when fe-policy is installed; invoices are backend-generated so no add action
+  "policy.Policy.panels": [PolicyInvoicesPanel],
   "invoice.MainMenu": [
     {
       text: "invoice.menu.invoices",
