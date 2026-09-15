@@ -11,6 +11,7 @@ import ThirdPartyTypePickerBill from "./pickers/ThirdPartyTypePickerBill";
 import InvoicePage from "./pages/InvoicePage";
 import BillsPage from "./pages/BillsPage";
 import BillPage from "./pages/BillPage";
+import PolicyInvoicesPanel from "./components/PolicyInvoicesPanel";
 import { InvoiceLineItemsTabLabel, InvoiceLineItemsTabPanel } from "./components/InvoiceLineItemsTab";
 import { InvoicePaymentsTabLabel, InvoicePaymentsTabPanel } from "./components/InvoicePaymentsTab";
 import { InvoiceEventsTabLabel, InvoiceEventsTabPanel } from "./components/InvoiceEventsTab";
@@ -47,7 +48,7 @@ const DEFAULT_CONFIG = {
       component: InvoicesPage,
       rights: [RIGHT_INVOICE_SEARCH, RIGHT_INVOICE_AMEND],
       icon: "Person",
-      text: "menu.invoice"
+      text: "invoices.pageTitle"
     },
     { path: ROUTE_INVOICE + "/:invoice_uuid?", id: "legalAndFinance.invoice", component: InvoicePage },
     { 
@@ -56,7 +57,7 @@ const DEFAULT_CONFIG = {
       component: BillsPage,
       rights: [RIGHT_BILL_SEARCH, RIGHT_BILL_AMEND],
       icon: "Business",
-      text: "menu.bills"
+      text: "bills.pageTitle"
     },
     { path: ROUTE_BILL + "/:bill_uuid?", id: "legalAndFinance.bill", component: BillPage },
   ],
@@ -73,6 +74,9 @@ const DEFAULT_CONFIG = {
   "invoice.TabPanel.panel": [InvoiceLineItemsTabPanel, InvoicePaymentsTabPanel, InvoiceEventsTabPanel],
   "bill.TabPanel.label": [BillLineItemsTabLabel, BillPaymentsTabLabel, BillEventsTabLabel],
   "bill.TabPanel.panel": [BillLineItemsTabPanel, BillPaymentsTabPanel, BillEventsTabPanel],
+  // read-only list of the invoices raised for a policy, shown on the policy page
+  // when fe-policy is installed; invoices are backend-generated so no add action
+  "policy.Policy.panels": [PolicyInvoicesPanel],
   "invoice.MainMenu": [
     {
       text: "invoice.menu.invoices",

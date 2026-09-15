@@ -70,7 +70,7 @@ const BillPage = ({
     prevSubmittingMutationRef.current = submittingMutation;
   });
 
-  useEffect(() => setEditedBill(bill), [bill]);
+  useEffect(() => setEditedBill(bill ?? {}), [bill]);
 
   const back = () => history.goBack();
 

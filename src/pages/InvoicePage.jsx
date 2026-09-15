@@ -67,7 +67,7 @@ const InvoicePage = ({
     prevSubmittingMutationRef.current = submittingMutation;
   });
 
-  useEffect(() => setEditedInvoice(invoice), [invoice]);
+  useEffect(() => setEditedInvoice(invoice ?? {}), [invoice]);
 
   const back = () => history.goBack();
 
