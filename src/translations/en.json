@@ -47,6 +47,25 @@
     "note": "Note",
     "terms": "Terms",
     "paymentReference": "Payment Reference",
+    "familyInvoicesPayments": {
+      "title": "{count} Invoices / Payments",
+      "coveredPeriod": "Covered Period",
+      "invoiceNumber": "Invoice Number",
+      "amountDue": "Amount Due",
+      "totalInvoicePayments": "Total Invoice Payments",
+      "invoiceBalance": "Invoice Balance",
+      "lastPayment": "Last Payment",
+      "totalInvoiceAmount": "Total Invoices",
+      "totalPaidAmount": "Total Paid",
+      "globalBalance": "Global Balance",
+      "invoicePaymentsSectionTitle": "Invoice {invoiceNumber} Payments ({count})",
+      "invoicePaymentDate": "Payment Date",
+      "invoicePaymentAmount": "Payment Amount",
+      "invoicePaymentReference": "Payment Reference",
+      "invoicePaymentOrigin": "Payment Origin",
+      "invoicePaymentCodeReceipt": "Receipt Number",
+      "invoicePaymentPayerRef": "Payer Reference"
+    },
     "delete": {
       "confirm": {
         "title": "Delete {code}?",
@@ -87,7 +106,7 @@
       "REFUNDED": "Refunded",
       "CANCELLED": "Cancelled"
     },
-    "codeExt":"Code",
+    "codeExt": "Code",
     "label": "Label",
     "codeTp": "Code Thirdparty",
     "codeReceipt": "Receipt Number",
@@ -100,9 +119,20 @@
       "label": "Create new Payment",
       "mutationLabel": "Create Invoice Payment {invoicePaymentLabel} for {invoiceCode}"
     },
+    "createPaymentTitle": "Create Payment",
+    "createPaymentButton": "Create Payment",
+    "paymentInformation": "Payment Information",
+    "accountingInformation": "Accounting Information",
+    "paymentReference": "Payment Reference",
+    "paymentAmount": "Payment Amount",
+    "specifyPaymentOrigin": "Specify Payment Origin",
+    "paymentDestination": "Payment Destination",
+    "thirdPartyAccount": "Third-Party Account",
+    "accountCode": "Account Code",
+    "accountName": "Account Name",
     "update": {
       "label": "Update Payment",
-      "mutationLabel":"Update Invoice Payment {invoicePaymentLabel} of {invoiceCode}"
+      "mutationLabel": "Update Invoice Payment {invoicePaymentLabel} of {invoiceCode}"
     },
     "delete": {
       "confirm": {
@@ -110,11 +140,18 @@
         "message": "Deleting data does not mean erasing it from openIMIS database. The data will only be deactivated from the viewed list."
       },
       "mutationLabel": "Delete Invoice Payment {invoicePaymentLabel} of {invoiceCode}"
+    },
+    "paymentOriginOptions": {
+      "CASH": "Cash",
+      "CHEQUE": "Cheque",
+      "BANK_TRANSFER": "Bank Transfer",
+      "MOBILE_MONEY": "Mobile Money",
+      "OTHER": "Other"
     }
   },
   "invoiceEvents": {
     "label": "Events",
-    "searcherResultsTitle":"{invoiceEventsTotalCount} Events Found"
+    "searcherResultsTitle": "{invoiceEventsTotalCount} Events Found"
   },
   "invoiceEvent": {
     "eventType": {
@@ -210,7 +247,7 @@
       "REFUNDED": "Refunded",
       "CANCELLED": "Cancelled"
     },
-    "codeExt":"Code",
+    "codeExt": "Code",
     "label": "Label",
     "codeTp": "Code Thirdparty",
     "codeReceipt": "Receipt Number",
@@ -225,7 +262,7 @@
     },
     "update": {
       "label": "Update Payment",
-      "mutationLabel":"Update Bill Payment {billPaymentLabel} of {billCode}"
+      "mutationLabel": "Update Bill Payment {billPaymentLabel} of {billCode}"
     },
     "delete": {
       "confirm": {
@@ -237,7 +274,7 @@
   },
   "billEvents": {
     "label": "Events",
-    "searcherResultsTitle":"{billEventsTotalCount} Events Found"
+    "searcherResultsTitle": "{billEventsTotalCount} Events Found"
   },
   "billEvent": {
     "eventType": {
@@ -275,7 +312,7 @@
       "REFUNDED": "Refunded",
       "CANCELLED": "Cancelled"
     },
-    "codeExt":"Code",
+    "codeExt": "Code",
     "label": "Label",
     "codeTp": "Code Thirdparty",
     "codeReceipt": "Receipt Number",
@@ -291,7 +328,7 @@
     },
     "update": {
       "label": "Update Payment",
-      "mutationLabel":"Update Payment {paymentInvoiceLabel} of {code}"
+      "mutationLabel": "Update Payment {paymentInvoiceLabel} of {code}"
     },
     "delete": {
       "confirm": {
@@ -299,7 +336,10 @@
         "message": "Deleting data does not mean erasing it from openIMIS database. The data will only be deactivated from the viewed list."
       },
       "mutationLabel": "Delete Payment {paymentInvoiceLabel} of {code}"
-    }
+    },
+    "paymentReference": "Payment Reference",
+    "paymentAmount": "Payment Amount",
+    "paymentDestination": "Payment Destination"
   },
   "detailPaymentInvoice": {
     "status": {

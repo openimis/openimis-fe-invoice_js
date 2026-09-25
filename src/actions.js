@@ -128,20 +128,24 @@ const BILL_PAYMENT_FULL_PROJECTION = [
   "paymentOrigin",
 ];
 
-// new payment design
+// new payment design: only the fields actually used by the invoice payments
+// panel are projected; `paymentDestination` is the ledger journal recorded for
+// the payment (backend contract #37884, reverse join on LedgerEntryMeta).
+// `paymentDestination` is only exposed on PaymentInvoiceGQLType by the ledger
+// module, so it must be requested ONLY when the ledger module is loaded
+// (otherwise GraphQL returns 400: cannot query field paymentDestination).
 const PAYMENT_INVOICE_FULL_PROJECTION = [
   "id",
-  "reconciliationStatus",
   "codeExt",
-  "codeTp",
-  "codeReceipt",
-  "label",
-  "fees",
   "amountReceived",
   "datePayment",
   "paymentOrigin",
-  "payerRef"
 ];
+// `paymentDestination` is a LedgerJournal reference (LedgerJournalGQLType on the
+// backend, contract #37884), so it needs an explicit sub-selection. Querying the
+// bare field returns: Field "paymentDestination" of type "LedgerJournalGQLType"
+// must have a sub selection.
+const PAYMENT_INVOICE_LEDGER_PROJECTION = ["paymentDestination{name code}"];
 
 const DETAIL_PAYMENT_INVOICE_FULL_PROJECTION = [
   "id",
@@ -150,6 +154,7 @@ const DETAIL_PAYMENT_INVOICE_FULL_PROJECTION = [
   "amount",
   "reconciliationId",
   "reconciliationDate",
+  "payment{ id codeExt codeTp codeReceipt datePayment paymentOrigin payerRef amountReceived }",
 ];
 
 const INVOICE_EVENT_FULL_PROJECTION = ["eventType", "dateCreated", "message"];
@@ -216,6 +221,8 @@ const formatPaymentInvoiceGQL = (payment, subjectId, subjectType) =>
     ${!!payment.datePayment ? `datePayment: "${payment.datePayment}"` : ""}
     ${!!payment.paymentOrigin ? `paymentOrigin: "${payment.paymentOrigin}"` : ""}
     ${!!payment.payerRef ? `payerRef: "${payment.payerRef}"` : ""}
+    ${!!payment.paymentDestination ? `paymentDestination: "${payment.paymentDestination}"` : ""}
+    ${!!payment.party ? `party: "${payment.party}"` : ""}
   `;
 
 export function fetchInvoices(params) {
@@ -452,14 +459,61 @@ export function createBillEventType(billEvent, clientMutationLabel) {
 }
 
 //payment new design
-export function fetchPaymentInvoices(params) {
-  const payload = formatPageQueryWithCount("paymentInvoice", params, PAYMENT_INVOICE_FULL_PROJECTION);
+export function fetchPaymentInvoices(params, ledgerEnabled = false) {
+  const projection = ledgerEnabled
+    ? [...PAYMENT_INVOICE_FULL_PROJECTION, ...PAYMENT_INVOICE_LEDGER_PROJECTION]
+    : PAYMENT_INVOICE_FULL_PROJECTION;
+  const payload = formatPageQueryWithCount("paymentInvoice", params, projection);
   return graphql(payload, ACTION_TYPE.SEARCH_PAYMENT_INVOICE);
 }
 
-export function fetchDetailPaymentInvoices(params) {
+export function fetchDetailPaymentInvoices(
+  params,
+  actionType = ACTION_TYPE.SEARCH_DETAIL_PAYMENT_INVOICE,
+  meta = {},
+) {
   const payload = formatPageQueryWithCount("detailPaymentInvoice", params, DETAIL_PAYMENT_INVOICE_FULL_PROJECTION);
-  return graphql(payload, ACTION_TYPE.SEARCH_DETAIL_PAYMENT_INVOICE);
+  return graphql(payload, actionType, meta);
+}
+
+export function fetchFamilyInvoicePaymentOverview(params, meta = {}) {
+  const payload = `
+  {
+    familyInvoicePaymentOverview${!!params && params.length ? `(${params.join(",")})` : ""} {
+      totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      items {
+        rowId
+        invoiceId
+        invoiceCode
+        coveredFrom
+        coveredTo
+        amountDue
+        totalInvoicePayments
+        invoiceBalance
+        lastPayment
+        hasInvoicePayments
+      }
+    }
+  }`;
+  return graphql(payload, ACTION_TYPE.SEARCH_FAMILY_INVOICE_PAYMENT_OVERVIEW, meta);
+}
+
+export function fetchFamilyInvoicePaymentGlobals(params, meta = {}) {
+  const payload = `
+  {
+    familyInvoicePaymentGlobals${!!params && params.length ? `(${params.join(",")})` : ""} {
+      totalInvoiceAmount
+      totalPaidAmount
+      globalBalance
+    }
+  }`;
+  return graphql(payload, ACTION_TYPE.SEARCH_FAMILY_INVOICE_PAYMENT_GLOBALS, meta);
 }
 
 export function createPaymentInvoiceWithDetail(paymentInvoice, subjectId, subjectType, clientMutationLabel) {
