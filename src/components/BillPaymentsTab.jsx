@@ -16,7 +16,7 @@ const BillPaymentsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected }) 
     />
   );
 
-const BillPaymentsTabPanel = ({ rights, value, bill, setConfirmedAction }) => (
+const BillPaymentsTabPanel = ({ rights, value, bill }) => (
   <PublishedComponent pubRef="policyHolder.TabPanel" module="bill" index={BILL_PAYMENTS_TAB_VALUE} value={value}>
     {rights?.includes(RIGHT_BILL_PAYMENT_CREATE) && (
       <Grid container justify="flex-end" alignItems="center" spacing={1}>
@@ -30,7 +30,7 @@ const BillPaymentsTabPanel = ({ rights, value, bill, setConfirmedAction }) => (
         </Grid>
       </Grid>
     )}
-    <BillPaymentsSearcher bill={bill} rights={rights} setConfirmedAction={setConfirmedAction} />
+    <BillPaymentsSearcher bill={bill} rights={rights} />
   </PublishedComponent>
 );
 

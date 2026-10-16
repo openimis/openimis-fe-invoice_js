@@ -79,13 +79,6 @@ const BillSearcher = ({
     }
   }, [billToDelete]);
 
-  useEffect(() => {
-    if (billToDelete && confirmed) {
-      confirmedAction();
-      setDeletedBillUuids([...deletedBillUuids, billToDelete.id]);
-    }
-    billToDelete && confirmed !== null && setBillToDelete(null);
-  }, [confirmed]);
 
   useEffect(() => {
     if (errorBillsExport) {
@@ -126,8 +119,18 @@ const BillSearcher = ({
           code: billToDelete.code,
         }),
         formatMessage(intl, "bill", "delete.confirm.message"),
+        {
+          // The answer comes back to this caller only, so the row bookkeeping that
+          // used to live in a `confirmed` effect belongs here too (OP-3190).
+          onConfirm: () => {
+            confirmedAction();
+            setDeletedBillUuids((uuids) => [...uuids, billToDelete.id]);
+            setBillToDelete(null);
+          },
+          onCancel: () => setBillToDelete(null),
+        },
       ),
-    [billToDelete],
+    [billToDelete, confirmedAction],
   );
 
   const fetch = useCallback(

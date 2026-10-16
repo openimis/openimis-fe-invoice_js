@@ -23,7 +23,7 @@ const StyledInvoiceTabPanel = styled('div')(({ theme }) => ({
   },
 }));
 
-const InvoiceTabPanel = ({ intl, rights, invoice, setConfirmedAction }) => {
+const InvoiceTabPanel = ({ intl, rights, invoice }) => {
   const [activeTab, setActiveTab] = useState(INVOICE_LINE_ITEMS_TAB_VALUE);
 
   const isSelected = (tab) => tab === activeTab;
@@ -51,7 +51,6 @@ const InvoiceTabPanel = ({ intl, rights, invoice, setConfirmedAction }) => {
           rights={rights}
           value={activeTab}
           invoice={invoice}
-          setConfirmedAction={setConfirmedAction}
         />
       </Paper>
     </StyledInvoiceTabPanel>

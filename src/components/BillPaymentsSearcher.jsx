@@ -25,7 +25,6 @@ const BillPaymentsSearcher = ({
   modulesManager,
   rights,
   bill,
-  setConfirmedAction,
   submittingMutation,
   mutation,
   coreConfirm,
@@ -80,12 +79,12 @@ const BillPaymentsSearcher = ({
     );
 
   const openDeleteBillPaymentConfirmDialog = () => {
-    setConfirmedAction(() => deleteBillPaymentCallback);
     coreConfirm(
       formatMessageWithValues(intl, "invoice", "billPayment.delete.confirm.title", {
         billPaymentLabel: billPaymentToDelete?.label,
       }),
       formatMessage(intl, "invoice", "billPayment.delete.confirm.message"),
+      { onConfirm: deleteBillPaymentCallback },
     );
   };
 

@@ -44,7 +44,6 @@ const BillPage = ({
 }) => {
   const modulesManager = useModulesManager();
   const [editedBill, setEditedBill] = useState({});
-  const [confirmedAction, setConfirmedAction] = useState(null);
   const prevSubmittingMutationRef = useRef();
 
   useEffect(() => {
@@ -52,13 +51,6 @@ const BillPage = ({
       fetchBill([`id: "${billUuid}"`]);
     }
   }, [billUuid]);
-
-  useEffect(() => {
-    // See InvoicePage: a stale `confirmed` fires this on mount, before any action is set.
-    if (confirmed && typeof confirmedAction === "function") {
-      confirmedAction();
-    }
-  }, [confirmed]);
 
   useEffect(() => {
     if (prevSubmittingMutationRef.current && !submittingMutation) {
@@ -87,12 +79,12 @@ const BillPage = ({
   );
 
   const openDeleteBillConfirmDialog = () => {
-    setConfirmedAction(() => deleteBillCallback);
     coreConfirm(
       formatMessageWithValues(intl, "invoice", "bill.delete.confirm.title", {
         code: bill?.code,
       }),
       formatMessage(intl, "invoice", "bill.delete.confirm.message"),
+      { onConfirm: deleteBillCallback },
     );
   };
 
@@ -123,7 +115,6 @@ const BillPage = ({
             Panels={[BillTabPanel]}
             rights={rights}
             actions={actions}
-            setConfirmedAction={setConfirmedAction}
           />
         </div>
       )}

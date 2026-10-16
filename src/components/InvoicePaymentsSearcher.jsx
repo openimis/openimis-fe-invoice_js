@@ -29,7 +29,6 @@ const InvoicePaymentsSearcher = ({
   modulesManager,
   rights,
   invoice,
-  setConfirmedAction,
   deletePaymentInvoice,
   submittingMutation,
   mutation,
@@ -85,12 +84,12 @@ const InvoicePaymentsSearcher = ({
     );
 
   const openDeletePaymentInvoiceConfirmDialog = () => {
-    setConfirmedAction(() => deletePaymentInvoiceCallback);
     coreConfirm(
       formatMessageWithValues(intl, "invoice", "paymentInvoice.delete.confirm.title", {
         paymentInvoiceLabel: paymentInvoiceToDelete?.label,
       }),
       formatMessage(intl, "invoice", "paymentInvoice.delete.confirm.message"),
+      { onConfirm: deletePaymentInvoiceCallback },
     );
   };
 

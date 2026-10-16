@@ -17,7 +17,7 @@ const InvoicePaymentsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected 
     />
   );
 
-const InvoicePaymentsTabPanel = ({ rights, value, invoice, setConfirmedAction }) => (
+const InvoicePaymentsTabPanel = ({ rights, value, invoice }) => (
   <PublishedComponent pubRef="policyHolder.TabPanel" module="invoice" index={INVOICE_PAYMENTS_TAB_VALUE} value={value}>
     {rights?.includes(RIGHT_INVOICE_PAYMENT_CREATE) && (
       <Grid container justify="flex-end" alignItems="center" spacing={1}>
@@ -31,7 +31,7 @@ const InvoicePaymentsTabPanel = ({ rights, value, invoice, setConfirmedAction })
         </Grid>
       </Grid>
     )}
-    <InvoicePaymentsSearcher invoice={invoice} rights={rights} setConfirmedAction={setConfirmedAction} />
+    <InvoicePaymentsSearcher invoice={invoice} rights={rights} />
   </PublishedComponent>
 );
 
