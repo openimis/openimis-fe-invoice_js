@@ -41,7 +41,7 @@ const InvoicePage = ({
   journalize,
 }) => {
   const [editedInvoice, setEditedInvoice] = useState({});
-  const [confirmedAction, setConfirmedAction] = useState(() => null);
+  const [confirmedAction, setConfirmedAction] = useState(null);
   const prevSubmittingMutationRef = useRef();
 
   useEffect(() => {
@@ -51,7 +51,9 @@ const InvoicePage = ({
   }, [invoiceUuid]);
 
   useEffect(() => {
-    if (confirmed) {
+    // `confirmed` is not reset once a dialog has been answered, so this effect also runs
+    // on mount with a stale `true` - and until something sets it, confirmedAction is null.
+    if (confirmed && typeof confirmedAction === "function") {
       confirmedAction();
     }
   }, [confirmed]);

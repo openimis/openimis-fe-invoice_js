@@ -44,7 +44,7 @@ const BillPage = ({
 }) => {
   const modulesManager = useModulesManager();
   const [editedBill, setEditedBill] = useState({});
-  const [confirmedAction, setConfirmedAction] = useState(() => null);
+  const [confirmedAction, setConfirmedAction] = useState(null);
   const prevSubmittingMutationRef = useRef();
 
   useEffect(() => {
@@ -54,7 +54,8 @@ const BillPage = ({
   }, [billUuid]);
 
   useEffect(() => {
-    if (confirmed) {
+    // See InvoicePage: a stale `confirmed` fires this on mount, before any action is set.
+    if (confirmed && typeof confirmedAction === "function") {
       confirmedAction();
     }
   }, [confirmed]);
