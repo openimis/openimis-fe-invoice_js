@@ -37,7 +37,6 @@ const BillPage = ({
   fetchBill,
   deleteBill,
   coreConfirm,
-  confirmed,
   submittingMutation,
   mutation,
   journalize,
@@ -125,7 +124,6 @@ const BillPage = ({
 const mapStateToProps = (state, props) => ({
   rights: !!state.core && !!state.core.user && !!state.core.user.i_user ? state.core.user.i_user.rights : [],
   billUuid: props.match.params.bill_uuid,
-  confirmed: state.core.confirmed,
   fetchingBill: state.invoice.fetchingBill,
   fetchedBill: state.invoice.fetchedBill,
   bill: state.invoice.bill,
