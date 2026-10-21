@@ -28,7 +28,7 @@ const BillPaymentsSearcher = ({
   submittingMutation,
   mutation,
   coreConfirm,
-  confirmed,
+  deleteBillPayment,
   fetchBillPayments,
   fetchingBillPayments,
   fetchedBillPayments,
@@ -38,22 +38,8 @@ const BillPaymentsSearcher = ({
   billPaymentsTotalCount,
 }) => {
   const [queryParams, setQueryParams] = useState([]);
-  const [billPaymentToDelete, setBillPaymentToDelete] = useState(null);
   const [deletedBillPaymentUuids, setDeletedBillPaymentUuids] = useState([]);
   const prevSubmittingMutationRef = useRef();
-
-  useEffect(() => {
-    if (billPaymentToDelete) {
-      openDeleteBillPaymentConfirmDialog();
-    }
-  }, [billPaymentToDelete]);
-
-  useEffect(() => {
-    if (billPaymentToDelete && confirmed) {
-      setDeletedBillPaymentUuids([...deletedBillPaymentUuids, billPaymentToDelete.id]);
-    }
-    billPaymentToDelete && confirmed !== null && setBillPaymentToDelete(null);
-  }, [confirmed]);
 
   useEffect(() => {
     if (
@@ -69,26 +55,28 @@ const BillPaymentsSearcher = ({
     prevSubmittingMutationRef.current = submittingMutation;
   });
 
-  const deleteBillPaymentCallback = () =>
-    deleteBillPayment(
-      billPaymentToDelete,
-      formatMessageWithValues(intl, "invoice", "billPayment.delete.mutationLabel", {
-        billPaymentLabel: billPaymentToDelete?.label,
-        billCode: bill?.code,
-      }),
-    );
-
-  const openDeleteBillPaymentConfirmDialog = () => {
+  // Greying the row on state.core.confirmed also ran on any other dialog's
+  // "Yes" (OP-3213); it now follows this dialog's answer only. The bound
+  // deleteBillPayment prop is used: the bare import was never dispatched.
+  const onDelete = (billPayment) =>
     coreConfirm(
       formatMessageWithValues(intl, "invoice", "billPayment.delete.confirm.title", {
-        billPaymentLabel: billPaymentToDelete?.label,
+        billPaymentLabel: billPayment?.label,
       }),
       formatMessage(intl, "invoice", "billPayment.delete.confirm.message"),
-      { onConfirm: deleteBillPaymentCallback },
+      {
+        onConfirm: () => {
+          deleteBillPayment(
+            billPayment,
+            formatMessageWithValues(intl, "invoice", "billPayment.delete.mutationLabel", {
+              billPaymentLabel: billPayment?.label,
+              billCode: bill?.code,
+            }),
+          );
+          setDeletedBillPaymentUuids((uuids) => [...uuids, billPayment.id]);
+        },
+      },
     );
-  };
-
-  const onDelete = (billPayment) => setBillPaymentToDelete(billPayment);
 
   const fetch = (params) => fetchBillPayments(params);
 
@@ -235,7 +223,6 @@ const mapStateToProps = (state) => ({
   billPaymentsTotalCount: state.invoice.billPaymentsTotalCount,
   submittingMutation: state.invoice.submittingMutation,
   mutation: state.invoice.mutation,
-  confirmed: state.core.confirmed,
 });
 
 const mapDispatchToProps = (dispatch) => {

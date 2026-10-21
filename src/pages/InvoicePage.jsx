@@ -35,7 +35,6 @@ const InvoicePage = ({
   fetchInvoice,
   deleteInvoice,
   coreConfirm,
-  confirmed,
   submittingMutation,
   mutation,
   journalize,
@@ -121,7 +120,6 @@ const InvoicePage = ({
 const mapStateToProps = (state, props) => ({
   rights: !!state.core && !!state.core.user && !!state.core.user.i_user ? state.core.user.i_user.rights : [],
   invoiceUuid: props.match.params.invoice_uuid,
-  confirmed: state.core.confirmed,
   fetchingInvoice: state.invoice.fetchingInvoice,
   fetchedInvoice: state.invoice.fetchedInvoice,
   invoice: state.invoice.invoice,
