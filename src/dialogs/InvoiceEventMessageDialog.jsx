@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { injectIntl } from "react-intl";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -21,7 +21,15 @@ const StyledInvoiceEventMessageDialog = styled('div')(({ theme }) => ({
 
 const InvoiceEventMessageDialog = ({ intl, invoice, createInvoiceEventMessage }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [eventMessage, setEventMessage] = useState({ invoiceId: invoice.id, ...EMPTY_EVENT_MESSAGE });
+  const [eventMessage, setEventMessage] = useState({ invoiceId: invoice?.id, ...EMPTY_EVENT_MESSAGE });
+
+  useEffect(
+    () =>
+      setEventMessage((eventMessage) =>
+        eventMessage.invoiceId === invoice?.id ? eventMessage : { ...eventMessage, invoiceId: invoice?.id },
+      ),
+    [invoice?.id],
+  );
 
   const handleOpen = () => setIsOpen(true);
 

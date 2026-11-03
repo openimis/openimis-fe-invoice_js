@@ -36,7 +36,6 @@ const InvoiceSearcher = ({
   history,
   rights,
   coreConfirm,
-  confirmed,
   journalize,
   submittingMutation,
   mutation,
@@ -50,28 +49,8 @@ const InvoiceSearcher = ({
   invoicesTotalCount,
   cacheFiltersKey
 }) => {
-  const [invoiceToDelete, setInvoiceToDelete] = useState(null);
   const [deletedInvoiceUuids, setDeletedInvoiceUuids] = useState([]);
   const prevSubmittingMutationRef = useRef();
-
-  useEffect(() => {
-    if (invoiceToDelete) {
-      openDeleteInvoiceConfirmDialog();
-    }
-  }, [invoiceToDelete]);
-
-  useEffect(() => {
-    if (invoiceToDelete && confirmed) {
-      deleteInvoice(
-        invoiceToDelete,
-        formatMessageWithValues(intl, "invoice", "invoice.delete.mutationLabel", {
-          code: invoiceToDelete.code,
-        }),
-      );
-      setDeletedInvoiceUuids([...deletedInvoiceUuids, invoiceToDelete.id]);
-    }
-    invoiceToDelete && confirmed !== null && setInvoiceToDelete(null);
-  }, [confirmed]);
 
   useEffect(() => {
     prevSubmittingMutationRef.current && !submittingMutation && journalize(mutation);
@@ -80,14 +59,6 @@ const InvoiceSearcher = ({
   useEffect(() => {
     prevSubmittingMutationRef.current = submittingMutation;
   });
-
-  const openDeleteInvoiceConfirmDialog = () =>
-    coreConfirm(
-      formatMessageWithValues(intl, "invoice", "invoice.delete.confirm.title", {
-        code: invoiceToDelete.code,
-      }),
-      formatMessage(intl, "invoice", "invoice.delete.confirm.message"),
-    );
 
   const fetch = (params) => fetchInvoices(params);
 
@@ -162,7 +133,25 @@ const InvoiceSearcher = ({
     !deletedInvoiceUuids.includes(invoice.id) &&
     historyPush(modulesManager, history, "invoice.route.invoice", [invoice?.id], newTab);
 
-  const onDelete = (invoice) => setInvoiceToDelete(invoice);
+  // state.core.confirmed deleted the invoice on any other dialog's "Yes" (OP-3213).
+  const onDelete = (invoice) =>
+    coreConfirm(
+      formatMessageWithValues(intl, "invoice", "invoice.delete.confirm.title", {
+        code: invoice.code,
+      }),
+      formatMessage(intl, "invoice", "invoice.delete.confirm.message"),
+      {
+        onConfirm: () => {
+          deleteInvoice(
+            invoice,
+            formatMessageWithValues(intl, "invoice", "invoice.delete.mutationLabel", {
+              code: invoice.code,
+            }),
+          );
+          setDeletedInvoiceUuids((uuids) => [...uuids, invoice.id]);
+        },
+      },
+    );
 
   const isRowDisabled = (_, invoice) => deletedInvoiceUuids.includes(invoice.id);
 
@@ -209,7 +198,6 @@ const mapStateToProps = (state) => ({
   invoices: state.invoice.invoices,
   invoicesPageInfo: state.invoice.invoicesPageInfo,
   invoicesTotalCount: state.invoice.invoicesTotalCount,
-  confirmed: state.core.confirmed,
   submittingMutation: state.invoice.submittingMutation,
   mutation: state.invoice.mutation,
 });

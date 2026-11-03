@@ -23,7 +23,7 @@ const StyledBillTabPanel = styled('div')(({ theme }) => ({
   },
 }));
 
-const BillTabPanel = ({ intl, rights, bill, setConfirmedAction }) => {
+const BillTabPanel = ({ intl, rights, bill }) => {
   const [activeTab, setActiveTab] = useState(BILL_LINE_ITEMS_TAB_VALUE);
 
   const isSelected = (tab) => tab === activeTab;
@@ -51,7 +51,6 @@ const BillTabPanel = ({ intl, rights, bill, setConfirmedAction }) => {
           rights={rights}
           value={activeTab}
           bill={bill}
-          setConfirmedAction={setConfirmedAction}
         />
       </Paper>
     </StyledBillTabPanel>

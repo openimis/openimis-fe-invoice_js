@@ -37,14 +37,12 @@ const BillPage = ({
   fetchBill,
   deleteBill,
   coreConfirm,
-  confirmed,
   submittingMutation,
   mutation,
   journalize,
 }) => {
   const modulesManager = useModulesManager();
   const [editedBill, setEditedBill] = useState({});
-  const [confirmedAction, setConfirmedAction] = useState(() => null);
   const prevSubmittingMutationRef = useRef();
 
   useEffect(() => {
@@ -52,12 +50,6 @@ const BillPage = ({
       fetchBill([`id: "${billUuid}"`]);
     }
   }, [billUuid]);
-
-  useEffect(() => {
-    if (confirmed) {
-      confirmedAction();
-    }
-  }, [confirmed]);
 
   useEffect(() => {
     if (prevSubmittingMutationRef.current && !submittingMutation) {
@@ -70,7 +62,7 @@ const BillPage = ({
     prevSubmittingMutationRef.current = submittingMutation;
   });
 
-  useEffect(() => setEditedBill(bill), [bill]);
+  useEffect(() => setEditedBill(bill ?? {}), [bill]);
 
   const back = () => history.goBack();
 
@@ -86,12 +78,12 @@ const BillPage = ({
   );
 
   const openDeleteBillConfirmDialog = () => {
-    setConfirmedAction(() => deleteBillCallback);
     coreConfirm(
       formatMessageWithValues(intl, "invoice", "bill.delete.confirm.title", {
         code: bill?.code,
       }),
       formatMessage(intl, "invoice", "bill.delete.confirm.message"),
+      { onConfirm: deleteBillCallback },
     );
   };
 
@@ -122,7 +114,6 @@ const BillPage = ({
             Panels={[BillTabPanel]}
             rights={rights}
             actions={actions}
-            setConfirmedAction={setConfirmedAction}
           />
         </div>
       )}
@@ -133,7 +124,6 @@ const BillPage = ({
 const mapStateToProps = (state, props) => ({
   rights: !!state.core && !!state.core.user && !!state.core.user.i_user ? state.core.user.i_user.rights : [],
   billUuid: props.match.params.bill_uuid,
-  confirmed: state.core.confirmed,
   fetchingBill: state.invoice.fetchingBill,
   fetchedBill: state.invoice.fetchedBill,
   bill: state.invoice.bill,

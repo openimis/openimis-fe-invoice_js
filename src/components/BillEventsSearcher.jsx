@@ -123,7 +123,6 @@ const mapStateToProps = (state) => ({
   billEventsTotalCount: state.invoice.billEventsTotalCount,
   submittingMutation: state.invoice.submittingMutation,
   mutation: state.invoice.mutation,
-  confirmed: state.core.confirmed,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchBillEvents }, dispatch);

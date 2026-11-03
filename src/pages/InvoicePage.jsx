@@ -35,13 +35,11 @@ const InvoicePage = ({
   fetchInvoice,
   deleteInvoice,
   coreConfirm,
-  confirmed,
   submittingMutation,
   mutation,
   journalize,
 }) => {
   const [editedInvoice, setEditedInvoice] = useState({});
-  const [confirmedAction, setConfirmedAction] = useState(() => null);
   const prevSubmittingMutationRef = useRef();
 
   useEffect(() => {
@@ -49,12 +47,6 @@ const InvoicePage = ({
       fetchInvoice([`id: "${invoiceUuid}"`]);
     }
   }, [invoiceUuid]);
-
-  useEffect(() => {
-    if (confirmed) {
-      confirmedAction();
-    }
-  }, [confirmed]);
 
   useEffect(() => {
     if (prevSubmittingMutationRef.current && !submittingMutation) {
@@ -67,7 +59,7 @@ const InvoicePage = ({
     prevSubmittingMutationRef.current = submittingMutation;
   });
 
-  useEffect(() => setEditedInvoice(invoice), [invoice]);
+  useEffect(() => setEditedInvoice(invoice ?? {}), [invoice]);
 
   const back = () => history.goBack();
 
@@ -84,12 +76,12 @@ const InvoicePage = ({
     );
 
   const openDeleteInvoiceConfirmDialog = () => {
-    setConfirmedAction(() => deleteInvoiceCallback);
     coreConfirm(
       formatMessageWithValues(intl, "invoice", "invoice.delete.confirm.title", {
         code: invoice?.code,
       }),
       formatMessage(intl, "invoice", "invoice.delete.confirm.message"),
+      { onConfirm: deleteInvoiceCallback },
     );
   };
 
@@ -118,7 +110,6 @@ const InvoicePage = ({
             Panels={[InvoiceTabPanel]}
             rights={rights}
             actions={actions}
-            setConfirmedAction={setConfirmedAction}
           />
         </div>
       )}
@@ -129,7 +120,6 @@ const InvoicePage = ({
 const mapStateToProps = (state, props) => ({
   rights: !!state.core && !!state.core.user && !!state.core.user.i_user ? state.core.user.i_user.rights : [],
   invoiceUuid: props.match.params.invoice_uuid,
-  confirmed: state.core.confirmed,
   fetchingInvoice: state.invoice.fetchingInvoice,
   fetchedInvoice: state.invoice.fetchedInvoice,
   invoice: state.invoice.invoice,

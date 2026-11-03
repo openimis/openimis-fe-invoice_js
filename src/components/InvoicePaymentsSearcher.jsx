@@ -29,12 +29,10 @@ const InvoicePaymentsSearcher = ({
   modulesManager,
   rights,
   invoice,
-  setConfirmedAction,
   deletePaymentInvoice,
   submittingMutation,
   mutation,
   coreConfirm,
-  confirmed,
   fetchPaymentInvoices,
   fetchingPaymentInvoices,
   fetchedPaymentInvoices,
@@ -44,22 +42,8 @@ const InvoicePaymentsSearcher = ({
   paymentInvoicesTotalCount,
 }) => {
   const [queryParams, setQueryParams] = useState([]);
-  const [paymentInvoiceToDelete, setPaymentInvoiceToDelete] = useState(null);
   const [deletedPaymentInvoiceUuids, setDeletedPaymentInvoiceUuids] = useState([]);
   const prevSubmittingMutationRef = useRef();
-
-  useEffect(() => {
-    if (paymentInvoiceToDelete) {
-      openDeletePaymentInvoiceConfirmDialog();
-    }
-  }, [paymentInvoiceToDelete]);
-
-  useEffect(() => {
-    if (paymentInvoiceToDelete && confirmed) {
-      setDeletedPaymentInvoiceUuids([...deletedPaymentInvoiceUuids, paymentInvoiceToDelete.id]);
-    }
-    paymentInvoiceToDelete && confirmed !== null && setPaymentInvoiceToDelete(null);
-  }, [confirmed]);
 
   useEffect(() => {
     if (
@@ -75,26 +59,27 @@ const InvoicePaymentsSearcher = ({
     prevSubmittingMutationRef.current = submittingMutation;
   });
 
-  const deletePaymentInvoiceCallback = () =>
-    deletePaymentInvoice(
-      paymentInvoiceToDelete,
-      formatMessageWithValues(intl, "invoice", "paymentInvoice.delete.mutationLabel", {
-        paymentInvoiceLabel: paymentInvoiceToDelete?.label,
-        code: invoice?.code,
-      }),
-    );
-
-  const openDeletePaymentInvoiceConfirmDialog = () => {
-    setConfirmedAction(() => deletePaymentInvoiceCallback);
+  // Greying the row on state.core.confirmed also ran on any other dialog's
+  // "Yes" (OP-3213); it now follows this dialog's answer only.
+  const onDelete = (paymentInvoice) =>
     coreConfirm(
       formatMessageWithValues(intl, "invoice", "paymentInvoice.delete.confirm.title", {
-        paymentInvoiceLabel: paymentInvoiceToDelete?.label,
+        paymentInvoiceLabel: paymentInvoice?.label,
       }),
       formatMessage(intl, "invoice", "paymentInvoice.delete.confirm.message"),
+      {
+        onConfirm: () => {
+          deletePaymentInvoice(
+            paymentInvoice,
+            formatMessageWithValues(intl, "invoice", "paymentInvoice.delete.mutationLabel", {
+              paymentInvoiceLabel: paymentInvoice?.label,
+              code: invoice?.code,
+            }),
+          );
+          setDeletedPaymentInvoiceUuids((uuids) => [...uuids, paymentInvoice.id]);
+        },
+      },
     );
-  };
-
-  const onDelete = (paymentInvoice) => setPaymentInvoiceToDelete(paymentInvoice);
 
   const fetch = (params) => fetchPaymentInvoices(params);
 
@@ -227,7 +212,6 @@ const mapStateToProps = (state) => ({
   paymentInvoicesTotalCount: state.invoice.paymentInvoicesTotalCount,
   submittingMutation: state.invoice.submittingMutation,
   mutation: state.invoice.mutation,
-  confirmed: state.core.confirmed,
 });
 
 const mapDispatchToProps = (dispatch) =>

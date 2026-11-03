@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { injectIntl } from "react-intl";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -30,7 +30,15 @@ const BillEventMessageDialog = ({
   createBillEventType
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [eventMessage, setEventMessage] = useState({ billId: bill.id, ...EMPTY_EVENT_MESSAGE });
+  const [eventMessage, setEventMessage] = useState({ billId: bill?.id, ...EMPTY_EVENT_MESSAGE });
+
+  useEffect(
+    () =>
+      setEventMessage((eventMessage) =>
+        eventMessage.billId === bill?.id ? eventMessage : { ...eventMessage, billId: bill?.id },
+      ),
+    [bill?.id],
+  );
 
   const handleOpen = () => setIsOpen(true);
 
