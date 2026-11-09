@@ -28,6 +28,7 @@ export const ACTION_TYPE = {
   GET_BILL: "BILL_BILL",
   DELETE_BILL: "BILL_DELETE_BILL",
   SEARCH_BILL_LINE_ITEMS: "BILL_BILL_LINE_ITEMS",
+  GET_BILL_MEDICAL_CATALOGS: "BILL_MEDICAL_CATALOGS",
   SEARCH_BILL_PAYMENT: "BILL_BILL_PAYMENTS",
   CREATE_BILL_PAYMENT: "BILL_CREATE_BILL_PAYMENT",
   UPDATE_BILL_PAYMENT: "BILL_UPDATE_BILL_PAYMENT",
@@ -90,6 +91,11 @@ function reducer(
     billLineItems: [],
     billLineItemsPageInfo: {},
     billLineItemsTotalCount: 0,
+    fetchingBillMedicalCatalogs: false,
+    fetchedBillMedicalCatalogs: false,
+    errorBillMedicalCatalogs: null,
+    billMedicalItems: [],
+    billMedicalServices: [],
 
     fetchingBillPayments: false,
     errorBillPayments: null,
@@ -283,17 +289,18 @@ function reducer(
         errorBills: null,
       };
     case SUCCESS(ACTION_TYPE.SEARCH_BILLS):
+      const billResult = action.payload.data.billByProgram || action.payload.data.bill;
       return {
         ...state,
         fetchingBills: false,
         fetchedBills: true,
-        bills: parseData(action.payload.data.bill)?.map((bill) => ({
+        bills: parseData(billResult)?.map((bill) => ({
           ...bill,
           id: decodeId(bill.id),
           status: getEnumValue(bill?.status)
         })),
-        billsPageInfo: pageInfo(action.payload.data.bill),
-        billsTotalCount: !!action.payload.data.bill ? action.payload.data.bill.totalCount : null,
+        billsPageInfo: pageInfo(billResult),
+        billsTotalCount: !!billResult ? billResult.totalCount : null,
         errorBills: formatGraphQLError(action.payload),
       };
     case ERROR(ACTION_TYPE.SEARCH_BILLS):
@@ -382,6 +389,36 @@ function reducer(
         ...state,
         fetchingBillLineItems: false,
         errorBillLineItems: formatServerError(action.payload),
+      };
+    case REQUEST(ACTION_TYPE.GET_BILL_MEDICAL_CATALOGS):
+      return {
+        ...state,
+        fetchingBillMedicalCatalogs: true,
+        fetchedBillMedicalCatalogs: false,
+        errorBillMedicalCatalogs: null,
+        billMedicalItems: [],
+        billMedicalServices: [],
+      };
+    case SUCCESS(ACTION_TYPE.GET_BILL_MEDICAL_CATALOGS): {
+      const data = action.payload?.data || {};
+      const nodes = (prefix) =>
+        Object.entries(data)
+          .filter(([key]) => key.startsWith(prefix))
+          .flatMap(([, connection]) => connection?.edges?.map((edge) => edge.node) || []);
+      return {
+        ...state,
+        fetchingBillMedicalCatalogs: false,
+        fetchedBillMedicalCatalogs: true,
+        errorBillMedicalCatalogs: formatGraphQLError(action.payload),
+        billMedicalItems: nodes("medicalItem"),
+        billMedicalServices: nodes("medicalService"),
+      };
+    }
+    case ERROR(ACTION_TYPE.GET_BILL_MEDICAL_CATALOGS):
+      return {
+        ...state,
+        fetchingBillMedicalCatalogs: false,
+        errorBillMedicalCatalogs: formatServerError(action.payload),
       };
     case REQUEST(ACTION_TYPE.SEARCH_BILL_PAYMENT):
       return {

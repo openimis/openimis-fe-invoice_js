@@ -130,6 +130,24 @@ const BillFilter = ({ intl, classes, filters, onChangeFilters }) => {
           onChange={onChangeDecimalFilter("amountTotal")}
         />
       </Grid>
+      <Grid item xs={2} className={classes.item}>
+        <PublishedComponent
+          pubRef="program.ProgramPicker"
+          withNull={true}
+          label={formatMessage(intl, "bill", "program") || "Program"}
+          value={filterValue("program")}
+          onChange={(opt) => {
+            const programId = opt?.idProgram;
+            onChangeFilters([
+              {
+                id: "program",
+                value: opt,
+                filter: programId ? `programId: ${programId}` : null,
+              },
+            ]);
+          }}
+        />
+      </Grid>
     </Grid>
   );
 };

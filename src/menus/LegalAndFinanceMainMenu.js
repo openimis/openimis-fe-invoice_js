@@ -39,27 +39,20 @@ const LegalAndFinanceMainMenu = (props) => {
     return <MainMenuContribution {...props} header={formatMessage(intl, "invoice", "mainMenu")} entries={entries} />;
   }
 
-  if (rights.filter((r) => r >= RIGHT_INVOICE_SEARCH && r <= RIGHT_INVOICE_AMEND).length) {
-    // RIGHT_SEARCH is shared by HF & HQ staff)
-    entries.push({
-      text: formatMessage(intl, "invoice", "menu.invoices"),
-      icon: <DoubleArrow />,
-      route: "/invoices",
-    });
-  }
+
   if (rights.filter((r) => r >= RIGHT_BILL_SEARCH && r <= RIGHT_BILL_AMEND).length) {
-    // RIGHT_SEARCH is shared by HF & HQ staff)
     entries.push({
-      text: formatMessage(intl, "invoice", "menu.bills"),
+      text: "Bills",
       icon: <DoubleArrowFlipped />,
       route: "/bills",
     });
   }
-  entries.push(
-    ...modulesManager
-      .getContribs(LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY)
-      .filter((c) => !c.filter || c.filter(rights)),
-  );
+  const contribEntries = modulesManager
+    .getContribs(LEGAL_AND_FINANCE_MAIN_MENU_CONTRIBUTION_KEY)
+    .filter((c) => !c.filter || c.filter(rights))
+    .filter((c) => c.route !== "/contracts"); // Hide Contract from Legal & Finance per user request
+
+  entries.push(...contribEntries);
   if (!entries.length) return null;
 
   if (!entries.length) return null;

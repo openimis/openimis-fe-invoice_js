@@ -5,6 +5,7 @@ import { injectIntl } from "react-intl";
 
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
+import PrintIcon from "@material-ui/icons/Print";
 
 import {
   Form,
@@ -92,7 +93,18 @@ const BillPage = ({
     );
   };
 
+  const printBill = () => {
+    if (!bill?.id) return;
+    const query = new URLSearchParams({ bill_uuid: bill.id });
+    window.open(`/api/report/bill_invoice_csu/pdf/?${query.toString()}`, "_blank", "noopener,noreferrer");
+  };
+
   const actions = [
+    !!bill && {
+      doIt: printBill,
+      icon: <PrintIcon />,
+      tooltip: formatMessage(intl, "invoice", "printBillButtonTooltip"),
+    },
     !!bill && 
       getEnumValue(bill?.status) !== STATUS.PAID && {
         doIt: openDeleteBillConfirmDialog,

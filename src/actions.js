@@ -112,6 +112,7 @@ const BILL_LINE_ITEM_FULL_PROJECTION = [
   "amountTotal",
   "amountNet",
   "taxAnalysis",
+  "details",
 ];
 
 const BILL_PAYMENT_FULL_PROJECTION = [
@@ -326,7 +327,8 @@ export function createInvoiceEventMessage(invoiceEvent, clientMutationLabel) {
 
 //bill 
 export function fetchBills(params) {
-  const payload = formatPageQueryWithCount("bill", params, BILL_FULL_PROJECTION);
+  const byProgram = params?.some((param) => typeof param === "string" && param.startsWith("programId:"));
+  const payload = formatPageQueryWithCount(byProgram ? "billByProgram" : "bill", params, BILL_FULL_PROJECTION);
   return graphql(payload, ACTION_TYPE.SEARCH_BILLS);
 }
 
@@ -362,6 +364,31 @@ export function deleteBill(bill, clientMutationLabel) {
 export function fetchBillLineItems(params) {
   const payload = formatPageQueryWithCount("billItem", params, BILL_LINE_ITEM_FULL_PROJECTION);
   return graphql(payload, ACTION_TYPE.SEARCH_BILL_LINE_ITEMS);
+}
+
+const uniqueCodes = (codes) => [...new Set((codes || []).filter(Boolean).map(String))];
+
+export function fetchBillMedicalCatalogs(itemCodes, serviceCodes) {
+  const items = uniqueCodes(itemCodes);
+  const services = uniqueCodes(serviceCodes);
+  const fields = [
+    ...items.map(
+      (code, index) => `medicalItem${index}: medicalItems(code: ${JSON.stringify(code)}, first: 1) {
+        edges { node { code name price } }
+      }`,
+    ),
+    ...services.map(
+      (code, index) => `medicalService${index}: medicalServices(code: ${JSON.stringify(code)}, first: 1) {
+        edges { node { code name price packagetype } }
+      }`,
+    ),
+  ];
+
+  if (!fields.length) {
+    return { type: SUCCESS(ACTION_TYPE.GET_BILL_MEDICAL_CATALOGS), payload: { data: {} } };
+  }
+
+  return graphql(`{ ${fields.join("\n")} }`, ACTION_TYPE.GET_BILL_MEDICAL_CATALOGS);
 }
 
 export function fetchBillPayments(params) {
