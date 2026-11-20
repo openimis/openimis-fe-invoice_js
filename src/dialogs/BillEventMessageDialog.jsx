@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { injectIntl } from "react-intl";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -10,6 +9,7 @@ import {
   TextInput,
   formatMessageWithValues,
   GetIconComponent,
+  injectIntl,
 } from "@openimis/fe-core";
 import { Fab, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";

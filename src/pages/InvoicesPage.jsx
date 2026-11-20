@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Helmet, withModulesManager, formatMessage, clearCurrentPaginationPage } from "@openimis/fe-core";
-import { injectIntl } from "react-intl";
+import { Helmet, withModulesManager, formatMessage, clearCurrentPaginationPage, injectIntl } from "@openimis/fe-core";
+
 import { styled } from "@mui/material/styles";
 import { connect, useDispatch } from "react-redux";
 import { RIGHT_INVOICE_SEARCH } from "../constants";

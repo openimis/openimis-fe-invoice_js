@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { injectIntl } from "react-intl";
 
 import { Paper, Grid, Typography, Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -15,6 +14,7 @@ import {
   ProgressOrError,
   Table,
   GRID_RESPONSIVE_FULL,
+  injectIntl,
 } from "@openimis/fe-core";
 
 import InvoiceStatusPicker from "../pickers/InvoiceStatusPicker";
@@ -69,7 +69,9 @@ const PolicyInvoicesPanel = ({ intl, modulesManager, history, edited, rights }) 
   return (
     <Grid size={GRID_RESPONSIVE_FULL}>
       <StyledPaper>
-        <Grid container alignItems="center" direction="row" className="paperHeader">
+        <Grid container direction="row" className="paperHeader" sx={{
+          alignItems: "center"
+        }}>
           <Grid size={12}>
             <Typography className="tableTitle">
               {formatMessage(intl, "invoice", "policyInvoices.title")}

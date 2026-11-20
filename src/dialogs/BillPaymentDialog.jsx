@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { injectIntl } from "react-intl";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -13,6 +12,7 @@ import {
   formatMessageWithValues,
   formatMessage,
   GetIconComponent,
+  injectIntl,
 } from "@openimis/fe-core";
 import { Fab, Grid, IconButton, Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -26,7 +26,7 @@ import PaymentInvoiceStatusPicker from "../pickers/PaymentInvoiceStatusPicker";
 const AddIcon = GetIconComponent("Add")
 const EditIcon = GetIconComponent("Edit")
 const StyledGrid = styled(Grid)(({ theme }) => ({
-  ...theme.paper?.item ?? {},
+  ...(theme.paper?.item ?? {}),
 }));
 
 const BillPaymentDialog = ({

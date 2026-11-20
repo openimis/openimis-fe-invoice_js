@@ -1,5 +1,4 @@
 import React from "react";
-import { injectIntl } from "react-intl";
 import _debounce from "lodash/debounce";
 
 import { Grid } from "@mui/material";
@@ -12,6 +11,7 @@ import {
   NumberInput,
   PublishedComponent,
   GRID_RESPONSIVE_STANDARD,
+  injectIntl,
 } from "@openimis/fe-core";
 import { CONTAINS_LOOKUP, DEFAULT, DEFUALT_DEBOUNCE_TIME } from "../constants";
 import { defaultFilterStyles } from "../util/styles";

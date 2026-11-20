@@ -1,10 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { injectIntl } from "react-intl";
 
 import { IconButton, Tooltip } from "@mui/material";
-import { GetIconComponent } from "@openimis/fe-core";
+import { GetIconComponent, injectIntl } from "@openimis/fe-core";
 const DeleteIcon = GetIconComponent("Delete")
 
 import {

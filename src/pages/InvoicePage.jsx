@@ -8,8 +8,8 @@ import {
   coreConfirm,
   journalize,
   GetIconComponent,
+  injectIntl,
 } from "@openimis/fe-core";
-import { injectIntl } from "react-intl";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { styled } from "@mui/material/styles";

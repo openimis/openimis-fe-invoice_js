@@ -1,6 +1,6 @@
 import React from "react";
-import { injectIntl } from "react-intl";
-import { formatMessageWithValues, Searcher, withHistory } from "@openimis/fe-core";
+
+import { formatMessageWithValues, Searcher, withHistory, injectIntl } from "@openimis/fe-core";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { fetchBillLineItems } from "../actions";
