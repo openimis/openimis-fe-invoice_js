@@ -18,7 +18,7 @@ const InvoiceEventsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected })
   );
 
 const InvoiceEventsTabPanel = ({ rights, value, invoice }) => (
-  <PublishedComponent pubRef="policyHolder.TabPanel" module="invoice" index={INVOICE_EVENTS_TAB_VALUE} value={value}>
+  <PublishedComponent pubRef="core.TabPanel" module="invoice" index={INVOICE_EVENTS_TAB_VALUE} value={value}>
     {rights?.includes(RIGHT_INVOICE_EVENT_CREATE_MESSAGE) && (
       <Grid container justify="flex-end" alignItems="center" spacing={1}>
         <Grid>

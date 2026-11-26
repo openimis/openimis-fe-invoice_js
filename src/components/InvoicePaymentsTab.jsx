@@ -18,7 +18,7 @@ const InvoicePaymentsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected 
   );
 
 const InvoicePaymentsTabPanel = ({ rights, value, invoice }) => (
-  <PublishedComponent pubRef="policyHolder.TabPanel" module="invoice" index={INVOICE_PAYMENTS_TAB_VALUE} value={value}>
+  <PublishedComponent pubRef="core.TabPanel" module="invoice" index={INVOICE_PAYMENTS_TAB_VALUE} value={value}>
     {rights?.includes(RIGHT_INVOICE_PAYMENT_CREATE) && (
       <Grid container justify="flex-end" alignItems="center" spacing={1}>
         <Grid>
