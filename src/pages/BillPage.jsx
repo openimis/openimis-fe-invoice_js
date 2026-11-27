@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { injectIntl } from "react-intl";
 
 import { styled } from "@mui/material/styles";
 
@@ -15,6 +14,7 @@ import {
   journalize,
   useModulesManager,
   GetIconComponent,
+  injectIntl,
 } from "@openimis/fe-core";
 import { fetchBill, deleteBill } from "../actions";
 import { STATUS, RIGHT_BILL_SEARCH, DEFAULT, WORKER_VOUCHER_HEAD_PANEL_CONTRIB } from "../constants";

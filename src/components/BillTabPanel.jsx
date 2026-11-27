@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Paper, Grid } from "@mui/material";
-import { Contributions } from "@openimis/fe-core";
-import { injectIntl } from "react-intl";
+import { Contributions, injectIntl } from "@openimis/fe-core";
+
 import { styled } from "@mui/material/styles";
 import {
   BILL_LINE_ITEMS_TAB_VALUE,

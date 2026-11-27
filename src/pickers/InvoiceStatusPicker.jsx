@@ -1,7 +1,5 @@
 import React from "react";
-import { SelectInput } from "@openimis/fe-core";
-import { formatMessage } from "@openimis/fe-core";
-import { injectIntl } from "react-intl";
+import { SelectInput, injectIntl, formatMessage } from "@openimis/fe-core";
 import { STATUS } from "../constants";
 
 const InvoiceStatusPicker = ({

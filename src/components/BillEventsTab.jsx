@@ -1,6 +1,6 @@
 import React from "react";
-import { Tab, Grid, Typography } from "@mui/material";
-import { formatMessage, PublishedComponent, FormattedMessage } from "@openimis/fe-core";
+import { Grid, Typography } from "@mui/material";
+import { formatMessage, PublishedComponent, FormattedMessage, Tab } from "@openimis/fe-core";
 import { BILL_EVENTS_TAB_VALUE, RIGHT_BILL_EVENT_SEARCH, RIGHT_BILL_EVENT_CREATE_MESSAGE } from "../constants";
 import BillEventsSearcher from "./BillEventsSearcher";
 import CreateBillEventMessageDialog from "../dialogs/BillEventMessageDialog";
@@ -19,7 +19,9 @@ const BillEventsTabPanel = ({ rights, value, bill }) =>
 
     <PublishedComponent pubRef="core.TabPanel" module="bill" index={BILL_EVENTS_TAB_VALUE} value={value}>
       {rights?.includes(RIGHT_BILL_EVENT_CREATE_MESSAGE) && (
-        <Grid container justify="flex-end" alignItems="center" spacing={1}>
+        <Grid container justify="flex-end" spacing={1} sx={{
+          alignItems: "center"
+        }}>
           <Grid>
             <Typography>
               <FormattedMessage module="invoice" id="billEventMessage.create.label" />
