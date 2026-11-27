@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
-import { injectIntl } from "react-intl";
 
 import { styled } from "@mui/material/styles";
 
-import { Helmet, withModulesManager, formatMessage, clearCurrentPaginationPage } from "@openimis/fe-core";
+import { Helmet, withModulesManager, formatMessage, clearCurrentPaginationPage, injectIntl } from "@openimis/fe-core";
 import { RIGHT_BILL_SEARCH } from "../constants";
 import BillSearcher from "../components/BillSearcher";
 
