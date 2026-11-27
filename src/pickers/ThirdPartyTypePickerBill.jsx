@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { SelectInput, injectIntl } from "@openimis/fe-core";
-import { formatMessage } from "@openimis/fe-core";
+import { SelectInput, injectIntl, formatMessage } from "@openimis/fe-core";
 import { THIRDPARTY_TYPE_OPTIONS_BILL } from "../constants";
 
 const ThirdpartyTypePickerBill = ({

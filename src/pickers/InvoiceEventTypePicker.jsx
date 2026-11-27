@@ -1,6 +1,5 @@
 import React from "react";
-import { SelectInput, injectIntl } from "@openimis/fe-core";
-import { formatMessage } from "@openimis/fe-core";
+import { SelectInput, injectIntl, formatMessage } from "@openimis/fe-core";
 import { EVENT_TYPE } from "../constants";
 
 const InvoiceEventTypePicker = ({

@@ -3,10 +3,9 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import { IconButton, Tooltip } from "@mui/material";
-import { GetIconComponent, injectIntl } from "@openimis/fe-core";
-const DeleteIcon = GetIconComponent("Delete")
-
 import {
+  GetIconComponent,
+  injectIntl,
   formatMessage,
   formatMessageWithValues,
   Searcher,
@@ -18,6 +17,8 @@ import { fetchBillPayments, deleteBillPayment } from "../actions";
 import { DEFAULT_PAGE_SIZE, EMPTY_STRING, RIGHT_BILL_PAYMENT_DELETE, ROWS_PER_PAGE_OPTIONS } from "../constants";
 import { ACTION_TYPE } from "../reducer";
 import BillPaymentsFilter from "./BillPaymentsFilter";
+
+const DeleteIcon = GetIconComponent("Delete")
 
 const BillPaymentsSearcher = ({
   intl,
