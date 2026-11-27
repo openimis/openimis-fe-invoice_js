@@ -1,8 +1,8 @@
 import React from "react";
 import { formatMessage, PublishedComponent, FormattedMessage, Tab } from "@openimis/fe-core";
+import { Grid, Typography } from "@mui/material";
 import { INVOICE_PAYMENTS_TAB_VALUE, RIGHT_INVOICE_PAYMENT_SEARCH, RIGHT_INVOICE_PAYMENT_CREATE } from "../constants";
 import InvoicePaymentsSearcher from "./InvoicePaymentsSearcher";
-import { Grid, Typography } from "@mui/material";
 import CreateInvoicePaymentDialog from "../dialogs/InvoicePaymentDialog";
 
 const InvoicePaymentsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected }) =>
@@ -17,7 +17,7 @@ const InvoicePaymentsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected 
   );
 
 const InvoicePaymentsTabPanel = ({ rights, value, invoice }) => (
-  <PublishedComponent pubRef="policyHolder.TabPanel" module="invoice" index={INVOICE_PAYMENTS_TAB_VALUE} value={value}>
+  <PublishedComponent pubRef="core.TabPanel" module="invoice" index={INVOICE_PAYMENTS_TAB_VALUE} value={value}>
     {rights?.includes(RIGHT_INVOICE_PAYMENT_CREATE) && (
       <Grid container justify="flex-end" spacing={1} sx={{
         alignItems: "center"

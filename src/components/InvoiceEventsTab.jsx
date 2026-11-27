@@ -1,7 +1,7 @@
 import React from "react";
 import { formatMessage, PublishedComponent, FormattedMessage, Tab } from "@openimis/fe-core";
-import { INVOICE_EVENTS_TAB_VALUE, RIGHT_INVOICE_EVENT_SEARCH, RIGHT_INVOICE_EVENT_CREATE_MESSAGE } from "../constants";
 import { Grid, Typography } from "@mui/material";
+import { INVOICE_EVENTS_TAB_VALUE, RIGHT_INVOICE_EVENT_SEARCH, RIGHT_INVOICE_EVENT_CREATE_MESSAGE } from "../constants";
 import CreateInvoiceEventMessageDialog from "../dialogs/InvoiceEventMessageDialog";
 import InvoiceEventsSearcher from "./InvoiceEventsSearcher";
 
@@ -17,7 +17,7 @@ const InvoiceEventsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected })
   );
 
 const InvoiceEventsTabPanel = ({ rights, value, invoice }) => (
-  <PublishedComponent pubRef="policyHolder.TabPanel" module="invoice" index={INVOICE_EVENTS_TAB_VALUE} value={value}>
+  <PublishedComponent pubRef="core.TabPanel" module="invoice" index={INVOICE_EVENTS_TAB_VALUE} value={value}>
     {rights?.includes(RIGHT_INVOICE_EVENT_CREATE_MESSAGE) && (
       <Grid container justify="flex-end" spacing={1} sx={{
         alignItems: "center"

@@ -15,7 +15,7 @@ const InvoiceLineItemsTabLabel = ({ intl, onChange, tabStyle, isSelected }) => (
 
 const InvoiceLineItemsTabPanel = ({ value, invoice }) => (
   <PublishedComponent
-    pubRef="policyHolder.TabPanel"
+    pubRef="core.TabPanel"
     module="invoice"
     index={INVOICE_LINE_ITEMS_TAB_VALUE}
     value={value}

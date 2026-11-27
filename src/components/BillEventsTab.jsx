@@ -17,7 +17,7 @@ const BillEventsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected }) =>
 
 const BillEventsTabPanel = ({ rights, value, bill }) =>
 
-    <PublishedComponent pubRef="policyHolder.TabPanel" module="bill" index={BILL_EVENTS_TAB_VALUE} value={value}>
+    <PublishedComponent pubRef="core.TabPanel" module="bill" index={BILL_EVENTS_TAB_VALUE} value={value}>
       {rights?.includes(RIGHT_BILL_EVENT_CREATE_MESSAGE) && (
         <Grid container justify="flex-end" spacing={1} sx={{
           alignItems: "center"

@@ -17,7 +17,7 @@ const BillPaymentsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected }) 
   );
 
 const BillPaymentsTabPanel = ({ rights, value, bill }) => (
-  <PublishedComponent pubRef="policyHolder.TabPanel" module="bill" index={BILL_PAYMENTS_TAB_VALUE} value={value}>
+  <PublishedComponent pubRef="core.TabPanel" module="bill" index={BILL_PAYMENTS_TAB_VALUE} value={value}>
     {rights?.includes(RIGHT_BILL_PAYMENT_CREATE) && (
       <Grid container justify="flex-end" spacing={1} sx={{
         alignItems: "center"
