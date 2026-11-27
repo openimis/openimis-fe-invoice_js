@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { injectIntl } from "react-intl";
 import {
   withModulesManager,
   formatMessage,
@@ -11,6 +10,7 @@ import {
   withHistory,
   historyPush,
   GetIconComponent,
+  injectIntl,
 } from "@openimis/fe-core";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";

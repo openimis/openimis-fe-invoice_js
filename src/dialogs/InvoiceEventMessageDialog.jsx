@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { injectIntl } from "react-intl";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import { GetIconComponent, FormattedMessage, TextInput, formatMessageWithValues } from "@openimis/fe-core";
+import { GetIconComponent, FormattedMessage, TextInput, formatMessageWithValues, injectIntl } from "@openimis/fe-core";
 import { Fab, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { createInvoiceEventMessage } from "../actions";

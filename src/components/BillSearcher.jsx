@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { bindActionCreators } from "redux";
 import { connect, useSelector } from "react-redux";
-import { injectIntl } from "react-intl";
 
 import { IconButton, Tooltip, Button, Dialog, DialogActions, DialogTitle, DialogContent } from "@mui/material";
 
@@ -18,6 +17,7 @@ import {
   downloadExport,
   decodeId,
   GetIconComponent,
+  injectIntl,
 } from "@openimis/fe-core";
 import { fetchBills, deleteBill, fetchBillsExport } from "../actions";
 import {

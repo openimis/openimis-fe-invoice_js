@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Divider, Typography } from "@mui/material";
-import { withModulesManager, TextInput, FormattedMessage, PublishedComponent, NumberInput, GRID_RESPONSIVE_STANDARD } from "@openimis/fe-core";
-import { injectIntl } from "react-intl";
+import { withModulesManager, TextInput, FormattedMessage, PublishedComponent, NumberInput, GRID_RESPONSIVE_STANDARD, injectIntl } from "@openimis/fe-core";
+
 import { styled } from "@mui/material/styles";
 import SubjectTypePickerBill from "../pickers/SubjectTypePickerBill";
 import ThirdPartyTypePickerBill from "../pickers/ThirdPartyTypePickerBill";
