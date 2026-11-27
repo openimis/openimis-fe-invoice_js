@@ -1,9 +1,8 @@
 import React from "react";
-import { Tab } from "@mui/material";
+import { Tab, Grid, Typography } from "@mui/material";
 import { formatMessage, PublishedComponent, FormattedMessage } from "@openimis/fe-core";
 import { INVOICE_PAYMENTS_TAB_VALUE, RIGHT_INVOICE_PAYMENT_SEARCH, RIGHT_INVOICE_PAYMENT_CREATE } from "../constants";
 import InvoicePaymentsSearcher from "./InvoicePaymentsSearcher";
-import { Grid, Typography } from "@mui/material";
 import CreateInvoicePaymentDialog from "../dialogs/InvoicePaymentDialog";
 
 const InvoicePaymentsTabLabel = ({ intl, rights, onChange, tabStyle, isSelected }) =>
